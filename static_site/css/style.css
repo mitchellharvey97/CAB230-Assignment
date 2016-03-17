@@ -12,14 +12,26 @@ body {
   height: 100px; }
 
 #titleblock {
+  height: 100%;
   width: 50%;
   float: left;
-  background-color: green; }
+  background-color: cyan;
+  text-align: center; }
 
 #menu {
+  height: 100%;
   width: 50%;
-  float: right;
-  background-color: yellow; }
+  float: right; }
+  #menu ul {
+    padding: 45px; }
+    #menu ul li {
+      float: right;
+      display: table-cell;
+      vertical-align: bottom;
+      margin-top: 10%;
+      margin: 10px;
+      list-style-type: none;
+      background-color: red; }
 
 #searchbar {
   background-color: olive; }

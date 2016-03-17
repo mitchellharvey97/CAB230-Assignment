@@ -9,22 +9,44 @@ background-color: white;
 	box-shadow: 10px 10px 5px #888888;
 }
 
+$headcolor: blue;
+
 #header {
-	background-color: blue;
+	background-color: $headcolor;
 	height: 100px;
 }
 
 #titleblock {
+	height: 100%;
 	width: 50%;
 	float: left;
-	background-color: green;
+	background-color: cyan;
+	text-align: center;
 }
 
 #menu {
+	height: 100%;
 	width: 50%;
 	float: right;
-	background-color: yellow;
+
+	ul{
+		padding: 45px;
+		li{
+	float: right;
+	display: table-cell;
+	vertical-align: bottom;
+	margin-top: 10%;
+	margin: 10px;
+	list-style-type:none;
+	background-color:red;
+		}
+	}
+	
+	
+	
+
 }
+
 
 #searchbar {
 	background-color: olive;
