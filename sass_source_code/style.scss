@@ -15,8 +15,8 @@ $headcolor: blue;
 	background-color: $headcolor;
 	height: 100px;
 }
-
 #titleblock {
+	
 	height: 100%;
 	width: 50%;
 	float: left;
@@ -24,6 +24,7 @@ $headcolor: blue;
 }
 
 #menu {
+	
 	height: 100%;
 	width: 50%;
 	float: right;
@@ -31,6 +32,7 @@ $headcolor: blue;
 	ul{
 		padding: 45px;
 		li{
+	font-family: "Arial", Helvetica, sans-serif;
 	float: right;
 	display: table-cell;
 	vertical-align: bottom;
