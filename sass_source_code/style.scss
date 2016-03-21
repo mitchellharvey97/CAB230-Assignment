@@ -20,7 +20,6 @@ $headcolor: blue;
 	height: 100%;
 	width: 50%;
 	float: left;
-	background-color: cyan;
 	text-align: center;
 }
 
@@ -48,8 +47,9 @@ $headcolor: blue;
 }
 
 
-#searchbar {
+#content {
 	background-color: olive;
+	height: 650px;
 }
 
 #footer {
