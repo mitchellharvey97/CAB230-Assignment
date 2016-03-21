@@ -8,7 +8,7 @@ body {
   box-shadow: 10px 10px 5px #888888; }
 
 #header {
-  background-color: blue;
+  background-color: silver;
   height: 100px; }
 
 #titleblock {
@@ -24,17 +24,19 @@ body {
   #menu ul {
     padding: 45px; }
     #menu ul li {
+      font-family: "Arial", Helvetica, sans-serif;
       float: right;
       display: table-cell;
       vertical-align: bottom;
       margin-top: 10%;
       margin: 10px;
-      list-style-type: none;
-      background-color: red; }
+      list-style-type: none; }
 
 #content {
   background-color: olive;
   height: 650px; }
+  #content #searchbar {
+    background-color: red; }
 
 #footer {
   background-color: red; }

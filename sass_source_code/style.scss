@@ -9,7 +9,7 @@ background-color: white;
 	box-shadow: 10px 10px 5px #888888;
 }
 
-$headcolor: blue;
+$headcolor: silver;
 
 #header {
 	background-color: $headcolor;
@@ -39,7 +39,6 @@ $headcolor: blue;
 	margin-top: 10%;
 	margin: 10px;
 	list-style-type:none;
-	background-color:red;
 		}
 	}
 	
@@ -52,6 +51,9 @@ $headcolor: blue;
 #content {
 	background-color: olive;
 	height: 650px;
+	#searchbar {
+		background-color: red;
+	}
 }
 
 #footer {
