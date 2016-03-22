@@ -9,22 +9,22 @@ background-color: white;
 	box-shadow: 10px 10px 5px #888888;
 }
 
-$headcolor: blue;
+$headcolor: silver;
 
 #header {
 	background-color: $headcolor;
 	height: 100px;
 }
-
 #titleblock {
+	
 	height: 100%;
 	width: 50%;
 	float: left;
-	background-color: cyan;
 	text-align: center;
 }
 
 #menu {
+	
 	height: 100%;
 	width: 50%;
 	float: right;
@@ -32,13 +32,13 @@ $headcolor: blue;
 	ul{
 		padding: 45px;
 		li{
+	font-family: "Arial", Helvetica, sans-serif;
 	float: right;
 	display: table-cell;
 	vertical-align: bottom;
 	margin-top: 10%;
 	margin: 10px;
 	list-style-type:none;
-	background-color:red;
 		}
 	}
 	
@@ -48,8 +48,12 @@ $headcolor: blue;
 }
 
 
-#searchbar {
+#content {
 	background-color: olive;
+	height: 650px;
+	#searchbar {
+		background-color: red;
+	}
 }
 
 #footer {
