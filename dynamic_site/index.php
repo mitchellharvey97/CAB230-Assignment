@@ -8,7 +8,10 @@
 
 // Create connection -- Using the credentials from external file
 require('local_config/db_password.php'); //Include the password file -- added as each dev environment will have different db details using git ignore files to prevent cloning
+$data_table = $databases['data_table'];
 $conn = new mysqli($databases['host'], $databases['username'], $databases['password'], $databases['database']);
+
+
 
 // Check connection
 if ($conn->connect_error) { //Display Connection error if any
@@ -30,21 +33,24 @@ $parameter = $_GET["par"];
 //$conn->close();
 
 
-	function print_results($conn, $filter_type, $filter_value){
-	   if ($filter_type == 'suburb'){
+	function print_results($filter_type, $filter_value){
+global $data_table;	
+global $conn;
+	if ($filter_type == 'suburb'){
 		   
-	   $sql = 'SELECT * FROM Wifi WHERE Wifi.Suburb like "%' . $filter_value . '%"';
+	   $sql = 'SELECT * FROM Wifi WHERE ' . $data_table . '.Suburb like "%' . $filter_value . '%"';
 	   }
 	   else if ($filter_type == 'name'){
 	   	  
-	   $sql = "SELECT * FROM Wifi WHERE `Wifi`.`Wifi Hotspot Name` like '%" . $filter_value . "%'";
-
+	   $sql = "SELECT * FROM ".$data_table. " WHERE `" . $data_table. "`.`Wifi Hotspot Name` like '%" . $filter_value . "%'";
 	   }
 		  else { 
-	   $sql ='SELECT * FROM Wifi';
+	   $sql ='SELECT * FROM Wifis';
 	   
 	   }
-	   
+	 
+echo  $sql;
+echo "var = ". $data_table;	 
 echo "<ul>";
 
 
@@ -77,7 +83,7 @@ echo "<br>";
 //testSql($conn);
 
 
-print_results($conn, $filter, $parameter);	
+print_results($filter, $parameter);	
 	
 
 	
