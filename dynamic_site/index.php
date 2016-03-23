@@ -38,25 +38,24 @@ global $data_table;
 global $conn;
 	if ($filter_type == 'suburb'){
 		   
-	   $sql = 'SELECT * FROM Wifi WHERE ' . $data_table . '.Suburb like "%' . $filter_value . '%"';
+	   $sql = 'SELECT * FROM '.$data_table.' WHERE ' . $data_table . '.Suburb like "%' . $filter_value . '%"';
 	   }
 	   else if ($filter_type == 'name'){
 	   	  
 	   $sql = "SELECT * FROM ".$data_table. " WHERE `" . $data_table. "`.`Wifi Hotspot Name` like '%" . $filter_value . "%'";
 	   }
 		  else { 
-	   $sql ='SELECT * FROM Wifis';
+	   $sql ='SELECT * FROM ' . $data_table;
 	   
 	   }
 	 
 echo  $sql;
-echo "var = ". $data_table;	 
 echo "<ul>";
 
 
 
     foreach ($conn->query($sql) as $row) {
-        print "<li> Hotspot Nameddd : " . $row['Wifi Hotspot Name']. "</li>
+        print "<li> Hotspot Name : " . $row['Wifi Hotspot Name']. ", Suburb: " . $row['Suburb'] . "</li>
 		";
     }
 	
