@@ -9,16 +9,24 @@ html, body {
   width: 95%;
   height: 100%;
   background-color: blue;
-  min-width: 600px; }
+  min-width: 600px;
+  max-width: 1366px; }
 
 #header {
-  background-color: silver;
+  background-color: #000033;
+  height: 125px; }
+
+#logo {
+  padding: 10px;
+  background-color: #000033;
+  float: left;
+  width: 100px;
   height: 100px; }
 
 #titleblock {
-  background-color: orange;
+  color: white;
+  background-color: #000033;
   height: 100%;
-  width: 50%;
   float: left;
   text-align: center;
   line-height: 325%; }
@@ -28,11 +36,11 @@ html, body {
   width: 50%;
   float: right; }
   #menu ul {
-    padding: 45px; }
+    padding: 59.5px; }
     #menu ul li {
       font-family: "Arial", Helvetica, sans-serif;
       float: right;
-      display: table-cell;
+      display: block;
       vertical-align: bottom;
       margin-top: 10%;
       margin: 10px;
@@ -41,13 +49,8 @@ html, body {
 #content {
   background-color: olive;
   height: 95%; }
-  #content #searchByName {
-    background-color: red; }
-  #content #searchByRating {
-    background-color: cyan; }
-  #content #searchByLocation {
-    background-color: red; }
-  #content #searchBySuburb {
+  #content #lol {
+    margin: 5%;
     background-color: red; }
 
 #footer {

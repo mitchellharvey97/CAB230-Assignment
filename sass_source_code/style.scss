@@ -1,33 +1,37 @@
 html, body {
-background-color: white;
-height :100%;
-margin: 0px;
-padding: 0px;
-}
+  background-color: white;
+  height: 100%;
+  margin: 0px;
+  padding: 0px; }
 
 #wrapper {
-	margin: auto;
-	width: 95%;
-	height: 100%;
-	background-color: blue;
-	min-width: 600px;
-}
-
-$headcolor: silver;
+  margin: auto;
+  width: 95%;
+  height: 100%;
+  background-color: blue;
+  min-width: 600px;
+  max-width: 1366px; }
 
 #header {
-	background-color: $headcolor;
-	height: 100px;
-}
-#titleblock {
-	background-color: orange;
-	height: 100%;
-	width: 50%;
-	float: left;
-	text-align: center;
-	line-height: 325%;
-}
+  background-color: #000033;
+  height: 125px; }
 
+#logo {
+  padding: 10px;
+  background-color: #000033;
+  float: left;
+  width: 100px;
+  height: 100px; }
+
+#titleblock {
+  color: white;
+  background-color: #000033;
+  height: 100%;
+  
+  float: left;
+  text-align: center;
+  line-height: 325%; }
+  
 #menu {
 	
 	height: 100%;
@@ -35,11 +39,11 @@ $headcolor: silver;
 	float: right;
 
 	ul{
-		padding: 45px;
+		padding: 59.5px;
 		li{
 	font-family: "Arial", Helvetica, sans-serif;
 	float: right;
-	display: table-cell;
+	display: block;
 	vertical-align: bottom;
 	margin-top: 10%;
 	margin: 10px;
@@ -48,25 +52,14 @@ $headcolor: silver;
 	}
 }
 
-
-
 #content {
 	background-color: olive;
 	height: 95%;
-	#searchByName {
-		background-color: red;
-	}
-	#searchByRating {
-		background-color: cyan;
-	}
-	
-	#searchByLocation {
+	#lol {
+		margin: 5%;
 		background-color: red;
 	}
 	
-	#searchBySuburb {
-		background-color: red;
-	}
 }
 
 #footer {
