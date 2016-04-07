@@ -1,21 +1,27 @@
-body {
-  background-color: white; }
+html, body {
+  background-color: white;
+  height: 100%;
+  margin: 0px;
+  padding: 0px; }
 
 #wrapper {
   margin: auto;
-  width: 80%;
-  min-width: 600px;
-  box-shadow: 10px 10px 5px #888888; }
+  width: 95%;
+  height: 100%;
+  background-color: blue;
+  min-width: 600px; }
 
 #header {
   background-color: silver;
   height: 100px; }
 
 #titleblock {
+  background-color: orange;
   height: 100%;
   width: 50%;
   float: left;
-  text-align: center; }
+  text-align: center;
+  line-height: 325%; }
 
 #menu {
   height: 100%;
@@ -34,11 +40,18 @@ body {
 
 #content {
   background-color: olive;
-  height: 650px; }
-  #content #searchbar {
+  height: 95%; }
+  #content #searchByName {
+    background-color: red; }
+  #content #searchByRating {
+    background-color: cyan; }
+  #content #searchByLocation {
+    background-color: red; }
+  #content #searchBySuburb {
     background-color: red; }
 
 #footer {
-  background-color: red; }
+  height: 5%;
+  background-color: yellow; }
 
 /*# sourceMappingURL=style.css.map */

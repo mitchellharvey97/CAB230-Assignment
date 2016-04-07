@@ -1,12 +1,16 @@
-body {
+html, body {
 background-color: white;
+height :100%;
+margin: 0px;
+padding: 0px;
 }
 
 #wrapper {
 	margin: auto;
-	width: 80%;
+	width: 95%;
+	height: 100%;
+	background-color: blue;
 	min-width: 600px;
-	box-shadow: 10px 10px 5px #888888;
 }
 
 $headcolor: silver;
@@ -16,11 +20,12 @@ $headcolor: silver;
 	height: 100px;
 }
 #titleblock {
-	
+	background-color: orange;
 	height: 100%;
 	width: 50%;
 	float: left;
 	text-align: center;
+	line-height: 325%;
 }
 
 #menu {
@@ -41,22 +46,32 @@ $headcolor: silver;
 	list-style-type:none;
 		}
 	}
-	
-	
-	
-
 }
+
 
 
 #content {
 	background-color: olive;
-	height: 650px;
-	#searchbar {
+	height: 95%;
+	#searchByName {
+		background-color: red;
+	}
+	#searchByRating {
+		background-color: cyan;
+	}
+	
+	#searchByLocation {
+		background-color: red;
+	}
+	
+	#searchBySuburb {
 		background-color: red;
 	}
 }
 
 #footer {
-	background-color: red;
+	height: 5%;
+	background-color: yellow;
+	
 }
 
