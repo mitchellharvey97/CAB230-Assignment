@@ -65,13 +65,23 @@ html, body {
   height: 5%;
   background-color: yellow; }
 
+/*Logo On Top Of Page*/
+#logo_1 {
+  width: 100%; }
+  #logo_1 #background {
+    fill: #FFF; }
+  #logo_1 #border {
+    fill: #000; }
+  #logo_1 #circle {
+    fill: #000; }
+  #logo_1 .line {
+    fill: #FFF; }
+
 @media only screen and (min-width: 650px) {
   #menu a {
     font-size: 1em; } }
 @media only screen and (min-width: 950px) {
   #menu a {
     font-size: 1.5em; } }
-/*# sourceMappingURL=style.css.map */
-/*# sourceMappingURL=style.css.map */
 
 /*# sourceMappingURL=style.css.map */
