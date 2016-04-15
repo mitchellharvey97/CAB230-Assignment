@@ -68,6 +68,24 @@ html, body {
   height: 5%;
   background-color: yellow; }
 
+/*Logo On Top Of Page*/
+
+#logo_1 {
+  width: 100%;
+  #background {
+    fill: #CCC;
+  }
+  #border {
+    fill: #000;
+  }
+  #circle {
+    fill: #000;
+  }
+  .line {
+    fill: #FFF;
+  }
+}
+
 
 @media only screen and (min-width: 650px) {
   #menu a {
@@ -81,6 +99,3 @@ html, body {
   }
 }
 
-/*# sourceMappingURL=style.css.map */
-
-/*# sourceMappingURL=style.css.map */
