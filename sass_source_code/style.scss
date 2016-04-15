@@ -1,59 +1,63 @@
 html, body {
-  background-color: white;
+  background-color: whitesmoke;
   height: 100%;
   margin: 5px;
   padding: 0px; }
 
 #wrapper {
   margin: auto;
-  width: 97%;
+  width: 98%;
   height: 100%;
   min-width: 650px; }
 
 #header {
-  border-radius: 20px 20px 0px 0px;
+  border-radius: 20px 20px 5px 5px;
+  margin-bottom: 5px;
   background-color: #000033;
-  height: 125px; }
+  height: 150px; }
 
 #logo {
-  margin: 10px;
-  background-color: #000033;
+  margin-top: 30px;
+  margin-left: 30px;
   float: left;
   width: 100px;
   height: 100px; }
 
 #titleblock {
+
+  font-family: "Arial", Helvetica, sans-serif;
   color: white;
-  background-color: #000033;
   font-size: 15pt;
   height: 100%;
   float: left;
   text-align: center;
-  line-height: 325%; }
+  line-height: 500%; }
 
 #menu {
   height: 100%;
   width: 50%;
   float: right; }
 
-#menu a:links {
-  color: white; }
+#menu a {
+  text-decoration: none;  color: white;
+  font-weight: 500; }
 
-#menu a:visited {
-  color: white; }
+
 
 #menu ul li {
+
   font-family: "Arial", Helvetica, sans-serif;
   float: right;
   display: block;
   vertical-align: bottom;
-  padding: 9px;
-  margin-right: 5px;;
-  margin-top: 75px;
+  padding: 3pt;
+  margin-right: 2%;
+  margin-top: 100px;
   list-style-type: none; }
 
 #content {
-  background-color: olive;
+  border-radius: 5px 5px 0px 0px;
+  background-color: #000066;
   height: 95%; }
 
 #content #lol {
@@ -63,3 +67,20 @@ html, body {
 #footer {
   height: 5%;
   background-color: yellow; }
+
+
+@media only screen and (min-width: 650px) {
+  #menu a {
+    font-size: 1em;
+  }
+}
+@media only screen and (min-width: 950px) {
+  #menu a {
+    
+    font-size: 1.5em;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
+
+/*# sourceMappingURL=style.css.map */
