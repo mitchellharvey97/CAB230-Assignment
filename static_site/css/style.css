@@ -4,6 +4,10 @@ html, body {
   margin: 5px;
   padding: 0px; }
 
+a {
+  text-decoration: none;
+  color: white; }
+
 #wrapper {
   margin: auto;
   width: 98%;
@@ -37,9 +41,18 @@ html, body {
   width: 50%;
   float: right; }
 
-#menu a {
-  text-decoration: none;
+.button {
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
   color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; }
+
+#menu a {
   font-weight: 500; }
 
 #menu ul li {
@@ -57,25 +70,38 @@ html, body {
   background-color: #000066;
   height: 95%; }
 
-#content #lol {
-  margin: 5%;
-  background-color: red; }
+#searchContent {
+  padding-top: 50px;
+  margin-left: 37.5%;
+  font-family: "Arial", Helvetica, sans-serif;
+  color: white;
+  font-size: 2em; }
 
 #footer {
-  height: 5%;
-  background-color: yellow; }
+  font-family: "Arial", Helvetica, sans-serif;
+  color: white;
+  font-size: 17.5pt;
+  font-style: oblique;
+  height: 45px;
+  background-color: #000033;
+  text-align: center;
+  padding: 10px; }
 
-/*Logo On Top Of Page*/
+#footer
 #logo_1 {
   width: 100%; }
-  #logo_1 #background {
-    fill: #FFF; }
-  #logo_1 #border {
-    fill: #000; }
-  #logo_1 #circle {
-    fill: #000; }
-  #logo_1 .line {
-    fill: #FFF; }
+
+#logo_1 #background {
+  fill: #FFF; }
+
+#logo_1 #border {
+  fill: #000033; }
+
+#logo_1 #circle {
+  fill: #000066; }
+
+#logo_1 .line {
+  fill: #FFF; }
 
 @media only screen and (min-width: 650px) {
   #menu a {
@@ -83,5 +109,6 @@ html, body {
 @media only screen and (min-width: 950px) {
   #menu a {
     font-size: 1.5em; } }
+/*# sourceMappingURL=style.css.map */
 
 /*# sourceMappingURL=style.css.map */
