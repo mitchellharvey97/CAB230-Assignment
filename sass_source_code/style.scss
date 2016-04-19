@@ -3,10 +3,11 @@ html, body {
   height: 100%;
   margin: 5px;
   padding: 0px; }
+
 a {
   text-decoration: none;
-  color: white;
-}
+  color: white; }
+
 #wrapper {
   margin: auto;
   width: 98%;
@@ -40,17 +41,6 @@ a {
   width: 50%;
   float: right; }
 
-.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-
 #menu a {
   font-weight: 500; }
 
@@ -67,42 +57,56 @@ a {
 #content {
   border-radius: 5px 5px 0px 0px;
   background-color: #000066;
-  height: 95%;
-  
-  }
-  
- #searchContent {
-	 padding-top: 50px;
-	margin-left: 37.5%;
-	font-family: "Arial", Helvetica, sans-serif;
-	color: white;
-	font-size: 2em;
+  height: 95%; }
 
- }
-
-#footer {
-  
+#searchContent {
+  padding-top: 125px;
+  margin-left: 37.5%;
   font-family: "Arial", Helvetica, sans-serif;
   color: white;
-  font-size:17.5pt;
-  font-style:  oblique;
+  font-size: 2em; }
+
+input[type=text] {
+  width: 350px;
+  padding: 10px; }
+
+button {
+  background-color: #000033;
+  width: 350px;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px; }
+
+#searchbar
+#footer {
+  font-family: "Arial", Helvetica, sans-serif;
+  color: white;
+  font-size: 17.5pt;
+  font-style: oblique;
   height: 45px;
   background-color: #000033;
   text-align: center;
-  padding: 10px;
-  }
-#footer 
-/*Logo On Top Of Page*/
+  padding: 10px; }
+
+#footer
 #logo_1 {
   width: 100%; }
-  #logo_1 #background {
-    fill: #FFF; }
-  #logo_1 #border {
-    fill: #000033; }
-  #logo_1 #circle {
-    fill: #000066; }
-  #logo_1 .line {
-    fill: #FFF; }
+
+#logo_1 #background {
+  fill: #FFF; }
+
+#logo_1 #border {
+  fill: #000033; }
+
+#logo_1 #circle {
+  fill: #000066; }
+
+#logo_1 .line {
+  fill: #FFF; }
 
 @media only screen and (min-width: 650px) {
   #menu a {
@@ -110,5 +114,7 @@ a {
 @media only screen and (min-width: 950px) {
   #menu a {
     font-size: 1.5em; } }
+/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=style.css.map */
 
 /*# sourceMappingURL=style.css.map */
