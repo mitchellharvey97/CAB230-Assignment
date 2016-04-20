@@ -89,10 +89,30 @@ function remove_error() {
 function check_field(name, field_name) {
     var field = document.getElementById(field_name);
 
+var field_id = field.id;
+
     if (!field.value) {//Every Checked Field is mandatory
         add_error(name + " must not be blank", field)
         return false;
     }
+	
+
+if (field_id == "name" || field_id == "surname"){
+	
+	    var regex_email_collection = new RegExp(/([0-9\*]+)/gi)
+        var provided_value = field.value;
+        var results_array;
+        var result_found = false;
+        while ((results_array = regex_email_collection.exec(provided_value)) != null)
+            result_found = true;
+
+        if (result_found) {
+            add_error("Please provide a valid Name", field)
+        }
+	
+}
+
+	
 
     if (field.type == "email") {
         var regex_email_collection = new RegExp(/(.+@.+)/gi)
