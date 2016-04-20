@@ -17,16 +17,18 @@ function validate_submission() {
 
     var mandatory_fields = [];
 //Push Items to the array to enforce mandatory requirements
-    mandatory_fields.push(["name", "surname"]);
-    mandatory_fields.push(["Street Address", "street"]);
+    mandatory_fields.push(["First name", "name"]);
+    mandatory_fields.push(["Surname", "surname"]);
     mandatory_fields.push(["Email Address", "email_address"]);
+	
+	
     mandatory_fields.push(["Password", "password1"]);
     mandatory_fields.push(["Password", "password2"]);
 
     var error = false;
     for (var x = 0; x < mandatory_fields.length; x++) {
         if (!check_field(mandatory_fields[x][0], mandatory_fields[x][1])) {
-            error = true;
+			error = true;
         }
     }
 
@@ -36,9 +38,15 @@ function validate_submission() {
 
     if (error) {
         console.log("There is an error in the page");
+		//window.location.href = "index.html";
     } else {
         console.log("All Systems GO, fire that nuke");
+		window.location.href = "index.html";
     }
+	
+	
+	
+	
 }
 
 function check_password_match(field1, field2) {
@@ -46,11 +54,13 @@ function check_password_match(field1, field2) {
     var pass2 = document.getElementById(field2);
     if (pass1.value == pass2.value) {
         console.log("Passwords the same");
+		return true;
     }
     else {
         console.log("Passwords don't match");
         add_error("Passwords don't match", pass2);
-    }
+    return false;
+	}
 }
 
 function add_error(error_code, element_error) {

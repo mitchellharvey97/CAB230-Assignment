@@ -56,48 +56,42 @@
 				<div id="menu">
 					<ul id="links">
 						<li><a href="">Contact Us</li>
-						<li><a href="signup.html">Sign Up/ Login</a></li>
-						<li><a href="index.html">Home</a></li>
+						<li><a href="">Sign Up/ Login</a></li>
+						<li><a href="">Home</a></li>
 					</ul>
 				</div>
 			</div>
 			<div id="content">
 			<div id="searchContent">
 
-			<form id ="main_form">
-			<input type ="text" name ="search_value" id = "search_value"><br>
-Search By:
-    <input type="radio" name="search_type" value="name" checked>Name
-    <input type="radio" name="search_type" value="suburb">Suburb<br>
-
-
-		<a href = "results_page.html"><input type="button" value="Lets Go">	</a>
-			</form>
 			
-			<br>
-			<br>
-			<br>
-		<form id = "rating_search">
-		Or, Search by Rating
-		
-		<input type="radio" name="enterRating" value="1">1
-						<input type="radio" name="enterRating" value="2">2
-						<input type="radio" name="enterRating" value="3">3
-						<input type="radio" name="enterRating" value="4">4
-						<input type="radio" name="enterRating" value="5">5
-		
-		<a href = "results_page.html"><input type="button" value="Lets Go">	</a>
-		
-		</form>
-		
-		
-				<form id = "geolocation_search">
-		Find the nearest Wifi Hotspot
-		
-		
-		<a href = "results_page.html"><input type="button" value="Lets Go"></a>
-		
-		</form>
+			
+			
+			<form 	id ="main_form">
+   
+   First name: <br>
+    <input type="text" name="name" id="name">
+    </br>
+ 
+ Surname: <br>
+    <input type="text" name="surname" id="surname">
+    </br>
+
+    Email Address: <br>
+    <input type="email" name="email_address" id ="email_address"><br>
+
+    Password: <br>
+    <input type="password" name="password1" id="password1"><br>
+
+    Confirm Password: <br>
+    <input type="password" name="password2" id="password2"><br>
+
+    <input type="button" value="Submit" onclick="validate_submission()">
+
+
+</form>
+
+				
 				
 				
 				
