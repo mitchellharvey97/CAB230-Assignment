@@ -20,9 +20,7 @@ function validate_submission() {
     mandatory_fields.push(["First name", "name"]);
     mandatory_fields.push(["Surname", "surname"]);
     mandatory_fields.push(["Email Address", "email_address"]);
-	
-	
-    mandatory_fields.push(["Password", "password1"]);
+	mandatory_fields.push(["Password", "password1"]);
     mandatory_fields.push(["Password", "password2"]);
 
     var error = false;
