@@ -5,7 +5,7 @@
 		<title>MyWiFind</title>
 		<?php 
 		#Links for Style Sheets and scripts to include
-$scripts = array("js/form_validate.js");
+$scripts = array("js/form_validate.js", "js/script.js");
 $css = array("css/style.css");
 
 require("common_files/logo.svg.php")
@@ -30,15 +30,16 @@ require("common_files/logo.svg.php")
 			<?php include 'common_files/header.php';?>	
 
 
-		<form id ="main_form">
-			<input type ="text" name ="search_value" id = "search_value"><br>
-		Search By:
-    <input type="radio" name="search_type" value="name" checked>Name
-    <input type="radio" name="search_type" value="suburb">Suburb<br>
+		
 
-
-		<a href = "results_page.html"><input type="button" value="Lets Go">	</a>
-			</form>
+		<form id ="main_search">
+				<input type ="text" name ="search_value" id = "search_value"><br>
+				Search By:
+					<input type="radio" name="search_type" value="name" checked>Name
+					<input type="radio" name="search_type" value="suburb">Suburb 
+				<input type="button" value="Lets Go">
+		</form>
+	
 			
 			<br>
 			<br>

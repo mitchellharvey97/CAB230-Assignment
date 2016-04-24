@@ -2,30 +2,39 @@ html, body {
   background-color: whitesmoke;
   height: 100%;
   margin: 5px;
-  padding: 0px; }
+  padding: 0px; 
+  }
 
 a {
   text-decoration: none;
-  color: white; }
+  color: white; 
+  }
 
 #wrapper {
-  margin: auto;
-  width: 98%;
-  height: 100%;
-  min-width: 650px; }
+	margin: auto;
+	width: 98%;
+	height: 100%;
+	min-width: 650px; 
+	border-radius: 5px 5px 0px 0px;
+	background-color: #000066;
+	color:white;
+}
 
+  
 #header {
   border-radius: 20px 20px 5px 5px;
   margin-bottom: 5px;
   background-color: #000033;
-  height: 150px; }
+  height: 150px;
 
-#logo {
-  margin-top: 30px;
-  margin-left: 30px;
-  float: left;
-  width: 100px;
-  height: 100px; }
+	.logo {
+		margin-top: 30px;
+		margin-left: 30px;
+		float: left;
+		width: 100px;
+		height: 100px; 
+	}
+}
 
 #titleblock {
   font-family: "Arial", Helvetica, sans-serif;
@@ -54,21 +63,14 @@ a {
   margin-top: 100px;
   list-style-type: none; }
 
-#content {
-  border-radius: 5px 5px 0px 0px;
-  background-color: #000066;
-  height: 95%; }
 
-#searchContent {
+  #searchContent {
   padding-top: 125px;
   margin-left: 37.5%;
   font-family: "Arial", Helvetica, sans-serif;
   color: white;
   font-size: 2em; }
 
-input[type=text] {
-  width: 350px;
-  padding: 10px; }
 
 button {
   background-color: #000033;
@@ -93,7 +95,26 @@ button {
   padding: 10px; }
 
   
+  #main_search, #rating_search{
+
+	  text-align:center;
+	  width:100%;
+	  background-color:red;
+	  padding-bottom:20px;
+	  input[type='text']{
+		  margin:20px 0	;
+		  background-color:green;
+		  height:30px;
+		  width:50%;
+		  
+	  }
+	  
+  }
   
+
+  
+  
+  //Base Logo Colors
   .logo {
   width: 100%; }
 

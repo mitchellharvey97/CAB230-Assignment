@@ -1,13 +1,10 @@
 <?php 
-require("logo.svg.php")
+require("logo.svg.php");
+require("pages.php");
 ?>
 
 <div id="header">
-				<div id="logo">
-					<a href="index.html">
-<?php echo ($logo);?>
-					</a  >
-				</div>
+					<?php echo '<a href="' . $home . '">' . $logo . '</a>';?>
 				<div id="titleblock">
 					<h1>MyWiFind</h1>
 				</div>
