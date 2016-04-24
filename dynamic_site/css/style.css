@@ -92,9 +92,7 @@ button {
   text-align: center;
   padding: 10px; }
 
-  
-  
-  .logo {
+.logo {
   width: 100%; }
 
 .logo #background {
@@ -108,8 +106,6 @@ button {
 
 .logo .line {
   fill: #FFF; }
-  
-  
 
 @media only screen and (min-width: 650px) {
   #menu a {
@@ -117,3 +113,5 @@ button {
 @media only screen and (min-width: 950px) {
   #menu a {
     font-size: 1.5em; } }
+
+/*# sourceMappingURL=style.css.map */
