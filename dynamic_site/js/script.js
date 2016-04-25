@@ -33,9 +33,6 @@ function report_search_value(){
 
 	console.log("Value is: " + search_bar.value)
 	
-
-	var current_regex = new RegExp(/(.*val.*)/gi);
-
 	
 	matching_results = get_search_results(search_bar.value)
 	
