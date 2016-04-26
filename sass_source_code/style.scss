@@ -112,6 +112,26 @@ button {
   }
   
 
+  .suggestion_holder{
+	  
+	  z-index: 1;
+    left: 0;
+    top: -38px;
+    position: relative;
+    width: 50%;
+    background-color: gray;
+    display: block;
+    margin: auto;
+    text-align: left;
+	
+	
+	li{
+		list-style-type:none;
+		
+	}
+	
+	}
+  
   
   
   //Base Logo Colors

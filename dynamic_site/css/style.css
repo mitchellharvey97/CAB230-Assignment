@@ -96,6 +96,19 @@ button {
     height: 30px;
     width: 50%; }
 
+.suggestion_holder {
+  z-index: 1;
+  left: 0;
+  top: -38px;
+  position: relative;
+  width: 50%;
+  background-color: gray;
+  display: block;
+  margin: auto;
+  text-align: left; }
+  .suggestion_holder li {
+    list-style-type: none; }
+
 .logo {
   width: 100%; }
 
