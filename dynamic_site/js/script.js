@@ -1,43 +1,39 @@
 window.onload = function() {
-test_database_connection()
+console.log("Script Loaded")
 load_script();
 }
 
+//Define the place name
+var place_names = [];
+var search_bar;
+var parent;
 
 
 
-//test_database_connection()
 
-function test_database_connection(){
-	
+function get_place_names(){
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-      console.log(xhttp.responseText);
+      //console.log(xhttp.responseText);
+	  place_names = JSON.parse(xhttp.responseText)
+	  if (place_names.length > 0){console.log("Place Names Retrieved Successfully");}
     }
   };
-  xhttp.open("GET", "http://cab230.local/common_files/database_api.php?q=all_names", true);
+  xhttp.open("GET", "common_files/database_api.php?q=all_names", true);
   xhttp.send();
-  
-  
-  
-	
 }
 
 
 
-
-var search_bar;
-
-var parent;
-
-var sample_options = ["Value1", "value2", "Value3", "value11", "A New One", "SomethingRandom", "This Time With Value in Middle"];
 
 
 function load_script(){
 search_bar = document.getElementById("search_value");
     parent = document.getElementById("main_search");
 //Add the keyup event to get the value;
+
+get_place_names() //Populate place name array for future use
 search_bar.onkeyup = function() {user_input()};
 
 }
@@ -86,7 +82,7 @@ function add_suggestion_li(parent, text){
 }
 
 function get_search_results(search_string){
-var matches = sample_options.filter( function(value){ return regex_contains_search(search_string, value )});
+var matches = place_names.filter( function(value){ return regex_contains_search(search_string, value )});
  //Only return the first 4 (Stop page getting too long)
  matches = matches.splice(0,4);
  return matches;		
