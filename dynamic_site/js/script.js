@@ -7,8 +7,32 @@ load_script();
 var place_names = [];
 var search_bar;
 var parent;
+var radio_buttons = [];
 
 
+function search_button_clicked(source){
+	//if the user searches via the search bar
+	if (source == "suggestion"){
+	var search_value = search_bar.value;
+		
+		if (radio_buttons[0].checked){
+			//Searching By Name
+			search_value  = "Name - " + search_value;
+		}
+		else{
+			search_value  = "Suburb - " + search_value;
+		}
+		
+	}
+	
+	alert(search_value);
+	
+}
+
+function suggestion_clicked(suggestion){
+search_bar.value = suggestion.innerHTML;
+search_button_clicked("suggestion");
+}
 
 
 function get_place_names(){
@@ -24,18 +48,17 @@ function get_place_names(){
   xhttp.send();
 }
 
-
-
-
-
 function load_script(){
 search_bar = document.getElementById("search_value");
+radio_buttons.push(document.getElementById("search_by_name"));
+radio_buttons.push(document.getElementById("search_by_suburb"));
+
+
     parent = document.getElementById("main_search");
 //Add the keyup event to get the value;
 
 get_place_names() //Populate place name array for future use
 search_bar.onkeyup = function() {user_input()};
-
 }
 
 function user_input(){
@@ -56,27 +79,27 @@ function cleanup_suggestions(){
 }
 
 function add_suggestions(top_suggestions){
-		console.log(top_suggestions);
-
-	
+		//console.log(top_suggestions);
+		
 	//Create Holder for suggestions
 	var suggestion_holder = document.createElement('span');
 	suggestion_holder.innerHTML = '<ul class ="suggestion"></li>';	
 	suggestion_holder.classList.add("suggestion_holder");
 	parent.insertBefore(suggestion_holder, search_bar.nextSibling)
 	
-
-	
 	for (x in top_suggestions){
 	add_suggestion_li(suggestion_holder, top_suggestions[x]);
 	}
-	
-	
 }
 
 function add_suggestion_li(parent, text){
 		var li = document.createElement("li");
   li.appendChild(document.createTextNode(text));
+  li.onclick = function () {
+    suggestion_clicked(li);
+};
+  
+  
   parent.appendChild(li);
 	
 }

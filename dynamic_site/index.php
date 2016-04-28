@@ -35,8 +35,8 @@ require("common_files/logo.svg.php")
 		<form id ="main_search">
 				<input type ="text" name ="search_value" id = "search_value"><br>
 				Search By:
-					<input type="radio" name="search_type" value="name" checked>Name
-					<input type="radio" name="search_type" value="suburb">Suburb 
+					<input type="radio" name="search_type" value="name" id = "search_by_name" checked>Name
+					<input type="radio" name="search_type" value="suburb" id = "search_by_suburb">Suburb 
 				<input type="button" value="Lets Go">
 		</form>
 	
