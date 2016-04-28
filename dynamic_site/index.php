@@ -8,11 +8,7 @@
 $scripts = array("js/form_validate.js", "js/script.js");
 $css = array("css/style.css");
 
-require("common_files/logo.svg.php")
-
-?>
-
- <?php
+require("common_files/logo.svg.php");
 
 	foreach ($scripts as $script){              #Link all Script Files
 		echo "<script src='".$script."'></script> \n";
@@ -25,7 +21,6 @@ require("common_files/logo.svg.php")
 	</head>
 	<body>
 	
-	</body>
 			<div id="wrapper">
 			<?php include 'common_files/header.php';?>	
 
@@ -73,4 +68,5 @@ require("common_files/logo.svg.php")
 	
 			<?php include 'common_files/footer.php';?>	
 			</div>	
+	</body>
 	</html>

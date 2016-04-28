@@ -98,10 +98,7 @@ function add_suggestion_li(parent, text){
   li.onclick = function () {
     suggestion_clicked(li);
 };
-  
-  
   parent.appendChild(li);
-	
 }
 
 function get_search_results(search_string){

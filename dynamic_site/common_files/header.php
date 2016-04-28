@@ -12,7 +12,7 @@ require("pages.php");
 					<ul id="links">
 						<li><a href="">Contact Us</li>
 						<li><a href="signup.html">Sign Up/ Login</a></li>
-						<li><a href="index.html">Home</a></li>
+						<li><a href="<?php echo $home ?>">Home</a></li>
 					</ul>
 				</div>
 </div>
