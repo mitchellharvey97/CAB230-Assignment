@@ -1,18 +1,56 @@
-window.onload = function() {
-console.log("Script Loaded")
-load_script();
-}
-
-//Define the place name
+//Define Global Variables for easy access
 var place_names = [];
 var search_bar;
 var parent;
 var radio_buttons = [];
+var text_box_search;
+var rating_search;
+var location_search;
 
+
+window.onload = function() {
+console.log("Script Loaded")
+
+add_page_events();
+parent = document.getElementById("main_search");
+
+
+get_place_names() //Populate place name array for future use
+
+
+
+}
+
+function add_page_events(){
+
+//Define the Global variables
+text_box_search = document.getElementById("text_search");
+rating_search = document.getElementById("rating_search");
+location_search = document.getElementById("location_search");
+
+search_bar = document.getElementById("search_value");
+radio_buttons.push(document.getElementById("search_by_name"));
+radio_buttons.push(document.getElementById("search_by_suburb"));
+
+//Add the events
+search_bar.onkeyup = function() {user_input()};
+
+text_box_search.onclick = function() {search_button_clicked("text_search")};
+rating_search.onclick = function() {search_button_clicked("rating_search")};
+location_search.onclick = function() {search_button_clicked("location_search")};
+
+
+	
+console.log(text_box_search);
+	
+}
 
 function search_button_clicked(source){
 	//if the user searches via the search bar
-	if (source == "suggestion"){
+	console.log("Search Clicked?")
+	console.log(source);
+	
+	if (source == "suggestion" || source == "text_search"){
 	var search_value = search_bar.value;
 		
 		if (radio_buttons[0].checked){
@@ -22,8 +60,14 @@ function search_button_clicked(source){
 		else{
 			search_value  = "Suburb - " + search_value;
 		}
-		
 	}
+	else if (source == "rating_search"){
+		//Searching By Rating
+		
+		var rating = document.querySelector('input[name = "enterRating"]:checked')//.value;
+		console.log(rating);
+	}
+	
 	
 	alert(search_value);
 	
@@ -48,18 +92,6 @@ function get_place_names(){
   xhttp.send();
 }
 
-function load_script(){
-search_bar = document.getElementById("search_value");
-radio_buttons.push(document.getElementById("search_by_name"));
-radio_buttons.push(document.getElementById("search_by_suburb"));
-
-
-    parent = document.getElementById("main_search");
-//Add the keyup event to get the value;
-
-get_place_names() //Populate place name array for future use
-search_bar.onkeyup = function() {user_input()};
-}
 
 function user_input(){
 	//A slightly complex process of getting the text from a passed text box and returning the
@@ -79,16 +111,15 @@ function cleanup_suggestions(){
 }
 
 function add_suggestions(top_suggestions){
-		//console.log(top_suggestions);
-		
-	//Create Holder for suggestions
-	var suggestion_holder = document.createElement('span');
-	suggestion_holder.innerHTML = '<ul class ="suggestion"></li>';	
-	suggestion_holder.classList.add("suggestion_holder");
-	parent.insertBefore(suggestion_holder, search_bar.nextSibling)
-	
-	for (x in top_suggestions){
-	add_suggestion_li(suggestion_holder, top_suggestions[x]);
+	//Create Holder for suggestions - ONLY IF THERE ARE SUGGESTIONS
+	if (top_suggestions.length > 0){
+		var suggestion_holder = document.createElement('span');
+		suggestion_holder.innerHTML = '<ul class ="suggestion"></li>';	
+		suggestion_holder.classList.add("suggestion_holder");
+		parent.insertBefore(suggestion_holder, search_bar.nextSibling)
+		for (x in top_suggestions){
+			add_suggestion_li(suggestion_holder, top_suggestions[x]);
+		}
 	}
 }
 
@@ -99,7 +130,7 @@ function add_suggestion_li(parent, text){
     suggestion_clicked(li);
 };
   parent.appendChild(li);
-}
+	}
 
 function get_search_results(search_string){
 var matches = place_names.filter( function(value){ return regex_contains_search(search_string, value )});

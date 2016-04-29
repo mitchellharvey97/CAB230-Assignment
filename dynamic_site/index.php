@@ -23,44 +23,35 @@ require("common_files/logo.svg.php");
 	
 			<div id="wrapper">
 			<?php include 'common_files/header.php';?>	
-
-
-		
-
 		<form id ="main_search">
 				<input type ="text" name ="search_value" id = "search_value"><br>
 				Search By:
 					<input type="radio" name="search_type" value="name" id = "search_by_name" checked>Name
 					<input type="radio" name="search_type" value="suburb" id = "search_by_suburb">Suburb 
-				<input type="button" value="Lets Go">
+				<input type="button" value="Lets Go" id="text_search">
 		</form>
 	
-			
-			<br>
-			<br>
-			<br>
-		<form id = "rating_search">
-		Or, Search by Rating
+		<br>
+		<form id ="rating_search_form">
+		Or, Search by Rating		
+		<?php
+		for ($x = 1; $x <=5; $x++){
+		echo("<input type='radio' name='enterRating' value='$x'>$x");
+		}
+		?>
 		
-		<input type="radio" name="enterRating" value="1">1
-						<input type="radio" name="enterRating" value="2">2
-						<input type="radio" name="enterRating" value="3">3
-						<input type="radio" name="enterRating" value="4">4
-						<input type="radio" name="enterRating" value="5">5
-		
-		<input type="button" value="Lets Go">
-		
+		<input type="button" value="Lets Gooo" id="rating_search">
 		</form>
 		
 		
-				<form id = "geolocation_search">
+			<!--	<form id = "geolocation_search">
 		Find the nearest Wifi Hotspot
 		
 		
-		<input type="button" value="Lets Go">
+		<input type="button" value="Lets Go" id="location_search">
 		
 		</form>
-				
+				-->
 				
 
 
