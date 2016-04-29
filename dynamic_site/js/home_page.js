@@ -7,8 +7,16 @@ var text_box_search;
 var rating_search;
 var location_search;
 
+//Load Scripts before the window is loaded
+document.onload = function(){
+	add_external_scripts();
+	extra_file();
+}
 
+//On the window Load - after the Document Has been loaded and external scripts are included
 window.onload = function() {
+	
+	
 console.log("Script Loaded")
 
 add_page_events();
@@ -19,6 +27,18 @@ get_place_names() //Populate place name array for future use
 
 
 
+}
+
+
+function add_external_scripts(){
+	console.log("Adding External");
+	var js = document.createElement("script");
+
+js.type = "text/javascript";
+js.src = "js/suggestion.js";
+
+document.body.appendChild(js);
+	
 }
 
 function add_page_events(){
@@ -34,25 +54,15 @@ radio_buttons.push(document.getElementById("search_by_suburb"));
 
 //Add the events
 search_bar.onkeyup = function() {user_input()};
-
 text_box_search.onclick = function() {search_button_clicked("text_search")};
 rating_search.onclick = function() {search_button_clicked("rating_search")};
-location_search.onclick = function() {search_button_clicked("location_search")};
-
-
-	
-console.log(text_box_search);
-	
+location_search.onclick = function() {search_button_clicked("location_search")};	
 }
 
 function search_button_clicked(source){
 	//if the user searches via the search bar
-	console.log("Search Clicked?")
-	console.log(source);
-	
 	if (source == "suggestion" || source == "text_search"){
 	var search_value = search_bar.value;
-		
 		if (radio_buttons[0].checked){
 			//Searching By Name
 			search_value  = "Name - " + search_value;
@@ -63,15 +73,22 @@ function search_button_clicked(source){
 	}
 	else if (source == "rating_search"){
 		//Searching By Rating
-		
-		var rating = document.querySelector('input[name = "enterRating"]:checked')//.value;
+		var rating = document.querySelector('input[name = "enterRating"]:checked').value;
 		console.log(rating);
+		search_value = "Rating Search: " + rating;
+	}
+	else if (source == "location_search"){
+			
+		search_value = "Location Search";
 	}
 	
 	
 	alert(search_value);
 	
 }
+
+
+
 
 function suggestion_clicked(suggestion){
 search_bar.value = suggestion.innerHTML;
