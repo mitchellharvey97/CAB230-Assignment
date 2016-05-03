@@ -46,7 +46,7 @@ function add_page_events(){
 //Define the Global variables
 text_box_search = document.getElementById("text_search");
 rating_search = document.getElementById("rating_search");
-location_search = document.getElementById("location_search");
+location_search = document.getElementById("geo_location_search");
 
 search_bar = document.getElementById("search_value");
 radio_buttons.push(document.getElementById("search_by_name"));
@@ -56,7 +56,7 @@ radio_buttons.push(document.getElementById("search_by_suburb"));
 search_bar.onkeyup = function() {user_input()};
 text_box_search.onclick = function() {search_button_clicked("text_search")};
 rating_search.onclick = function() {search_button_clicked("rating_search")};
-location_search.onclick = function() {search_button_clicked("location_search")};	
+location_search.onclick = function() {search_button_clicked("geo_location_search")};	
 }
 
 function search_button_clicked(source){
@@ -77,18 +77,17 @@ function search_button_clicked(source){
 		console.log(rating);
 		search_value = "Rating Search: " + rating;
 	}
-	else if (source == "location_search"){
+	else if (source == "geo_location_search"){
 			
-		search_value = "Location Search";
+		search_value = "Geo Location Search";
+		
+		
 	}
 	
 	
 	alert(search_value);
 	
 }
-
-
-
 
 function suggestion_clicked(suggestion){
 search_bar.value = suggestion.innerHTML;

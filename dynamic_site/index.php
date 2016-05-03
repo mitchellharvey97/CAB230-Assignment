@@ -5,16 +5,16 @@
 		<title>MyWiFind</title>
 		<?php 
 		#Links for Style Sheets and scripts to include
-$scripts = array("js/form_validate.js", "js/home_page.js" );
+$scripts = array("js/form_validate.js", "js/home_page.js", "js/geolocation.js" );
 $css = array("css/style.css");
 //"js/suggestion.js",
 require("common_files/logo.svg.php");
 
 	foreach ($scripts as $script){              #Link all Script Files
-		echo "<script src='".$script."'></script> \n";
+		echo "<script src='".$script."'></script>\n";
 	}
 	foreach ($css as $script){                  #Link All CSS Files
-		echo "<link href='".$script."' rel='stylesheet'> \n";
+		echo "<link href='".$script."' rel='stylesheet'>\n";
 	}
 
     ?>
@@ -38,7 +38,7 @@ require("common_files/logo.svg.php");
 		
 		for ($x = 1; $x <=5; $x++){
 			//Make the highest rated checked - Just to prevent an error with no submission, and who
-			//Wouldn't want the best
+			//wouldn't want the best
 			if ($x == 5){$checked = "checked";}
 			else {$checked = '';}
 		echo("<input type='radio' name='enterRating' $checked value='$x'>$x");
@@ -53,7 +53,7 @@ require("common_files/logo.svg.php");
 		Find the nearest Wifi Hotspot
 		
 		
-		<input type="button" value="Lets Go" id="location_search">
+		<input type="button" value="Lets Go" id="geo_location_search">
 		
 		</form>
 				
