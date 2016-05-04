@@ -15,17 +15,6 @@ if ($conn->connect_error) { //Display Connection error if any
 }
 
 
-$all_names = array("Person1");
-array_push($all_names, "Person 2");
-array_push($all_names, "Place 1");
-array_push($all_names, "Value 1");
-array_push($all_names, "Value 11");
-array_push($all_names, "Value 2");
-
-
-
-
-
 if ($requested == "all_names"){
 	$sql = 'SELECT `Wifi Hotspot Name` FROM Wifi';
 	$results = sql_query($sql);
@@ -43,6 +32,28 @@ else if ($requested == "all_location_data"){
 	
 	
 }
+
+
+else if ($requested == 'wifi'){
+$hotspot_name = $_GET['name'];
+
+$sql = "SELECT * FROM Wifi WHERE `Wifi Hotspot Name` = '" . $hotspot_name . "'";
+
+echo $sql;
+
+
+//	$sql = "SELECT * FROM Wifi";
+$results = sql_query($sql);
+
+echo "Displaying results for $hotspot_name <br>";
+
+
+
+echo json_encode($results);
+	
+}
+
+
 
 else{
 	print("Please provide arguments in the url **ADD HELP SCRIPT HERE MAYBE **");
