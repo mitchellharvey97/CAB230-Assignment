@@ -4,6 +4,16 @@
 $user_lat = $_GET["lat"];
 $user_lon = $_GET["lon"];
 
+if ($user_lat == ""){
+	print"Ya Goofed Up";
+	$user_lat = -27.5963595;
+}
+
+if ($user_lon == ""){
+	print"Ya Goofed Up again...";
+	$user_lon = 153.2905616;
+}
+
 require("common_files/pages.php");
 
 //Get the data from the api and decode it to an object
