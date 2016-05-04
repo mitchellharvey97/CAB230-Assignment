@@ -6,7 +6,7 @@ function validate_submission() {
     //Parent is the holder ID of the form
     parent = document.getElementById("main_form");
 
-    console.log("Validating form")
+    console.log("Validating form");
 
     if (first_run) {
         first_run = false;
@@ -90,14 +90,14 @@ function check_field(name, field_name) {
 var field_id = field.id;
 
     if (!field.value) {//Every Checked Field is mandatory
-        add_error(name + " must not be blank", field)
+        add_error(name + " must not be blank", field);
         return false;
     }
 	
 
 if (field_id == "name" || field_id == "surname"){
-	
-	    var regex_email_collection = new RegExp(/([0-9\*]+)/gi)
+
+    var regex_email_collection = new RegExp(/([0-9\*]+)/gi);
         var provided_value = field.value;
         var results_array;
         var result_found = false;
@@ -113,7 +113,7 @@ if (field_id == "name" || field_id == "surname"){
 	
 
     if (field.type == "email") {
-        var regex_email_collection = new RegExp(/(.+@.+)/gi)
+        var regex_email_collection = new RegExp(/(.+@.+)/gi);
         var provided_value = field.value;
         var results_array;
         var result_found = false;
