@@ -15,18 +15,11 @@ document.onload = function(){
 
 //On the window Load - after the Document Has been loaded and external scripts are included
 window.onload = function() {
-	
-	
 console.log("Script Loaded")
 
 add_page_events();
 parent = document.getElementById("main_search");
-
-
 get_place_names() //Populate place name array for future use
-
-
-
 }
 
 
@@ -38,7 +31,6 @@ js.type = "text/javascript";
 js.src = "js/suggestion.js";
 
 document.body.appendChild(js);
-	
 }
 
 function add_page_events(){
@@ -60,12 +52,21 @@ location_search.onclick = function() {search_button_clicked("geo_location_search
 }
 
 function search_button_clicked(source){
+	//If the user clicks on a place name then they can skip the results page and go straight to the item page
+
+	
 	//if the user searches via the search bar
 	if (source == "suggestion" || source == "text_search"){
 	var search_value = search_bar.value;
 		if (radio_buttons[0].checked){
+			if (source == "suggestion"){
+				//GO straight to results
+				
+			}
+			else{
 			//Searching By Name
 			search_value  = "Name - " + search_value;
+			}
 		}
 		else{
 			search_value  = "Suburb - " + search_value;
@@ -77,11 +78,8 @@ function search_button_clicked(source){
 		console.log(rating);
 		search_value = "Rating Search: " + rating;
 	}
-	else if (source == "geo_location_search"){
-			
+	else if (source == "geo_location_search"){		
 		search_value = "Geo Location Search";
-		
-		
 	}
 	
 	
@@ -101,13 +99,21 @@ function get_place_names(){
     if (xhttp.readyState == 4 && xhttp.status == 200) {
       //console.log(xhttp.responseText);
 	  place_names = JSON.parse(xhttp.responseText)
-	  if (place_names.length > 0){console.log("Place Names Retrieved Successfully");}
+	  if (place_names.length > 0){console.log("Place Names Retrieved Successfully");
+	  extract_place_names();
+	  }
     }
   };
   xhttp.open("GET", "common_files/database_api.php?q=all_names", true);
   xhttp.send();
 }
 
+//Function to convert json to array
+function extract_place_names(){
+	for (x in place_names){
+		place_names[x] = place_names[x]['Wifi Hotspot Name'];
+	}
+}
 
 function user_input(){
 	//A slightly complex process of getting the text from a passed text box and returning the

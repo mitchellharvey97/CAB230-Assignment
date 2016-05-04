@@ -1,11 +1,5 @@
 <?php
-//Collect Data Call and work out what to do with it
-
-
-//$recieved_data = json_decode($_POST['json']);
-
-
-$requested = $_GET["q"];
+$requested = $_GET["q"]; //Get the type the user wanted
 
 
 require('./local_config/db_password.php'); //Include the password file -- added as each dev environment will have different db details using git ignore files to prevent cloning
@@ -33,12 +27,12 @@ array_push($all_names, "Value 2");
 
 
 if ($requested == "all_names"){
-echo json_encode($all_names);
+	$sql = 'SELECT `Wifi Hotspot Name` FROM Wifi';
+	$results = sql_query($sql);
+echo json_encode($results);	
 
-	//get_search_list();
-	
 }
-if ($requested == "all_location_data"){
+else if ($requested == "all_location_data"){
 //	print "All Location data comming right up, hang tight <br>";	
 	$sql = "SELECT * FROM Wifi";
 
@@ -47,6 +41,11 @@ if ($requested == "all_location_data"){
 	
 	echo json_encode($results);
 	
+	
+}
+
+else{
+	print("Please provide arguments in the url **ADD HELP SCRIPT HERE MAYBE **");
 	
 }
 
