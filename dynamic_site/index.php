@@ -1,68 +1,67 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<title>MyWiFind</title>
-		<?php 
-		#Links for Style Sheets and scripts to include
-$scripts = array("js/form_validate.js", "js/home_page.js", "js/geolocation.js" );
-$css = array("css/style.css");
-//"js/suggestion.js",
-require("common_files/logo.svg.php");
+<head>
+    <title>MyWiFind</title>
+    <?php
+    #Links for Style Sheets and scripts to include
+    $scripts = array("js/form_validate.js", "js/home_page.js", "js/geolocation.js");
+    $css = array("css/style.css");
+    //"js/suggestion.js",
+    require("common_files/logo.svg.php");
 
-	foreach ($scripts as $script){              #Link all Script Files
-		echo "<script src='".$script."'></script>\n";
-	}
-	foreach ($css as $script){                  #Link All CSS Files
-		echo "<link href='".$script."' rel='stylesheet'>\n";
-	}
+    foreach ($scripts as $script) {              #Link all Script Files
+        echo "<script src='" . $script . "'></script>\n";
+    }
+    foreach ($css as $script) {                  #Link All CSS Files
+        echo "<link href='" . $script . "' rel='stylesheet'>\n";
+    }
 
     ?>
-	</head>
-	<body>
-	
-			<div id="wrapper">
-			<?php include 'common_files/header.php';?>	
-		<form id ="main_search">
-				<input type ="text" name ="search_value" id = "search_value"><br>
-				Search By:
-					<input type="radio" name="search_type" value="name" id = "search_by_name" checked>Name
-					<input type="radio" name="search_type" value="suburb" id = "search_by_suburb">Suburb 
-				<input type="button" value="Lets Go" id="text_search">
-		</form>
-	
-		<br>
-		<form id ="rating_search_form">
-		Or, Search by Rating		
-		<?php
-		
-		for ($x = 1; $x <=5; $x++){
-			//Make the highest rated checked - Just to prevent an error with no submission, and who
-			//wouldn't want the best
-			if ($x == 5){$checked = "checked";}
-			else {$checked = '';}
-		echo("<input type='radio' name='enterRating' $checked value='$x'>$x");
-		}
-		?>
-		
-		<input type="button" value="Lets Gooo" id="rating_search">
-		</form>
-		
-		
-				<form id = "geolocation_search">
-		Find the nearest Wifi Hotspot
-		
-		
-		<input type="button" value="Lets Go" id="geo_location_search">
-		
-		</form>
-				
-				
+</head>
+<body>
+
+<div id="wrapper">
+    <?php include 'common_files/header.php'; ?>
+    <form id="main_search">
+        <input type="text" name="search_value" id="search_value"><br>
+        Search By:
+        <input type="radio" name="search_type" value="name" id="search_by_name" checked>Name
+        <input type="radio" name="search_type" value="suburb" id="search_by_suburb">Suburb
+        <input type="button" value="Lets Go" id="text_search">
+    </form>
+
+    <br>
+    <form id="rating_search_form">
+        Or, Search by Rating
+        <?php
+
+        for ($x = 1; $x <= 5; $x++) {
+            //Make the highest rated checked - Just to prevent an error with no submission, and who
+            //wouldn't want the best
+            if ($x == 5) {
+                $checked = "checked";
+            } else {
+                $checked = '';
+            }
+            echo("<input type='radio' name='enterRating' $checked value='$x'>$x");
+        }
+        ?>
+
+        <input type="button" value="Lets Gooo" id="rating_search">
+    </form>
 
 
+    <form id="geolocation_search">
+        Find the nearest Wifi Hotspot
 
-	
-			<?php include 'common_files/footer.php';?>	
-			</div>	
-	</body>
-	</html>
+
+        <input type="button" value="Lets Go" id="geo_location_search">
+
+    </form>
+
+
+    <?php include 'common_files/footer.php'; ?>
+</div>
+</body>
+</html>
