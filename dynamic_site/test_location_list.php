@@ -4,6 +4,8 @@
 $user_lat = $_GET["lat"];
 $user_lon = $_GET["lon"];
 
+
+
 if ($user_lat == ""){
 	print"Ya Goofed Up";
 	$user_lat = -27.5963595;
@@ -15,6 +17,7 @@ if ($user_lon == ""){
 }
 
 require("common_files/pages.php");
+//require("common_files/database_connect.php");
 
 //Get the data from the api and decode it to an object
 $wifi_hostspot_data_store = json_decode(file_get_contents($api . "?q=all_location_data"));
