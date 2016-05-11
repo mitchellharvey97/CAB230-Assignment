@@ -31,9 +31,6 @@ $wifi_hostspot_data_store = json_decode(file_get_contents($api . "?q=all_locatio
 $request = "all_location_data";
 $wifi_hostspot_data_store =make_sql_request($request);
 
-print("Back in Loc List File <br>");
-print_r($wifi_hostspot_data_store);
-
 
 function find_distance($lat1, $lon1, $lat2, $lon2) {
   $theta = $lon1 - $lon2;
@@ -53,17 +50,24 @@ add_distance_array();
 function add_distance_array(){
 global $wifi_hostspot_data_store;
 
+
 function calculate_distance($location_array){
 	global $user_lat;
 	global $user_lon;
 	return (find_distance($user_lat, $user_lon, $location_array->Latitude, $location_array->Longitude));
 }
 
+
 foreach ($wifi_hostspot_data_store as $hotspot){
+	//print_r($hotspot);
+	
+	
 			$dist = calculate_distance($hotspot);
 			$hotspot->distance_from_user = $dist;
-			print "The Distance between $hotspot->Suburb and the user is $hotspot->distance_from_user km<br>";
+			print "The Distance between " . $hotspot->Suburb . "and the user is $hotspot->distance_from_user km<br>";
 }
+
+
 }
 
 

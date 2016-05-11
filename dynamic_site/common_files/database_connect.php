@@ -21,15 +21,15 @@ else {$path_to_pass = './local_config/db_password.php';}
 
 	//added a source varaible as webcalls don't have permission to alter database data
 	$requested = $data;//['request'];
-	print("Make SQL Request Success <br>");
+	//print("Make SQL Request Success <br>");
 	
 if ($requested == "all_names") {
-    $sql = 'SELECT `Wifi Hotspot Name` FROM $wifi_table';
+    $sql = "SELECT `Wifi Hotspot Name` FROM $wifi_table";
     $results = sql_query($sql);
 } 
 
 else if ($requested == "all_location_data") {
-	print("Got to All Loc Data <br>");
+//	print("Got to All Loc Data <br>");
     $sql = "SELECT * FROM $wifi_table";
     $results = sql_query($sql);
 } 
@@ -55,7 +55,6 @@ else if ($requested == 'wifi') {
 
 }
 
-print_r ($results);
 return $results;
 
 }
@@ -64,12 +63,6 @@ return $results;
 
 function sql_query($query){
 global $source;
-print("Into the Actual Request query <br>");
-
-print($query);
-
-print "Source is $source<br>";
-
 
 //Stuff around as the api call is made from web_root/common_files and other files are making the call from web_root
 if ($source == "direct"){$path_to_pass = './common_files/local_config/db_password.php';}
@@ -90,7 +83,7 @@ $result = $pdo->query($query);
 $result_data_store = array();
 
 	foreach ($result as $data){
-		array_push($result_data_store, $data);
+		array_push($result_data_store, (object) $data);
 	}
 	return($result_data_store);	
 }
