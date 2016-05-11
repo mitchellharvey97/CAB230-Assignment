@@ -9,8 +9,6 @@
 $user_lat = $_GET["lat"];
 $user_lon = $_GET["lon"];
 
-
-
 if ($user_lat == ""){
 	print"Ya Goofed Up";
 	$user_lat = -27.5963595;
@@ -24,13 +22,9 @@ if ($user_lon == ""){
 require("common_files/pages.php");
 require("common_files/database_connect.php");
 
-//Get the data from the api and decode it to an object
-$wifi_hostspot_data_store = json_decode(file_get_contents($api . "?q=all_location_data"));
-
-
+//Get the data from the database connector and decode it to an object
 $request = "all_location_data";
 $wifi_hostspot_data_store =make_sql_request($request);
-
 
 function find_distance($lat1, $lon1, $lat2, $lon2) {
   $theta = $lon1 - $lon2;
@@ -59,14 +53,10 @@ function calculate_distance($location_array){
 
 
 foreach ($wifi_hostspot_data_store as $hotspot){
-	//print_r($hotspot);
-	
-	
 			$dist = calculate_distance($hotspot);
 			$hotspot->distance_from_user = $dist;
 			print "The Distance between " . $hotspot->Suburb . "and the user is $hotspot->distance_from_user km<br>";
 }
-
 
 }
 
