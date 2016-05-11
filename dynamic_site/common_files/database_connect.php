@@ -1,25 +1,36 @@
 <?php
 
-function make_sql_request($requested, $source = "direct"){
-	//added a source varaible as webcalls don't have permission to alter database data
+$source;
+
+function make_sql_request($data, $passed_source="direct"){
+	global $source;
 	
+	
+	$source = $passed_source;
+	//added a source varaible as webcalls don't have permission to alter database data
+	$requested = $data;//['request'];
+	print("Make SQL Request Success <br>");
 	
 if ($requested == "all_names") {
     $sql = 'SELECT `Wifi Hotspot Name` FROM Wifi';
     $results = sql_query($sql);
-} else if ($requested == "all_location_data") {
+} 
+
+else if ($requested == "all_location_data") {
+	print("Got to All Loc Data <br>");
     $sql = "SELECT * FROM Wifi";
     $results = sql_query($sql);
-} else if ($requested == 'wifi') {
+} 
+else if ($requested == 'wifi') {
 //Get the name of the hotspot to return
     $hotspot_name = $_GET['name'];
     $sql = "SELECT * FROM Wifi WHERE `Wifi Hotspot Name` = '" . $hotspot_name . "'";
     $results = sql_query($sql);
-} else if ($requested == "search") {
+}
+ else if ($requested == "search") {
     $search_type = $_GET['search_type'];
 
     if ($search_type == "name") {
-
 
     } else if ($search_type == "suburb") {
 
@@ -31,15 +42,28 @@ if ($requested == "all_names") {
     print ("ITS A QUERY");
 
 }
+
+print_r ($results);
 return $results;
+
 }
 
 
 
 function sql_query($query){
+global $source;
+print("Into the Actual Request query <br>");
+
+print($query);
+
+print "Source is $source<br>";
 
 
-    require('./local_config/db_password.php'); //Include the password file -- added as each dev environment will have different db details using git ignore files to prevent cloning
+//Stuff around as the api call is made from web_root/common_files and other files are making the call from web_root
+if ($source == "direct"){$path_to_pass = './common_files/local_config/db_password.php';}
+else {$path_to_pass = './local_config/db_password.php';}
+
+    require($path_to_pass); //Include the password file -- added as each dev environment will have different db details using git ignore files to prevent cloning
     $data_table = $databases['data_table']; //Change to a straight variable for simplicity
 
 	$host = $databases["host"];
@@ -56,8 +80,8 @@ $result_data_store = array();
 	foreach ($result as $data){
 		array_push($result_data_store, $data);
 	}
+//print_r($result_data_store);
 	return($result_data_store);	
-
 }
 catch (PDOException $e)
 {

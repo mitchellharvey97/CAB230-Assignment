@@ -1,3 +1,8 @@
+<HTML>
+<HEAD>
+<TITLE> Test Location List</TITLE>
+</HEAD>
+<BODY>
 <?php
 
 //Pull user location from URL
@@ -17,10 +22,18 @@ if ($user_lon == ""){
 }
 
 require("common_files/pages.php");
-//require("common_files/database_connect.php");
+require("common_files/database_connect.php");
 
 //Get the data from the api and decode it to an object
 $wifi_hostspot_data_store = json_decode(file_get_contents($api . "?q=all_location_data"));
+
+
+$request = "all_location_data";
+$wifi_hostspot_data_store =make_sql_request($request);
+
+print("Back in Loc List File <br>");
+print_r($wifi_hostspot_data_store);
+
 
 function find_distance($lat1, $lon1, $lat2, $lon2) {
   $theta = $lon1 - $lon2;
