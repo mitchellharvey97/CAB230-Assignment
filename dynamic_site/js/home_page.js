@@ -62,27 +62,34 @@ function add_page_events() {
 function search_button_clicked(source) {
     //If the user clicks on a place name then they can skip the results page and go straight to the item page
 
+	var search_page_prefix = "results.php?"
+var result_query;
+
 
     //if the user searches via the search bar
     if (source == "suggestion" || source == "text_search") {
         var search_value = search_bar.value;
         if (radio_buttons[0].checked) {
             if (source == "suggestion") {
+				
                 //GO straight to results
-
-            }
+						document.location = "item_page.php/?q=" + search_value	
+				}
             else {
                 //Searching By Name
+				result_query = "name=" + search_value;
                 search_value = "Name - " + search_value;
             }
         }
         else {
+				result_query = "suburb=" + search_value;
             search_value = "Suburb - " + search_value;
         }
     }
     else if (source == "rating_search") {
         //Searching By Rating
         var rating = document.querySelector('input[name = "enterRating"]:checked').value;
+				result_query = "rating=" + rating;
         console.log(rating);
         search_value = "Rating Search: " + rating;
     }
@@ -90,7 +97,7 @@ function search_button_clicked(source) {
         search_value = "Geo Location Search";
     }
 
-
+document.location = "results.php?" + result_query;
     alert(search_value);
 
 }
