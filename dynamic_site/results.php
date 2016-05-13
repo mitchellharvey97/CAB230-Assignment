@@ -38,11 +38,12 @@ require("common_files/logo.svg.php");
 				</tr>
 	
 				<?php
-				$url = "http://www.plaecholder.com";
+				
 				$totalSearch = count($recieved_data);
 					for($i = 0; $i < $totalSearch; $i++) {
+						$url = "/cab230-assignment/dynamic_site/item_page.php?id=" . $i;
 						echo "<tr>";
-							echo "<td><a href=" . $url . ">" . $recieved_data[$i]->{'Wifi Hotspot Name'} . "</a></td>";
+							echo "<td><a href=" . $url  . ">" . $recieved_data[$i]->{'Wifi Hotspot Name'} . "</a></td>";
 							echo "<td>" . $recieved_data[$i]->{'Address'} . "</td>";
 							echo "<td>" . $recieved_data[$i]->{'Suburb'} . "</td>";
 							echo "<td>" . $recieved_data[$i]->{'Longitude'} . "</td>";
