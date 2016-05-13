@@ -2,8 +2,7 @@
 
 $urlrequested = $_GET["q"]; //Get the type of query
 
-require"database_connect.php";
-
+require "database_connect.php";
 
 
 //If there is a query in the url variables (It is an api request probably from Frontend JSON)
@@ -15,11 +14,9 @@ $results = make_sql_request($urlrequested, "webcall");
 if ($results) {
     echo json_encode($results);
 
-} else 
-{
+} else {
     echo("Please provide arguments in the url **ADD HELP SCRIPT HERE MAYBE **");
 }
-
 
 
 ?>
