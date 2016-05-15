@@ -89,7 +89,7 @@ $user_lon = 153.2905616;
 						
 						$url = "/cab230-assignment/dynamic_site/item_page.php?id=" . $i;
 						echo "<tr>";
-							echo "<td><a href=" . $url  . ">$wifi_name</a></td>";
+							echo "<td><a href='$item?q=$wifi_name'>$wifi_name</a></td>";
 							echo "<td>$wifi_address</td>";
 							echo "<td>$wifi_suburb</td>";
 							
