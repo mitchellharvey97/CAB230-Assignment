@@ -1,5 +1,7 @@
 function display_map(locations, map_id){
-//Script adapted from http://chrisltd.com/blog/2013/08/google-map-random-color-pins/
+	//console.log(locations);
+	
+	//Script adapted from http://chrisltd.com/blog/2013/08/google-map-random-color-pins/
   //The script has been tweeked to enable the map locations to become clickable objects
   
      // Setup the different icons and shadows
@@ -10,6 +12,7 @@ function display_map(locations, map_id){
       iconURLPrefix + 'red-dot.png',
       iconURLPrefix + 'green-dot.png',
       iconURLPrefix + 'blue-dot.png',
+      iconURLPrefix + 'ltblue-dot.png',
       iconURLPrefix + 'orange-dot.png',
       iconURLPrefix + 'purple-dot.png',
       iconURLPrefix + 'pink-dot.png',      

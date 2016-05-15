@@ -20,21 +20,14 @@ if ($user_lon == "") {
 }
 
 require("common_files/pages.php");
+require("common_files/distance_calculate.php");
 require("common_files/database_connect.php");
 
 //Get the data from the database connector and decode it to an object
 $request['request'] = "all_location_data";
 $wifi_hostspot_data_store = make_sql_request($request);
 
-function find_distance($lat1, $lon1, $lat2, $lon2)
-{
-    $theta = $lon1 - $lon2;
-    $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-    $dist = acos($dist);
-    $dist = rad2deg($dist);
-    $km = $dist * 60 * 1.1515 * 1.609344;
-    return $km;
-}
+
 
 
 add_distance_array();

@@ -43,9 +43,10 @@ function search_button_clicked(source) {
     //If the user clicks on a place name then they can skip the results page and go straight to the item page
 
 	var search_page_prefix = "results.php?"
-var result_query;
+var result_query="";
+var search_type;
 
-
+result_page = null;
     //if the user searches via the search bar
     if (source == "suggestion" || source == "text_search") {
         var search_value = search_bar.value;
@@ -57,31 +58,35 @@ var result_query;
 				}
             else {
                 //Searching By Name
-				result_query = "name=" + search_value;
+				search_type = "name";
+				result_query = search_value;
                 search_value = "Name - " + search_value;
             }
         }
         else {
-				result_query = "suburb=" + search_value;
+				search_type = "suburb";
+				result_query = search_value;
             search_value = "Suburb - " + search_value;
         }
     }
     else if (source == "rating_search") {
         //Searching By Rating
-        var rating = document.querySelector('input[name = "enterRating"]:checked').value;
-				result_query = "rating=" + rating;
-        console.log(rating);
-        search_value = "Rating Search: " + rating;
+        var search_value = document.querySelector('input[name = "enterRating"]:checked').value;
+				 search_type = "rating";
+				result_query = search_value;
+        search_value = "Rating Search: " + search_value;
     }
     else if (source == "geo_location_search") {
+		 search_type = "geo_location";
         search_value = "Geo Location Search";
     }
 
-	if (result_page){
+	if (result_page != null){
+		//if the user hasn't selected a drop down option
 		document.location = result_page
 	}
 	else{
-document.location = "results.php?" + result_query;
+document.location = "results.php?" + "searchtype=" + search_type + "&value=" + result_query;
 	}
     alert(search_value);
 
