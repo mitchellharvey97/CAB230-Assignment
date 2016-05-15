@@ -1,6 +1,6 @@
 <?php
 
-$urlrequested = $_GET["q"]; //Get the type of query
+$urlrequested['request'] = $_GET["q"]; //Get the type of query
 
 require "database_connect.php";
 

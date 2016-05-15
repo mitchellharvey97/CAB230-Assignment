@@ -1,29 +1,35 @@
 <?php
-
-$source;
+$direct;
 
 function make_sql_request($data, $passed_source = "direct")
 {
-    global $source;
+	global $direct;
+	
+	
+	if ($passed_source == "direct") {
+        $direct = true;
+    } else {
+$direct = false;    }
+	
+	
 
 
-    $source = $passed_source;
-
+	
+	
 
 //Stuff around as the api call is made from web_root/common_files and other files are making the call from web_root
-    if ($source == "direct") {
+    if ($direct) {
         $path_to_pass = './common_files/local_config/db_password.php';
     } else {
         $path_to_pass = './local_config/db_password.php';
     }
-
     require($path_to_pass); //Include the password file -- added as each dev environment will have different db details using git ignore files to prevent cloning
 
     $wifi_table = $databases["data_table"];
 
 
     //added a source varaible as webcalls don't have permission to alter database data
-    $requested = $data;//['request'];
+    $requested = $data['request'];
     //print("Make SQL Request Success <br>");
 
     if ($requested == "all_names") {
@@ -33,11 +39,18 @@ function make_sql_request($data, $passed_source = "direct")
 //	print("Got to All Loc Data <br>");
         $sql = "SELECT * FROM $wifi_table";
         $results = sql_query($sql);
+		
     } else if ($requested == 'wifi') {
 //Get the name of the hotspot to return
+if ($direct){
+		$hotspot_name = $data['place_name'];
+}
+else{
         $hotspot_name = $_GET['name'];
+}
         $sql = "SELECT * FROM $wifi_table WHERE `Wifi Hotspot Name` = '" . $hotspot_name . "'";
         $results = sql_query($sql);
+		
     } else if ($requested == "search") {
         $search_type = $_GET['search_type'];
 
@@ -53,18 +66,22 @@ function make_sql_request($data, $passed_source = "direct")
         print ("ITS A QUERY");
 
     }
-
-    return $results;
+if (sizeof($results) <=1){
+    return $results[0];
+}
+else{
+	return $results;
+}
 
 }
 
 
 function sql_query($query)
 {
-    global $source;
+    global $direct;
 
 //Stuff around as the api call is made from web_root/common_files and other files are making the call from web_root
-    if ($source == "direct") {
+    if ($direct) {
         $path_to_pass = './common_files/local_config/db_password.php';
     } else {
         $path_to_pass = './local_config/db_password.php';

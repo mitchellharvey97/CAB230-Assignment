@@ -5,7 +5,8 @@
     <title>MyWiFind</title>
     <?php
     #Links for Style Sheets and scripts to include
-    $scripts = array("js/form_validate.js", "js/home_page.js", "js/geolocation.js");
+	$script_folder = "js";
+    $scripts = array("$script_folder/suggestion.js", "$script_folder/form_validate.js", "$script_folder/home_page.js", "$script_folder/geolocation.js");
     $css = array("css/style.css");
     //"js/suggestion.js",
     require("common_files/logo.svg.php");

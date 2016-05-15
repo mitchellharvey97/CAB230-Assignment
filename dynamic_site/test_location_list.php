@@ -23,7 +23,7 @@ require("common_files/pages.php");
 require("common_files/database_connect.php");
 
 //Get the data from the database connector and decode it to an object
-$request = "all_location_data";
+$request['request'] = "all_location_data";
 $wifi_hostspot_data_store = make_sql_request($request);
 
 function find_distance($lat1, $lon1, $lat2, $lon2)

@@ -1,40 +1,20 @@
 //Define Global Variables for easy access
 var place_names = [];
 var search_bar;
-var parent;
 var radio_buttons = [];
 var text_box_search;
 var rating_search;
 var location_search;
 
-//Load Scripts before the window is loaded
-document.onload = function () {
-    add_external_scripts();
-    extra_file();
-}
-
 //On the window Load - after the Document Has been loaded and external scripts are included
 window.onload = function () {
     console.log("Script Loaded")
-
     add_page_events();
-    parent = document.getElementById("main_search");
-    get_place_names() //Populate place name array for future use
-}
-
-
-function add_external_scripts() {
-    console.log("Adding External");
-    var js = document.createElement("script");
-
-    js.type = "text/javascript";
-    js.src = "js/suggestion.js";
-
-    document.body.appendChild(js);
+    //parent = document.getElementById("main_search");
+  	initialize_suggestions("../common_files/database_api.php?q=all_names", "main_search")
 }
 
 function add_page_events() {
-
 //Define the Global variables
     text_box_search = document.getElementById("text_search");
     rating_search = document.getElementById("rating_search");
@@ -46,7 +26,7 @@ function add_page_events() {
 
 //Add the events
     search_bar.onkeyup = function () {
-        user_input()
+        user_input(search_bar);
     };
     text_box_search.onclick = function () {
         search_button_clicked("text_search")
@@ -73,7 +53,7 @@ var result_query;
             if (source == "suggestion") {
 				
                 //GO straight to results
-						document.location = "item_page.php/?q=" + search_value	
+				result_page = "item_page.php/?q=" + search_value
 				}
             else {
                 //Searching By Name
@@ -97,7 +77,12 @@ var result_query;
         search_value = "Geo Location Search";
     }
 
+	if (result_page){
+		document.location = result_page
+	}
+	else{
 document.location = "results.php?" + result_query;
+	}
     alert(search_value);
 
 }
@@ -108,79 +93,4 @@ function suggestion_clicked(suggestion) {
 }
 
 
-function get_place_names() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            //console.log(xhttp.responseText);
-            place_names = JSON.parse(xhttp.responseText)
-            if (place_names.length > 0) {
-                console.log("Place Names Retrieved Successfully");
-                extract_place_names();
-            }
-        }
-    };
-    xhttp.open("GET", "common_files/database_api.php?q=all_names", true);
-    xhttp.send();
-}
-
-//Function to convert json to array
-function extract_place_names() {
-    for (x in place_names) {
-        place_names[x] = place_names[x]['Wifi Hotspot Name'];
-    }
-}
-
-function user_input() {
-    //A slightly complex process of getting the text from a passed text box and returning the
-    //Top 4 before passing it onto the add suggestion function
-    cleanup_suggestions();
-
-    if (search_bar.value) {
-        add_suggestions(get_search_results(search_bar.value));
-    }
-}
-
-function cleanup_suggestions() {
-    var curr_suggestions = document.getElementsByClassName('suggestion_holder')
-    if (curr_suggestions[0]) {
-        parent.removeChild(curr_suggestions[0]);
-    }
-}
-
-function add_suggestions(top_suggestions) {
-    //Create Holder for suggestions - ONLY IF THERE ARE SUGGESTIONS
-    if (top_suggestions.length > 0) {
-        var suggestion_holder = document.createElement('span');
-        suggestion_holder.innerHTML = '<ul class ="suggestion"></li>';
-        suggestion_holder.classList.add("suggestion_holder");
-        parent.insertBefore(suggestion_holder, search_bar.nextSibling)
-        for (x in top_suggestions) {
-            add_suggestion_li(suggestion_holder, top_suggestions[x]);
-        }
-    }
-}
-
-function add_suggestion_li(parent, text) {
-    var li = document.createElement("li");
-    li.appendChild(document.createTextNode(text));
-    li.onclick = function () {
-        suggestion_clicked(li);
-    };
-    parent.appendChild(li);
-}
-
-function get_search_results(search_string) {
-    var matches = place_names.filter(function (value) {
-        return regex_contains_search(search_string, value)
-    });
-    //Only return the first 4 (Stop page getting too long)
-    matches = matches.splice(0, 4);
-    return matches;
-}
-
-function regex_contains_search(compareTo, value) {
-    var regex_contain = new RegExp('.*' + compareTo.toLowerCase() + '.*');
-    return regex_contain.test(value.toLowerCase());
-}
 

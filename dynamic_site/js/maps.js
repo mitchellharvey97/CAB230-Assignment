@@ -40,7 +40,8 @@ function display_map(locations, map_id){
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
-        icon: icons[iconCounter]
+        icon: icons[iconCounter],
+		zoom:10
       });
 
       markers.push(marker);
@@ -60,6 +61,7 @@ function display_map(locations, map_id){
     }
 
     function autoCenter() {
+		
       //  Create a new viewpoint bound
       var bounds = new google.maps.LatLngBounds();
       //  Go through each...
@@ -67,7 +69,15 @@ function display_map(locations, map_id){
 				bounds.extend(markers[i].position);
       }
       //  Fit these bounds to the map
-      map.fitBounds(bounds);
+		//If there is only one location, the auto center code bugs out and zooms too much so hardcode values
+     if (locations.length == 1){
+		 map.setCenter(bounds.getCenter());
+		map.setZoom(14);
+	 }
+	 else{
+	 map.fitBounds(bounds);
+		}
+		
     }
     autoCenter();
 	
