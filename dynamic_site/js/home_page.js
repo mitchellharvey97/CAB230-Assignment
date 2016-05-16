@@ -1,10 +1,12 @@
 //Define Global Variables for easy access
 var place_names = [];
 var search_bar;
-var radio_buttons = [];
+//var radio_buttons = [];
 var text_box_search;
+var suburb_search;
 var rating_search;
 var location_search;
+var suburb_list;
 
 //On the window Load - after the Document Has been loaded and external scripts are included
 window.onload = function () {
@@ -19,18 +21,25 @@ function add_page_events() {
     text_box_search = document.getElementById("text_search");
     rating_search = document.getElementById("rating_search");
     location_search = document.getElementById("geo_location_search");
+	suburb_search  =document.getElementById("suburb_search");
+	suburb_list = document.getElementById("suburb_list");
 
     search_bar = document.getElementById("search_value");
-    radio_buttons.push(document.getElementById("search_by_name"));
-    radio_buttons.push(document.getElementById("search_by_suburb"));
+  //  radio_buttons.push(document.getElementById("search_by_name"));
+  //  radio_buttons.push(document.getElementById("search_by_suburb"));
 
 //Add the events
     search_bar.onkeyup = function () {
         user_input(search_bar);
     };
+	
     text_box_search.onclick = function () {
         search_button_clicked("text_search")
     };
+
+    suburb_search.onclick = function () {
+        search_button_clicked("suburb_search")
+    };	
     rating_search.onclick = function () {
         search_button_clicked("rating_search")
     };
@@ -50,7 +59,7 @@ result_page = null;
     //if the user searches via the search bar
     if (source == "suggestion" || source == "text_search") {
         var search_value = search_bar.value;
-        if (radio_buttons[0].checked) {
+        //if (radio_buttons[0].checked) {
             if (source == "suggestion") {
 				
                 //GO straight to results
@@ -60,15 +69,24 @@ result_page = null;
                 //Searching By Name
 				search_type = "name";
 				result_query = search_value;
-                search_value = "Name - " + search_value;
+              //  search_value = "Name - " + search_value;
             }
-        }
-        else {
-				search_type = "suburb";
+       // }
+      //  else {
+	//			search_type = "suburb";
 				result_query = search_value;
-            search_value = "Suburb - " + search_value;
-        }
+      //      search_value = "Suburb - " + search_value;
+      //  }
     }
+	
+	else if (source == "suburb_search"){
+		search_type = "suburb";
+		result_query = suburb_list.options[suburb_list.selectedIndex].value;
+		
+		
+	}
+	
+
     else if (source == "rating_search") {
         //Searching By Rating
         var search_value = document.querySelector('input[name = "enterRating"]:checked').value;
@@ -89,7 +107,7 @@ result_page = null;
 	else if (search_type != null){
 document.location = "results.php?" + "searchtype=" + search_type + "&value=" + result_query;
 	}
-    alert(search_value);
+//    alert(result_query);
 
 }
 
@@ -100,10 +118,7 @@ function suggestion_clicked(suggestion) {
 
 
 function geo_loc(){
-	console.log("Geo Loc Search")
-
 	getLocation()
-	
 	
 function getLocation() {
     if (navigator.geolocation) {

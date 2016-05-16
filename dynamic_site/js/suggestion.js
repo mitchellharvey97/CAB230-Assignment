@@ -6,7 +6,6 @@ var parent;
 function initialize_suggestions(place_source, parent_id){
 	parent = document.getElementById(parent_id);
 	get_place_names(place_source)
-	
 }
 
 

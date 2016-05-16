@@ -10,7 +10,13 @@
     $css = array("css/style.css");
     //"js/suggestion.js",
     require("common_files/logo.svg.php");
-
+    require("common_files/database_connect.php");
+	
+	$request['request'] = "all_suburb";	
+	 $received_data = make_sql_request($request);
+	 
+	 print_r($received_data[0]->{'Suburb'});
+	 
     foreach ($scripts as $script) {              #Link all Script Files
         echo "<script src='" . $script . "'></script>\n";
     }
@@ -24,14 +30,34 @@
 
 <div id="wrapper">
     <?php include 'common_files/header.php'; ?>
+	
     <form id="main_search">
-        <input type="text" name="search_value" id="search_value"><br>
-        Search By:
-        <input type="radio" name="search_type" value="name" id="search_by_name" checked>Name
-        <input type="radio" name="search_type" value="suburb" id="search_by_suburb">Suburb
+        Search By name: <br>
+		<input type="text" name="search_value" id="search_value"><br>
         <input type="button" value="Lets Go" id="text_search">
     </form>
 
+	<br>
+	
+	<form id="suburb_drop_form">
+	Or, Select a suburb from the list
+	
+	<select id = "suburb_list">
+	<?php
+	
+	foreach ($received_data as $suburb){
+		$suburb_name = $suburb->{'Suburb'};
+		echo"<option value=\"$suburb_name\">$suburb_name</option>";		
+	}
+	?>
+</select>
+
+	<input type="button" value="Search" id="suburb_search">
+	
+	
+	
+	</form>
+	
     <br>
     <form id="rating_search_form">
         Or, Search by Rating
