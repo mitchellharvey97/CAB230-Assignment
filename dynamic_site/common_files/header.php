@@ -10,8 +10,7 @@ require("pages.php");
     </div>
     <div id="menu">
         <ul id="links">
-            <li><a href="">Contact Us</li>
-            <li><a href="signup.html">Sign Up/ Login</a></li>
+            <li><a href="<?php echo $login ?>">Sign Up/ Login</a></li>
             <li><a href="<?php echo $home ?>">Home</a></li>
         </ul>
     </div>

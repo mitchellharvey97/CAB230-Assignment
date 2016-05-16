@@ -3,19 +3,14 @@ $direct;
 
 function make_sql_request($data, $passed_source = "direct")
 {
-	global $direct;
-	
-	
-	if ($passed_source == "direct") {
+    global $direct;
+
+
+    if ($passed_source == "direct") {
         $direct = true;
     } else {
-$direct = false;    }
-	
-	
-
-
-	
-	
+        $direct = false;
+    }
 
 //Stuff around as the api call is made from web_root/common_files and other files are making the call from web_root
     if ($direct) {
@@ -28,72 +23,65 @@ $direct = false;    }
     $wifi_table = $databases["data_table"];
 
 
-    //added a source varaible as webcalls don't have permission to alter database data
+    //added a source variable as web calls don't have permission to alter database data
     $requested = $data['request'];
     //print("Make SQL Request Success <br>");
 
     if ($requested == "all_names") {
         $sql = "SELECT `Wifi Hotspot Name` FROM $wifi_table";
         $results = sql_query($sql);
-    } 
-	
-	else if ($requested == "all_location_data") {
+    } else if ($requested == "all_location_data") {
         $sql = "SELECT * FROM $wifi_table";
-        $results = sql_query($sql);		
-    } 
-	
-	else if ($requested == 'wifi') {
-		//Get the name of the hotspot to return
-		if ($direct){
-		$hotspot_name = $data['place_name'];
-		}
-		else{
-        $hotspot_name = $_GET['name'];
-		}
-		
+        $results = sql_query($sql);
+    } else if ($requested == 'wifi') {
+        //Get the name of the hotspot to return
+        if ($direct) {
+            $hotspot_name = $data['place_name'];
+        } else {
+            $hotspot_name = $_GET['name'];
+        }
+
         $sql = "SELECT * FROM $wifi_table WHERE `Wifi Hotspot Name` = '" . $hotspot_name . "'";
         $results = sql_query($sql);
-		
+
     } else if ($requested == "search") {
-		
-		if ($direct){
-			$search_type = $data['search_type'];
-			if ($search_type != "geo_location"){
-			$search_value = $data['search_value'];
-			}
-			
-		}else{
-        $search_type = $_GET['search_type'];
-		}
-		
+
+        if ($direct) {
+            $search_type = $data['search_type'];
+            if ($search_type != "geo_location") {
+                $search_value = $data['search_value'];
+            }
+
+        } else {
+            $search_type = $_GET['search_type'];
+        }
+
 
         if ($search_type == "name") {
-			$sql = "SELECT * FROM $wifi_table WHERE `Wifi Hotspot Name` LIKE '%$search_value%'";
-			$results = sql_query($sql);
-		
+            $sql = "SELECT * FROM $wifi_table WHERE `Wifi Hotspot Name` LIKE '%$search_value%'";
+            $results = sql_query($sql);
+
 
         } else if ($search_type == "suburb") {
-			
-    		$sql = "SELECT * FROM $wifi_table WHERE `Suburb` LIKE '%$search_value%'";
-			$results = sql_query($sql);
-	
+
+            $sql = "SELECT * FROM $wifi_table WHERE `Suburb` LIKE '%$search_value%'";
+            $results = sql_query($sql);
+
         } else if ($search_type == "rating") {
 
 
+        } else if ($search_type == "geo_location") {
+            $sql = "SELECT * FROM $wifi_table";
+            $results = sql_query($sql);
         }
-		else if ($search_type == "geo_location"){
-			        $sql = "SELECT * FROM $wifi_table";
-        $results = sql_query($sql);			
-		}
 
 
     }
-if (sizeof($results) <=1){
-    return $results[0];
-}
-else{
-	return $results;
-}
+    if (sizeof($results) <= 1) {
+        return $results[0];
+    } else {
+        return $results;
+    }
 
 }
 

@@ -2,38 +2,37 @@ html, body {
   background-color: whitesmoke;
   height: 100%;
   margin: 5px;
-  padding: 0px; 
-  }
+  padding: 0px;
+}
 
 a {
   text-decoration: none;
-  color: white; 
-  }
-
-#wrapper {
-	margin: auto;
-	width: 98%;
-	height: 100%;
-	min-width: 650px; 
-	border-radius: 5px 5px 0px 0px;
-	background-color: #000066;
-	color:white;
+  color: white;
 }
 
-  
+#wrapper {
+  margin: auto;
+  width: 98%;
+  height: 100%;
+  min-width: 650px;
+  border-radius: 5px 5px 0px 0px;
+  background-color: #000066;
+  color: white;
+}
+
 #header {
   border-radius: 20px 20px 5px 5px;
   margin-bottom: 5px;
   background-color: #000033;
   height: 150px;
 
-	.logo {
-		margin-top: 30px;
-		margin-left: 30px;
-		float: left;
-		width: 100px;
-		height: 100px; 
-	}
+  .logo {
+    margin-top: 30px;
+    margin-left: 30px;
+    float: left;
+    width: 100px;
+    height: 100px;
+  }
 }
 
 #titleblock {
@@ -43,15 +42,18 @@ a {
   height: 100%;
   float: left;
   text-align: center;
-  line-height: 500%; }
+  line-height: 500%;
+}
 
 #menu {
   height: 100%;
   width: 50%;
-  float: right; }
+  float: right;
+}
 
 #menu a {
-  font-weight: 500; }
+  font-weight: 500;
+}
 
 #menu ul li {
   font-family: "Arial", Helvetica, sans-serif;
@@ -61,7 +63,8 @@ a {
   padding: 3pt;
   margin-right: 2%;
   margin-top: 100px;
-  list-style-type: none; }
+  list-style-type: none;
+}
 
 #location_name {
   margin-top: 15px;
@@ -77,13 +80,13 @@ a {
   font-family: "Arial", Helvetica, sans-serif;
 }
 
-  #searchContent {
+#searchContent {
   padding-top: 125px;
   margin-left: 37.5%;
   font-family: "Arial", Helvetica, sans-serif;
   color: white;
-  font-size: 2em; }
-
+  font-size: 2em;
+}
 
 button {
   background-color: #000033;
@@ -94,17 +97,19 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 24px; }
+  font-size: 24px;
+}
 
- #googleMap{
-    
-    width:80%;
-	margin:auto;
-	text-align:center;
-	display:block;
-} 
+#googleMap {
+
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  display: block;
+}
+
 table {
-  
+
   width: 100%;
   border-collapse: collapse;
 }
@@ -120,14 +125,15 @@ td {
   text-align: center;
 }
 
-
 th, td {
-    padding: 5px;
-    text-align: left; 
-    border-bottom: 1px solid white;
-    }
+  padding: 5px;
+  text-align: left;
+  border-bottom: 1px solid white;
+}
 
-tr:hover {background-color: black}
+tr:hover {
+  background-color: black
+}
 
 #footer {
   font-family: "Arial", Helvetica, sans-serif;
@@ -137,69 +143,73 @@ tr:hover {background-color: black}
   height: 45px;
   background-color: #000033;
   text-align: center;
-  padding: 10px; }
+  padding: 10px;
+}
 
-  
-  #main_search, #rating_search_form{
+#main_search, #rating_search_form {
 
-	  text-align:center;
-	  width:100%;
-	  background-color:red;
-	  padding-bottom:20px;
-	  input[type='text']{
-		  margin:20px 0	;
-		  background-color:green;
-		  height:30px;
-		  width:50%;
-		  
-	  }
-	  
-  }
-  
-
-  .suggestion_holder{
-	  
-	  z-index: 1;
-    left: 0;
-    top: -38px;
-    position: relative;
+  text-align: center;
+  width: 100%;
+  background-color: red;
+  padding-bottom: 20px;
+  input[type='text'] {
+    margin: 20px 0;
+    background-color: green;
+    height: 30px;
     width: 50%;
-    background-color: gray;
-    display: block;
-    margin: auto;
-    text-align: left;
-	
-	
-	li{
-		list-style-type:none;
-		
-	}
-	
-	}
-  
-  
-  
-  //Base Logo Colors
-  .logo {
-  width: 100%; }
+
+  }
+
+}
+
+.suggestion_holder {
+
+  z-index: 1;
+  left: 0;
+  top: -38px;
+  position: relative;
+  width: 50%;
+  background-color: gray;
+  display: block;
+  margin: auto;
+  text-align: left;
+
+  li {
+    list-style-type: none;
+
+  }
+
+}
+
+//Base Logo Colors
+.logo {
+  width: 100%;
+}
 
 .logo #background {
-  fill: #FFF; }
+  fill: #FFF;
+}
 
 .logo #border {
-  fill: #000033; }
+  fill: #000033;
+}
 
 .logo #circle {
-  fill: #000066; }
+  fill: #000066;
+}
 
 .logo .line {
-  fill: #FFF; }
-  
-  
+  fill: #FFF;
+}
 
 @media only screen and (min-width: 650px) {
   #menu a {
-    font-size: 1em; } }
+    font-size: 1em;
+  }
+}
+
 @media only screen and (min-width: 950px) {
   #menu a {
-    font-size: 1.5em; } }
+    font-size: 1.5em;
+  }
+}

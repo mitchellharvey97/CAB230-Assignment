@@ -1,4 +1,4 @@
- <HTML>
+<HTML>
 <HEAD>
     <TITLE> Test Location List</TITLE>
 </HEAD>
@@ -26,8 +26,6 @@ require("common_files/database_connect.php");
 //Get the data from the database connector and decode it to an object
 $request['request'] = "all_location_data";
 $wifi_hostspot_data_store = make_sql_request($request);
-
-
 
 
 add_distance_array();
