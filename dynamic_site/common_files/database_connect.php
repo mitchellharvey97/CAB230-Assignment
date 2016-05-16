@@ -58,7 +58,9 @@ $direct = false;    }
 		
 		if ($direct){
 			$search_type = $data['search_type'];
+			if ($search_type != "geo_location"){
 			$search_value = $data['search_value'];
+			}
 			
 		}else{
         $search_type = $_GET['search_type'];

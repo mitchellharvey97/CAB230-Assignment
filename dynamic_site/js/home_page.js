@@ -77,15 +77,16 @@ result_page = null;
         search_value = "Rating Search: " + search_value;
     }
     else if (source == "geo_location_search") {
-		 search_type = "geo_location";
+		 search_type = null;
         search_value = "Geo Location Search";
+		geo_loc();
     }
 
 	if (result_page != null){
 		//if the user hasn't selected a drop down option
 		document.location = result_page
 	}
-	else{
+	else if (search_type != null){
 document.location = "results.php?" + "searchtype=" + search_type + "&value=" + result_query;
 	}
     alert(search_value);
@@ -97,5 +98,27 @@ function suggestion_clicked(suggestion) {
     search_button_clicked("suggestion");
 }
 
+
+function geo_loc(){
+	console.log("Geo Loc Search")
+
+	getLocation()
+	
+	
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+		
+    }else { 
+       alert("Geolocation is not supported by this browser.");
+   }
+}
+
+function showPosition(position) {
+	console.log(position);
+    alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);	
+	document.location = "results.php?searchtype=geo_location&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&radius=30";
+}
+}
 
 

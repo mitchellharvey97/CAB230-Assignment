@@ -6,7 +6,7 @@
     <?php
     #Links for Style Sheets and scripts to include
 	$script_folder = "js";
-    $scripts = array("$script_folder/suggestion.js", "$script_folder/form_validate.js", "$script_folder/home_page.js", "$script_folder/geolocation.js");
+    $scripts = array("$script_folder/suggestion.js", "$script_folder/form_validate.js", "$script_folder/home_page.js");
     $css = array("css/style.css");
     //"js/suggestion.js",
     require("common_files/logo.svg.php");
@@ -55,8 +55,6 @@
 
     <form id="geolocation_search">
         Find the nearest Wifi Hotspot
-
-
         <input type="button" value="Lets Go" id="geo_location_search">
 
     </form>

@@ -13,13 +13,18 @@ require("common_files/distance_calculate.php");
 require("common_files/logo.svg.php");
 
 $search_type = $_GET['searchtype'];
-$search_value = $_GET['value'];
 
-		
-		
-		$request['request'] = "search";
-$request['search_type'] = $search_type;
+if ($search_type != "geo_location"){
+$search_value = $_GET['value'];
 $request['search_value'] = $search_value;
+} 
+		
+		
+$request['request'] = "search";
+
+$request['search_type'] = $search_type;
+
+
 $recieved_data = make_sql_request($request);
 			
 		#Links for Style Sheets and scripts to include
@@ -36,9 +41,57 @@ $css = array("css/style.css");
 
 	if ($search_type == "geo_location"){
 		$geo_location = true;
+		
+							$user_lat = $_GET['lat'];
+					$user_lon = $_GET['lon'];
+					 foreach ($recieved_data as $hotspot_loc){
+						 $distance_from_user = calculate_distance($hotspot_loc->{'Latitude'}, $hotspot_loc->{'Longitude'});
+						$hotspot_loc->{'distance'} = $distance_from_user; 
+					 }
+					 
+					 $recieved_data = sort_array($recieved_data, $_GET['radius']);			
+		
 	}else{
 	$geo_location = false;
 	}
+	
+				 function sort_array($unsorted, $max_value){
+						 $returned_value = array();
+											 
+						 foreach ($unsorted as $item){
+							 if ($item->{'distance'} <=$max_value){
+											 $pos = find_index_in_order($returned_value, $item->{'distance'});
+								$returned_value = insertArrayIndex($returned_value, $item, ($pos));
+							 }
+						 }
+						 
+						 return $returned_value;					 
+					 }
+					 
+					 function find_index_in_order($input_array, $item){
+						 												 if (sizeof($input_array) == 0){
+							 return 0;
+						 						 }
+						 
+						 $index = 0;
+					 for ($x = 0; $x < sizeof($input_array); $x++){
+						 $index_distance = $input_array[$x]->{'distance'};
+						 if ($index_distance < $item){
+							 $index++;
+						 }
+						 else{
+							 break;
+						 }
+					 }
+						 return $index;						 
+					 }				 
+					 
+					 function insertArrayIndex($array, $new_element, $index) {
+							$start = array_slice($array, 0, $index); 
+							$end = array_slice($array, $index);
+							$start[] = $new_element;
+						return array_merge($start, $end);
+						}		
 	
     ?>
 	</head>
@@ -56,17 +109,16 @@ $css = array("css/style.css");
 					<th>Hotspot Name</th>
 					<th>Address</th>
 					<th>Suburb</th>
-					<?php if ($geo_location){
-					echo"<th>Distance From User</th>";
-					 }?>
+					
+					<?php if ($geo_location){ //If it is a geolocation search then add the distance field to the array
+					echo"<th>Distance From User</th>";		 
+					 } ?>
 				</tr>
 	
 				<?php
 				
 				
 				
-$user_lat = -27.5963595;
-$user_lon = 153.2905616;
 
     function calculate_distance($place_lat, $place_lon)
     {
@@ -84,16 +136,15 @@ $user_lon = 153.2905616;
 						$wifi_suburb = $recieved_data[$i]->{'Suburb'};
 						$wifi_lat = $recieved_data[$i]->{'Latitude'};
 						$wifi_lon = $recieved_data[$i]->{'Longitude'};
-						
-						
-						
-						$url = "/cab230-assignment/dynamic_site/item_page.php?id=" . $i;
+					
 						echo "<tr>";
 							echo "<td><a href='$item?q=$wifi_name'>$wifi_name</a></td>";
 							echo "<td>$wifi_address</td>";
 							echo "<td>$wifi_suburb</td>";
 							
-							if ($geo_location) {echo "<td>" . calculate_distance($wifi_lat, $wifi_lon) . " km</td>"; }
+							if ($geo_location) {
+								$distance = $recieved_data[$i]->{'distance'};
+								echo "<td>$distance km</td>"; }
 						echo "</tr>";
 					}
 				?>
