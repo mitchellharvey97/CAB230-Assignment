@@ -14,7 +14,8 @@ $sign_up = 'signup.php';
 $results = 'results.php';
 $item = 'item_page.php';
 $login = 'login.php';
-$api = $web_root . 'common_files/database_api.php'
+$verify_user = "user_verification.php";
+$api = $web_root . 'common_files/database_api.php';
 //require("database_api.php");
 
 ?>

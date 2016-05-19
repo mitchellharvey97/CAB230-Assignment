@@ -21,6 +21,8 @@ function make_sql_request($data, $passed_source = "direct")
     require($path_to_pass); //Include the password file -- added as each dev environment will have different db details using git ignore files to prevent cloning
 
     $wifi_table = $databases["data_table"];
+    $user_table = $databases["user_table"];
+    $database = $databases["database"];
 
 
     //added a source variable as web calls don't have permission to alter database data
@@ -31,7 +33,7 @@ function make_sql_request($data, $passed_source = "direct")
         $sql = "SELECT `Wifi Hotspot Name` FROM $wifi_table";
         $results = sql_query($sql);
     } 
-	    if ($requested == "all_suburb") {
+	elseif ($requested == "all_suburb") {
         $sql = "SELECT DISTINCT `Suburb` FROM $wifi_table ORDER BY `Suburb`";
         $results = sql_query($sql);
     } 
@@ -86,7 +88,15 @@ function make_sql_request($data, $passed_source = "direct")
 
 
     }
-    if (sizeof($results) <= 1) {
+    
+	else if ($requested == "add_user"){
+		$sql = "INSERT INTO `$database`.`$user_table` (`email`, `f_name`, `l_name`, `Age`, `Gender`, `Excitment`, `Profile_Color`, `Pasword`) VALUES ('mitchellharvey97@gmail.com', 'mitch', 'Harvey', '32', 'm', '6', 'BE0000', 'Mitch')";
+		
+		sql_query($sql);
+		print ("User Added Succesfully");
+	}
+	
+	if (sizeof($results) <= 1) {
         return $results[0];
     } else {
         return $results;
@@ -95,7 +105,7 @@ function make_sql_request($data, $passed_source = "direct")
 }
 
 
-function sql_query($query)
+function sql_query($query, $search=true)
 {
     global $direct;
 
@@ -118,11 +128,14 @@ function sql_query($query)
         $result = $pdo->query($query);
 
         $result_data_store = array();
-
+		
+if ($search){
+	
         foreach ($result as $data) {
             array_push($result_data_store, (object)$data);
         }
         return ($result_data_store);
+}
     } catch (PDOException $e) {
         echo $e->getMessage();
     }

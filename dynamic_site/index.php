@@ -8,14 +8,11 @@
     $script_folder = "js";
     $scripts = array("$script_folder/suggestion.js", "$script_folder/form_validate.js", "$script_folder/home_page.js");
     $css = array("css/style.css");
-    //"js/suggestion.js",
     require("common_files/logo.svg.php");
     require("common_files/database_connect.php");
 	
 	$request['request'] = "all_suburb";	
 	 $received_data = make_sql_request($request);
-	 
-	 print_r($received_data[0]->{'Suburb'});
 	 
     foreach ($scripts as $script) {              #Link all Script Files
         echo "<script src='" . $script . "'></script>\n";
