@@ -3,15 +3,14 @@
 <head>
     <title>MyWiFind - Search Results</title>
 
-	
-	
-	  <?php
-	  
-	    require("common_files/pages.php");
+
+    <?php
+
+    require("common_files/pages.php");
     require("common_files/logo.svg.php");
 
-	
-	 #Links for Style Sheets and scripts to include
+
+    #Links for Style Sheets and scripts to include
     $scripts = array("http://maps.google.com/maps/api/js", "js/maps.js");
     $css = array("css/style.css");
     //"js/suggestion.js",
@@ -22,7 +21,7 @@
     foreach ($css as $script) {                  #Link All CSS Files
         echo "<link href='" . $script . "' rel='stylesheet'>\n";
     }
-	?>
+    ?>
 
 </head>
 <body>
@@ -31,14 +30,15 @@
 <div id="wrapper">
     <?php include 'common_files/header.php'; ?>
 
-	<form method="post" action="<?php echo $verify_user; ?>">
-	Email Address:<input type="text" name = "email"><br>
-	Password:<input type="password" name = "password"><br>
-	<button value="Login" name = "form_type" style="background-color:red;">Login </button><br>
-	Don't Have an account?
-	<a href = "<?php echo $sign_up?>">Sign up now</a>
-	
-    <?php include 'common_files/footer.php'; ?>
+    <form method="post" action="<?php echo $verify_user; ?>">
+        Email Address:<input type="text" name="email"><br>
+        Password:<input type="password" name="password"><br>
+        <button value="Login" name="form_type" style="background-color:red;">Login</button>
+        <br>
+        Don't Have an account?
+        <a href="<?php echo $sign_up ?>">Sign up now</a>
+
+        <?php include 'common_files/footer.php'; ?>
 </div>
 </body>
 </html>
