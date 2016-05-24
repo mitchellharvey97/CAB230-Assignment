@@ -31,10 +31,10 @@
 <div id="wrapper">
     <?php include 'common_files/header.php'; ?>
 
-	<form action="post" location="<?php echo $home; ?>">
-	Email Address:<input type="text"><br>
-	Password:<input type="password"><br>
-	<button value="submit" style="background-color:red;">Login </button><br>
+	<form method="post" action="<?php echo $verify_user; ?>">
+	Email Address:<input type="text" name = "email"><br>
+	Password:<input type="password" name = "password"><br>
+	<button value="Login" name = "form_type" style="background-color:red;">Login </button><br>
 	Don't Have an account?
 	<a href = "<?php echo $sign_up?>">Sign up now</a>
 	

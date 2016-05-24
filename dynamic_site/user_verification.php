@@ -1,34 +1,36 @@
 <?php
 
     require("common_files/database_connect.php");
+    require("common_files/pages.php");
 	
 
-$user['f_name'] = $_POST['f_name'];
-$user['l_name'] = $_POST['l_name'];
-$user['age'] = $_POST['age'];
-$user['gender'] = $_POST['gender'];
-$user['excitment'] = $_POST['excitment'];
+$form_source = $_POST['form_type'];
+	print("Form Source is: $form_source <br>");
+	
+
+//Collect email as it is required for both
+	
 $user['email'] = $_POST['email'];
-$user['profile_color'] = substr($_POST['profile_color'],1); //Stripping # From front
-//$user['password1'] = $_POST['password1'];
-//$user['password2'] = $_POST['password2'];
-$user['password'] = array($_POST['password1'], $_POST['password2']);
 
+$register = false;
 
-//Breaking stuff
+	if($form_source == "Register"){
+		$register = true;
+			$user['f_name'] = $_POST['f_name'];
+			$user['l_name'] = $_POST['l_name'];
+			$user['age'] = $_POST['age'];
+			$user['gender'] = $_POST['gender'];
+			$user['excitment'] = $_POST['excitment'];
+			$user['profile_color'] = substr($_POST['profile_color'],1); //Stripping # From front
+			//$user['password1'] = $_POST['password1'];
+			//$user['password2'] = $_POST['password2'];
+			$user['password'] = array($_POST['password1'], $_POST['password2']);
+	}
+		else if ($form_source == "Login"){
+		$user['password'] = $_POST['password'];
+	}
 
-//$user['f_name'] = "My Name";
-//$user['age'] = 123;
-//$user['excitment'] = "3sa";
-//$user['gender'] = "a";
-	
-//$user['password1'] = "pass";
-//$user['password2'] = "pass";
-
-
-//$user['password'] = array("pass", "pass");
-
-
+	if ($register){
 			$error = false;
 			$error_fields = array();
 			
@@ -51,14 +53,30 @@ $user['password'] = array($_POST['password1'], $_POST['password2']);
 							print $errors['message'] . "with field " . $errors['field'] . "<br>";
 						}
 					}
+					
+					
 					else{
 						print "<br><h1>No Errors!!!!</h1>";
-						$request_data['request'] = "add_user";
+						
 						$request_data['user'] = $user;
+						$request_data['user']['password'] = $request_data['user']['password'][0]; //Only pass one password as they have been checked to be the same
+						$request_data['request'] = "add_user";
+					if (user_unique()){
 						make_sql_request($request_data);
-					}					
-		
-			
+						//if all is good, go to the home page
+						echo "<script> window.location.assign('$home?q=login'); </script>";
+						}
+						else{
+							echo "That email address is already in use";
+						}
+					}			
+
+					function user_unique(){
+						global $user;
+						$request_data['request']= "user_verify";
+						$request_data['email'] = $user['email'];
+					return !make_sql_request($request_data);
+					}				
 			
 			function error($key, $value){
 				if ($key == "password"){ //Password variable works a little different
@@ -96,8 +114,7 @@ $user['password'] = array($_POST['password1'], $_POST['password2']);
 		
 				if ($key == "age"){
 					$age_min = 1; 
-					$age_max = 99;
-					
+					$age_max = 99;					
 					if (out_of_bounds($value, $age_min, $age_max)){
 						return ("Age out of bounds, ");
 						}
@@ -120,7 +137,6 @@ $user['password'] = array($_POST['password1'], $_POST['password2']);
 			}
 				return false;			
 			}
-
 			
 			function out_of_bounds($val, $min, $max){				
 				if ($val < $min || $val > $max){
@@ -130,6 +146,27 @@ $user['password'] = array($_POST['password1'], $_POST['password2']);
 					return false;
 				}
 			}
+	}
+	
+	else{
+		print "Loging In Plz";
+		
+						//	global $user;
+		$request_data['request']= "user_verify";
+		$request_data['email'] = $user['email'];
+		$request_data['password'] = $user['password'];
+
+	print_r($request_data);
+		
+		if (make_sql_request($request_data)){
+			echo "<script> window.location.assign('$home?q=login'); </script>";
+		}
+		else{
+			echo "<script> window.location.assign('$login?q=fail'); </script>";
+		};
+		
+		
+	}
 			
 ?>
 

@@ -33,7 +33,7 @@
 
 Register for My WiFind<br>
 
-	<form method="post" name="test" action="<?php echo $verify_user; ?>">
+	<form method="post" action="<?php echo $verify_user; ?>">
 	First Name:
 		<input type="text" id="f_name" name="f_name" required value="PersonFirst"><br>
 	Last Name:
