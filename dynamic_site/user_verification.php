@@ -5,16 +5,18 @@ require("common_files/pages.php");
 
 
 $form_source = $_POST['form_type'];
-print("Form Source is: $form_source <br>");
 
-
-//Collect email as it is required for both
+//Collect email and password as it is required for both
 
 $user['email'] = $_POST['email'];
+$user['password'] = $_POST['password'];
+
 
 $register = false;
-
+//Get extra data for the user login page
 if ($form_source == "Register") {
+	global $user;
+	global $_POST;
     $register = true;
     $user['f_name'] = $_POST['f_name'];
     $user['l_name'] = $_POST['l_name'];
@@ -22,11 +24,6 @@ if ($form_source == "Register") {
     $user['gender'] = $_POST['gender'];
     $user['excitment'] = $_POST['excitment'];
     $user['profile_color'] = substr($_POST['profile_color'], 1); //Stripping # From front
-    //$user['password1'] = $_POST['password1'];
-    //$user['password2'] = $_POST['password2'];
-    $user['password'] = array($_POST['password1'], $_POST['password2']);
-} else if ($form_source == "Login") {
-    $user['password'] = $_POST['password'];
 }
 
 if ($register) {
@@ -34,11 +31,13 @@ if ($register) {
     $error_fields = array();
 
     echo "<h1>Values Recieved:</h1>";
-    foreach ($user as $key => $value) {
+	print_r($user);
+    echo "<br>";
+	
+	foreach ($user as $key => $value) {
         if ($error_info['message'] = error($key, $value)) {
-            //$error_info['message'] = "Goofed Up";
+            $error_info['message'] = "Goofed Up";
             $error_info['field'] = $key;
-
             array_push($error_fields, $error_info);
             $error = true;
         }
@@ -55,16 +54,43 @@ if ($register) {
         print "<br><h1>No Errors!!!!</h1>";
 
         $request_data['user'] = $user;
-        $request_data['user']['password'] = $request_data['user']['password'][0]; //Only pass one password as they have been checked to be the same
+      //  $request_data['user']['password'] = $request_data['user']['password'][0]; //Only pass one password as they have been checked to be the same
         $request_data['request'] = "add_user";
         if (user_unique()) {
+			$request_data['user']['password'] = password_hash($request_data['user']['password'], PASSWORD_DEFAULT);
+			
             make_sql_request($request_data);
             //if all is good, go to the home page
-            echo "<script> window.location.assign('$home?q=login'); </script>";
+           echo "<script> window.location.assign('$home?q=signup'); </script>";
+	  // echo "Success";
         } else {
-            echo "That email address is already in use";
+		//	echo "Fail";
+            echo "<script> window.location.assign('$sign_up?q=error'); </script>";
+//            echo "That email address is already in use";
         }
     }
+
+	
+} 
+else {
+    //	global $user;
+    $request_data['request'] = "user_verify";
+    $request_data['email'] = $user['email'];
+    $request_data['password'] = $user['password'];
+
+    print_r($request_data);
+
+    if (make_sql_request($request_data)) {
+		//echo "Success";
+        echo "<script> window.location.assign('$home?q=login'); </script>";
+    } else {
+		//echo "fail";
+        echo "<script> window.location.assign('$login?q=fail'); </script>";
+    };
+
+
+}
+
 
     function user_unique()
     {
@@ -74,30 +100,22 @@ if ($register) {
         return !make_sql_request($request_data);
     }
 
-    function error($key, $value)
+    function out_of_bounds($val, $min, $max)
     {
-        if ($key == "password") { //Password variable works a little different
-            echo "Pass1:" . $value[0] . ", Pass2:" . $value[1] . ", ";
-            if (empty($value[0])) {
-                return "Missing Password";
-            }
-            if ($value[0] != $value[1]) {
-                return "Passwords don't match";
-            }
+        if ($val < $min || $val > $max) {
+            return true;
+        } else {
+            return false;
         }
+    }
 
+
+   function error($key, $value)
+    {
         if (empty($value)) {
             return "$key value is empty, ";
         }
-
-        if ($key == "password1") {
-            $pass1 = $value;
-            $pass2 = $user['password2'];
-
-            if ($value != $pass2) {
-                return "Password Not Same, ";
-            }
-        }
+		
 
         if ($key == "age" || $key == "excitment") {
             print "Integer Checking, ";
@@ -134,33 +152,6 @@ if ($register) {
         }
         return false;
     }
-
-    function out_of_bounds($val, $min, $max)
-    {
-        if ($val < $min || $val > $max) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-} else {
-    print "Loging In Plz";
-
-    //	global $user;
-    $request_data['request'] = "user_verify";
-    $request_data['email'] = $user['email'];
-    $request_data['password'] = $user['password'];
-
-    print_r($request_data);
-
-    if (make_sql_request($request_data)) {
-        echo "<script> window.location.assign('$home?q=login'); </script>";
-    } else {
-        echo "<script> window.location.assign('$login?q=fail'); </script>";
-    };
-
-
-}
 
 ?>
 

@@ -5,9 +5,11 @@
 
 
     <?php
+$logged_in = false;
+$error = true;
 
     require("common_files/pages.php");
-    require("common_files/logo.svg.php");
+    require("common_files/images.php");
 
 
     #Links for Style Sheets and scripts to include
@@ -28,7 +30,12 @@
 
 
 <div id="wrapper">
-    <?php include 'common_files/header.php'; ?>
+    <?php include 'common_files/header.php'; 
+	
+	if ($error){
+	echo "<div id='error_message'>There where errors in your username or password<br>Please try again</div>";
+	}
+	?>
 
     <form method="post" action="<?php echo $verify_user; ?>">
         Email Address:<input type="text" name="email"><br>

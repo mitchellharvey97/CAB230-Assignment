@@ -10,7 +10,16 @@ require("pages.php");
     </div>
     <div id="menu">
         <ul id="links">
-            <li><a href="<?php echo $login ?>">Sign Up/ Login</a></li>
+		<li><?php 
+		if ($logged_in)
+		{
+		echo "<a href='$login'>Log Out</a>";
+		} 
+		else{
+			echo "<a href='$login'>Sign Up/ Login</a>";}
+			
+			
+		?></li>
             <li><a href="<?php echo $home ?>">Home</a></li>
         </ul>
     </div>

@@ -161,6 +161,41 @@ tr:hover {
 .logo .line {
   fill: #FFF; }
 
+#reviews {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  background-color: green; }
+  #reviews .review {
+    background-color: grey; }
+  #reviews #profile_pict {
+    width: 40%;
+    float: left;
+    margin-bottom: 10px; }
+    #reviews #profile_pict svg {
+      border-radius: 50%;
+      width: 100%; }
+  #reviews .person_info {
+    padding-top: 30px;
+    padding-left: 10%;
+    width: 50%;
+    float: right;
+    text-align: left; }
+  #reviews .left {
+    width: 30%;
+    float: left; }
+  #reviews .right {
+    width: 70%;
+    float: right; }
+
+.clearfix {
+  clear: both; }
+
+#error_message {
+  color: red;
+  font-style: italic;
+  margin-bottom: 10px; }
+
 @media only screen and (min-width: 650px) {
   #menu a {
     font-size: 1em; } }

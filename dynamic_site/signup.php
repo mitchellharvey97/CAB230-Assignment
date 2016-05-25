@@ -5,9 +5,18 @@
 
 
     <?php
+	$logged_in = false;
+	$error = false;
+	if (isset($_GET['q'])){
+		
+	if ($_GET['q'] == "error"){
+		$error = true;
+	}
+	}
 
+	
     require("common_files/pages.php");
-    require("common_files/logo.svg.php");
+    require("common_files/images.php");
 
 
     #Links for Style Sheets and scripts to include
@@ -28,7 +37,13 @@
 
 
 <div id="wrapper">
-    <?php include 'common_files/header.php'; ?>
+    <?php include 'common_files/header.php'; 
+	if ($error){
+	echo "<div id='error_message'>There where errors in the form<ul>
+	<li>Email Address has already been used</li>
+	</ul></div>";
+	}
+	?>
 
     Register for My WiFind<br>
 
@@ -52,9 +67,8 @@
         Profile Color:
         <input type="color" name="profile_color" require value="#ff0000"><br>
         Password:
-        <input type="password" name="password1" require><br>
+        <input type="password" name="password" require><br>
         Repeat Password:
-        <input type="password" name="password2" require><br>
         <input type="submit" name="form_type" value="Register">
 
         <?php include 'common_files/footer.php'; ?>

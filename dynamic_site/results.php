@@ -4,11 +4,11 @@
     <title>MyWiFind - Search Results</title>
 
     <?php
-
+$logged_in = false;
     require("common_files/pages.php");
     require("common_files/database_connect.php");
     require("common_files/distance_calculate.php");
-    require("common_files/logo.svg.php");
+    require("common_files/images.php");
 
     $search_type = $_GET['searchtype'];
 
@@ -37,6 +37,10 @@
         echo "<link href='" . $script . "' rel='stylesheet'>\n";
     }
 
+        $geo_location = false;
+		$rating = false;
+		$rating_min = 0;
+		
     if ($search_type == "geo_location") {
         $geo_location = true;
 
@@ -49,8 +53,10 @@
 
         $recieved_data = sort_array($recieved_data, $_GET['radius']);
 
-    } else {
-        $geo_location = false;
+    } 
+	if ($search_type == "rating"){
+		$rating = true;
+		$rating_min = $_GET['value'];
     }
 
     function sort_array($unsorted, $max_value)
@@ -107,6 +113,7 @@
                 <th>Hotspot Name</th>
                 <th>Address</th>
                 <th>Suburb</th>
+                <th>Average Rating</th>
 
                 <?php if ($geo_location) { //If it is a geolocation search then add the distance field to the array
                     echo "<th>Distance From User</th>";
@@ -132,11 +139,26 @@
                 $wifi_suburb = $recieved_data[$i]->{'Suburb'};
                 $wifi_lat = $recieved_data[$i]->{'Latitude'};
                 $wifi_lon = $recieved_data[$i]->{'Longitude'};
+				
+				$rating_request['request'] = "rating_average";
+				$rating_request['place_name'] = $wifi_name;
+				
+				
+				$wifi_rating = make_sql_request($rating_request);
+				
 
+				if (!$rating || ($rating && $wifi_rating >= $rating_min)){
+				
+				if ($wifi_rating < 0){
+					$wifi_rating = "No Ratings yet";
+				} 
+				
                 echo "<tr>";
                 echo "<td><a href='$item?q=$wifi_name'>$wifi_name</a></td>";
                 echo "<td>$wifi_address</td>";
                 echo "<td>$wifi_suburb</td>";
+                echo "<td>$wifi_rating</td>";
+				}
 
                 if ($geo_location) {
                     $distance = $recieved_data[$i]->{'distance'};
@@ -161,8 +183,17 @@
             $lat = ($each_loc->Latitude);
             $name = ($each_loc->{'Wifi Hotspot Name'});
             $result_page = $item . "?q=$name";
+			
+			
+				$rating_request['request'] = "rating_average";
+				$rating_request['place_name'] = $name;
+				$wifi_rating = make_sql_request($rating_request);
+			
+			if (!$rating || ($rating && $wifi_rating >= $rating_min)){
+				
             echo "hotspot_locations.push([\"<h4>$name</h4><br><a href =\\\"$result_page\\\"> View Hotspot</a>\",$lat, $lon])
 	  ";
+        }
         }
         ?>
         display_map(hotspot_locations, "results_map"); //Call the Display map command with the item locations, and the map ID

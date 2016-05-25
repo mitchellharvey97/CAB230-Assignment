@@ -4,11 +4,13 @@
 <head>
     <title>MyWiFind</title>
     <?php
+$logged_in = false;
+
     #Links for Style Sheets and scripts to include
     $script_folder = "js";
     $scripts = array("$script_folder/suggestion.js", "$script_folder/form_validate.js", "$script_folder/home_page.js");
     $css = array("css/style.css");
-    require("common_files/logo.svg.php");
+    require("common_files/images.php");
     require("common_files/database_connect.php");
 	
 	$request['request'] = "all_suburb";	
@@ -26,8 +28,28 @@
 <body>
 
 <div id="wrapper">
-    <?php include 'common_files/header.php'; ?>
+    <?php include 'common_files/header.php'; 
 	
+	
+	
+	if (isset($_GET['q'])){
+	
+	if ($_GET['q'] == "login" ){
+echo "<div id ='login_success'>Log in successful</div>";
+		
+	}
+	
+	else if ($_GET['q'] == "signup" ){
+echo "<div id ='login_success'>Registration successful</div>";
+		
+	}
+	
+	}
+	
+	
+	
+	
+	?>
     <form id="main_search">
         Search By name: <br>
 		<input type="text" name="search_value" id="search_value"><br>
