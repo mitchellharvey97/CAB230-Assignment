@@ -12,9 +12,10 @@ $logged_in = false;
     $css = array("css/style.css");
     require("common_files/images.php");
     require("common_files/database_connect.php");
+    require("common_files/helper_functions.php");
 	
 	$request['request'] = "all_suburb";	
-	 $received_data = make_sql_request($request);
+	 $suburb_data = make_sql_request($request);
 	 
     foreach ($scripts as $script) {              #Link all Script Files
         echo "<script src='" . $script . "'></script>\n";
@@ -41,9 +42,7 @@ echo "<div id ='login_success'>Log in successful</div>";
 	
 	else if ($_GET['q'] == "signup" ){
 echo "<div id ='login_success'>Registration successful</div>";
-		
-	}
-	
+	}	
 	}
 	
 	
@@ -64,8 +63,15 @@ echo "<div id ='login_success'>Registration successful</div>";
 	<select id = "suburb_list">
 	<?php
 	
-	foreach ($received_data as $suburb){
-		$suburb_name = $suburb->{'Suburb'};
+	foreach ($suburb_data as $suburb){
+	$suburb->{'Suburb'} = strip_postcode($suburb->{'Suburb'});
+	}
+
+	$suburb_data = remove_duplicates($suburb_data, "Suburb");
+	
+	foreach ($suburb_data as $suburb){
+
+	$suburb_name = $suburb['Suburb'];
 		echo"<option value=\"$suburb_name\">$suburb_name</option>";		
 	}
 	?>

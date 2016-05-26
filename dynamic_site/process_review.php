@@ -15,7 +15,4 @@ $review['rating'] = $_POST['rating'];
 $review['userid'] = $_POST['userid'];
 $review['place'] = $_POST['place'];
 
-
-//print_r($review);
-
 make_sql_request($review);

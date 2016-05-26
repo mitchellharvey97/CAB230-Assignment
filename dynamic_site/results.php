@@ -9,6 +9,7 @@ $logged_in = false;
     require("common_files/database_connect.php");
     require("common_files/distance_calculate.php");
     require("common_files/images.php");
+    require("common_files/helper_functions.php");
 
     $search_type = $_GET['searchtype'];
 
@@ -24,7 +25,14 @@ $logged_in = false;
 
 
     $recieved_data = make_sql_request($request);
-
+	
+	//Clean the data
+foreach ($recieved_data as $place){
+	$place->{'Suburb'} = strip_postcode($place->{'Suburb'});
+	}
+	
+	
+	
     #Links for Style Sheets and scripts to include
     $scripts = array("http://maps.google.com/maps/api/js", "js/maps.js");
     $css = array("css/style.css");
@@ -59,19 +67,7 @@ $logged_in = false;
 		$rating_min = $_GET['value'];
     }
 
-    function sort_array($unsorted, $max_value)
-    {
-        $returned_value = array();
 
-        foreach ($unsorted as $item) {
-            if ($item->{'distance'} <= $max_value) {
-                $pos = find_index_in_order($returned_value, $item->{'distance'});
-                $returned_value = insertArrayIndex($returned_value, $item, ($pos));
-            }
-        }
-
-        return $returned_value;
-    }
 
     function find_index_in_order($input_array, $item)
     {
@@ -91,13 +87,7 @@ $logged_in = false;
         return $index;
     }
 
-    function insertArrayIndex($array, $new_element, $index)
-    {
-        $start = array_slice($array, 0, $index);
-        $end = array_slice($array, $index);
-        $start[] = $new_element;
-        return array_merge($start, $end);
-    }
+
 
     ?>
 </head>

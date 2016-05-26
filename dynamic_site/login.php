@@ -6,7 +6,16 @@
 
     <?php
 $logged_in = false;
-$error = true;
+
+$error = false;
+
+if (isset($_GET['q'])){
+		
+	if ($_GET['q'] == "fail"){
+		$error = true;
+	}
+	}
+
 
     require("common_files/pages.php");
     require("common_files/images.php");

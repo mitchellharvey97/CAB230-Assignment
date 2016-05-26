@@ -27,16 +27,7 @@ function make_sql_request($data, $passed_source = "direct")
 
     $database_connection = new PDO("mysql:host=$host;dbname=$db_name", $databases['username'], $databases['password']);
     $database_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  //End of setting up database connection
-
-
-
-
-  
-
-
-
-  
+  //End of setting up database connection  
   
 	
 	
@@ -44,9 +35,7 @@ function make_sql_request($data, $passed_source = "direct")
     $user_table = $databases["user_table"];
     $review_table = $databases["rating_table"];
     $database = $databases["database"];
-	
-	
-	
+
 	
     //added a source variable as web calls don't have permission to alter database data
     $requested = $data['request'];
@@ -60,7 +49,8 @@ function make_sql_request($data, $passed_source = "direct")
 
 	else if ($requested == "all_suburb") {
 		$prepared = $database_connection->prepare("SELECT DISTINCT `Suburb` FROM $wifi_table ORDER BY `Suburb`");
-		$results = sql_query_prepared($prepared);
+		$results = sql_query_prepared($prepared);	
+	//	print_r($results);
 		return $results;	
     } 
 	else if ($requested == "all_location_data") {
@@ -108,19 +98,11 @@ function make_sql_request($data, $passed_source = "direct")
 		$results = sql_query_prepared($prepared);
 		return $results;	
         } 
-		else if ($search_type == "rating") {
-		$prepared = $database_connection->prepare("SELECT * FROM $wifi_table");// WHERE `Wifi Hotspot Name` LIKE :place_name");
-		$results = sql_query_prepared($prepared);
-		return $results;	
-        } 
-		else if ($search_type == "geo_location") {
-          			$prepared = $database_connection->prepare("SELECT * FROM $wifi_table");// WHERE `Wifi Hotspot Name` LIKE :place_name");
-		$search_value = "%$search_value%";
-		//$prepared->bindParam(':place_name', $search_value);
-		$results = sql_query_prepared($prepared);
-		return $results;	
+		//Both Geo Location and Ratings are calculated in the results page so all data is needed to be returned
+		else if ($search_type == "geo_location" || $search_type == "rating" ) {
+			$all_data_request['request'] = "all_location_data";		
+			return make_sql_request($all_data_request);
         }
-
 
     } 
 	else if ($requested == "add_user") {
@@ -137,14 +119,11 @@ function make_sql_request($data, $passed_source = "direct")
 		$prepared->bindParam(':date_added', time());		
 		
 		$results = sql_query_prepared($prepared);
-		//print"<br>Adding the user maybe";
-		return true;	
-		
+		return true;			
     } 
 	
 	else if ($requested == "user_verify") {
  		$prepared = $database_connection->prepare("SELECT * FROM `$database`.`$user_table` WHERE `email` = :email");
-		
 		
 		$prepared->bindParam(':email', $data['email']);
 		$result = sql_query_prepared($prepared);
@@ -182,6 +161,7 @@ function make_sql_request($data, $passed_source = "direct")
 		$prepared->bindParam(':date', $date);		
 		
 		$results = sql_query_prepared($prepared);
+		
 		return true;	
 	}
 	else if ($requested == "rating_all"){

@@ -120,6 +120,8 @@ echo "$person_name <br>
 	<div class = "add_review">
 		<?php
 if ($logged_in){
+	$user_email = "mitchellharvey97@gmail.com";
+	
 	?>
 	<form id = "add_review" method="post" action="../<?php echo $add_review; ?>" oninput="x.value=parseInt(rating.value)">
 	<h2> Add Review</h2>
@@ -136,7 +138,7 @@ if ($logged_in){
   <br><br>
   
   
-	<input type = "hidden" name = "userid" value = "<?php echo $person_email;?>">
+	<input type = "hidden" name = "userid" value = "<?php echo $user_email;?>">
 	  <button value="<?php echo $wifiName;?>" name="place" style="background-color:red;">Submit Review</button>
 	</form>
 	
