@@ -5,16 +5,16 @@
 
 
     <?php
-$logged_in = false;
+    $logged_in = false;
 
-$error = false;
+    $error = false;
 
-if (isset($_GET['q'])){
-		
-	if ($_GET['q'] == "fail"){
-		$error = true;
-	}
-	}
+    if (isset($_GET['q'])) {
+
+        if ($_GET['q'] == "fail") {
+            $error = true;
+        }
+    }
 
 
     require("common_files/pages.php");
@@ -39,12 +39,12 @@ if (isset($_GET['q'])){
 
 
 <div id="wrapper">
-    <?php include 'common_files/header.php'; 
-	
-	if ($error){
-	echo "<div id='error_message'>There where errors in your username or password<br>Please try again</div>";
-	}
-	?>
+    <?php include 'common_files/header.php';
+
+    if ($error) {
+        echo "<div id='error_message'>There where errors in your username or password<br>Please try again</div>";
+    }
+    ?>
 
     <form method="post" action="<?php echo $verify_user; ?>">
         Email Address:<input type="text" name="email"><br>

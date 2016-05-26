@@ -4,7 +4,7 @@
     <title>MyWiFind - Search Results</title>
 
     <?php
-$logged_in = false;
+    $logged_in = false;
     require("common_files/pages.php");
     require("common_files/database_connect.php");
     require("common_files/distance_calculate.php");
@@ -25,14 +25,13 @@ $logged_in = false;
 
 
     $recieved_data = make_sql_request($request);
-	
-	//Clean the data
-foreach ($recieved_data as $place){
-	$place->{'Suburb'} = strip_postcode($place->{'Suburb'});
-	}
-	
-	
-	
+
+    //Clean the data
+    foreach ($recieved_data as $place) {
+        $place->{'Suburb'} = strip_postcode($place->{'Suburb'});
+    }
+
+
     #Links for Style Sheets and scripts to include
     $scripts = array("http://maps.google.com/maps/api/js", "js/maps.js");
     $css = array("css/style.css");
@@ -45,10 +44,10 @@ foreach ($recieved_data as $place){
         echo "<link href='" . $script . "' rel='stylesheet'>\n";
     }
 
-        $geo_location = false;
-		$rating = false;
-		$rating_min = 0;
-		
+    $geo_location = false;
+    $rating = false;
+    $rating_min = 0;
+
     if ($search_type == "geo_location") {
         $geo_location = true;
 
@@ -61,12 +60,11 @@ foreach ($recieved_data as $place){
 
         $recieved_data = sort_array($recieved_data, $_GET['radius']);
 
-    } 
-	if ($search_type == "rating"){
-		$rating = true;
-		$rating_min = $_GET['value'];
     }
-
+    if ($search_type == "rating") {
+        $rating = true;
+        $rating_min = $_GET['value'];
+    }
 
 
     function find_index_in_order($input_array, $item)
@@ -86,7 +84,6 @@ foreach ($recieved_data as $place){
         }
         return $index;
     }
-
 
 
     ?>
@@ -129,26 +126,26 @@ foreach ($recieved_data as $place){
                 $wifi_suburb = $recieved_data[$i]->{'Suburb'};
                 $wifi_lat = $recieved_data[$i]->{'Latitude'};
                 $wifi_lon = $recieved_data[$i]->{'Longitude'};
-				
-				$rating_request['request'] = "rating_average";
-				$rating_request['place_name'] = $wifi_name;
-				
-				
-				$wifi_rating = make_sql_request($rating_request);
-				
 
-				if (!$rating || ($rating && $wifi_rating >= $rating_min)){
-				
-				if ($wifi_rating < 0){
-					$wifi_rating = "No Ratings yet";
-				} 
-				
-                echo "<tr>";
-                echo "<td><a href='$item?q=$wifi_name'>$wifi_name</a></td>";
-                echo "<td>$wifi_address</td>";
-                echo "<td>$wifi_suburb</td>";
-                echo "<td>$wifi_rating</td>";
-				}
+                $rating_request['request'] = "rating_average";
+                $rating_request['place_name'] = $wifi_name;
+
+
+                $wifi_rating = make_sql_request($rating_request);
+
+
+                if (!$rating || ($rating && $wifi_rating >= $rating_min)) {
+
+                    if ($wifi_rating < 0) {
+                        $wifi_rating = "No Ratings yet";
+                    }
+
+                    echo "<tr>";
+                    echo "<td><a href='$item?q=$wifi_name'>$wifi_name</a></td>";
+                    echo "<td>$wifi_address</td>";
+                    echo "<td>$wifi_suburb</td>";
+                    echo "<td>$wifi_rating</td>";
+                }
 
                 if ($geo_location) {
                     $distance = $recieved_data[$i]->{'distance'};
@@ -173,17 +170,17 @@ foreach ($recieved_data as $place){
             $lat = ($each_loc->Latitude);
             $name = ($each_loc->{'Wifi Hotspot Name'});
             $result_page = $item . "?q=$name";
-			
-			
-				$rating_request['request'] = "rating_average";
-				$rating_request['place_name'] = $name;
-				$wifi_rating = make_sql_request($rating_request);
-			
-			if (!$rating || ($rating && $wifi_rating >= $rating_min)){
-				
-            echo "hotspot_locations.push([\"<h4>$name</h4><br><a href =\\\"$result_page\\\"> View Hotspot</a>\",$lat, $lon])
+
+
+            $rating_request['request'] = "rating_average";
+            $rating_request['place_name'] = $name;
+            $wifi_rating = make_sql_request($rating_request);
+
+            if (!$rating || ($rating && $wifi_rating >= $rating_min)) {
+
+                echo "hotspot_locations.push([\"<h4>$name</h4><br><a href =\\\"$result_page\\\"> View Hotspot</a>\",$lat, $lon])
 	  ";
-        }
+            }
         }
         ?>
         display_map(hotspot_locations, "results_map"); //Call the Display map command with the item locations, and the map ID

@@ -5,16 +5,16 @@
 
 
     <?php
-	$logged_in = false;
-	$error = false;
-	if (isset($_GET['q'])){
-		
-	if ($_GET['q'] == "error"){
-		$error = true;
-	}
-	}
+    $logged_in = false;
+    $error = false;
+    if (isset($_GET['q'])) {
 
-	
+        if ($_GET['q'] == "error") {
+            $error = true;
+        }
+    }
+
+
     require("common_files/pages.php");
     require("common_files/images.php");
 
@@ -37,13 +37,13 @@
 
 
 <div id="wrapper">
-    <?php include 'common_files/header.php'; 
-	if ($error){
-	echo "<div id='error_message'>There where errors in the form<ul>
+    <?php include 'common_files/header.php';
+    if ($error) {
+        echo "<div id='error_message'>There where errors in the form<ul>
 	<li>Email Address has already been used</li>
 	</ul></div>";
-	}
-	?>
+    }
+    ?>
 
     Register for My WiFind<br>
 

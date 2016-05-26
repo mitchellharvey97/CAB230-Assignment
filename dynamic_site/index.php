@@ -4,7 +4,7 @@
 <head>
     <title>MyWiFind</title>
     <?php
-$logged_in = false;
+    $logged_in = false;
 
     #Links for Style Sheets and scripts to include
     $script_folder = "js";
@@ -13,10 +13,10 @@ $logged_in = false;
     require("common_files/images.php");
     require("common_files/database_connect.php");
     require("common_files/helper_functions.php");
-	
-	$request['request'] = "all_suburb";	
-	 $suburb_data = make_sql_request($request);
-	 
+
+    $request['request'] = "all_suburb";
+    $suburb_data = make_sql_request($request);
+
     foreach ($scripts as $script) {              #Link all Script Files
         echo "<script src='" . $script . "'></script>\n";
     }
@@ -29,60 +29,54 @@ $logged_in = false;
 <body>
 
 <div id="wrapper">
-    <?php include 'common_files/header.php'; 
-	
-	
-	
-	if (isset($_GET['q'])){
-	
-	if ($_GET['q'] == "login" ){
-echo "<div id ='login_success'>Log in successful</div>";
-		
-	}
-	
-	else if ($_GET['q'] == "signup" ){
-echo "<div id ='login_success'>Registration successful</div>";
-	}	
-	}
-	
-	
-	
-	
-	?>
+    <?php include 'common_files/header.php';
+
+
+    if (isset($_GET['q'])) {
+
+        if ($_GET['q'] == "login") {
+            echo "<div id ='login_success'>Log in successful</div>";
+
+        } else if ($_GET['q'] == "signup") {
+            echo "<div id ='login_success'>Registration successful</div>";
+        }
+    }
+
+
+    ?>
     <form id="main_search">
         Search By name: <br>
-		<input type="text" name="search_value" id="search_value"><br>
+        <input type="text" name="search_value" id="search_value"><br>
         <input type="button" value="Lets Go" id="text_search">
     </form>
 
-	<br>
-	
-	<form id="suburb_drop_form">
-	Or, Select a suburb from the list
-	
-	<select id = "suburb_list">
-	<?php
-	
-	foreach ($suburb_data as $suburb){
-	$suburb->{'Suburb'} = strip_postcode($suburb->{'Suburb'});
-	}
+    <br>
 
-	$suburb_data = remove_duplicates($suburb_data, "Suburb");
-	
-	foreach ($suburb_data as $suburb){
+    <form id="suburb_drop_form">
+        Or, Select a suburb from the list
 
-	$suburb_name = $suburb['Suburb'];
-		echo"<option value=\"$suburb_name\">$suburb_name</option>";		
-	}
-	?>
-</select>
+        <select id="suburb_list">
+            <?php
 
-	<input type="button" value="Search" id="suburb_search">
-	
-	
-	
-	</form>
-	
+            foreach ($suburb_data as $suburb) {
+                $suburb->{'Suburb'} = strip_postcode($suburb->{'Suburb'});
+            }
+
+            $suburb_data = remove_duplicates($suburb_data, "Suburb");
+
+            foreach ($suburb_data as $suburb) {
+
+                $suburb_name = $suburb['Suburb'];
+                echo "<option value=\"$suburb_name\">$suburb_name</option>";
+            }
+            ?>
+        </select>
+
+        <input type="button" value="Search" id="suburb_search">
+
+
+    </form>
+
     <br>
     <form id="rating_search_form">
         Or, Search by Rating
