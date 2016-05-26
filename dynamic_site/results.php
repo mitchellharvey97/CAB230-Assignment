@@ -8,7 +8,6 @@
     require("common_files/pages.php");
     require("common_files/database_connect.php");
     require("common_files/distance_calculate.php");
-    require("common_files/images.php");
     require("common_files/helper_functions.php");
 
     $search_type = $_GET['searchtype'];

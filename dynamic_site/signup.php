@@ -16,7 +16,6 @@
 
 
     require("common_files/pages.php");
-    require("common_files/images.php");
 
 
     #Links for Style Sheets and scripts to include

@@ -3,7 +3,6 @@ $place_name = $_GET["q"];
 
 require("common_files/pages.php");
 require("common_files/database_connect.php");
-require("common_files/images.php");
 
 $prefix = "../";
 //Get the data from the database connector and decode it to an object
