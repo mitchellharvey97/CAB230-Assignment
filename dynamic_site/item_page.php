@@ -1,4 +1,7 @@
 <?php
+    require("common_files/check_session.php");
+	
+
 $place_name = $_GET["q"];
 
 require("common_files/pages.php");
@@ -15,9 +18,6 @@ $wifiAddress = $received_data->{'Address'};
 $wifiSuburb = $received_data->{'Suburb'};
 $wifiLat = $received_data->{'Latitude'};
 $wifiLng = $received_data->{'Longitude'};
-
-
-$logged_in = true;
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +48,7 @@ $logged_in = true;
     echo "</div>";
     ?>
 
-    <div id="googleMap" style="width: 500px; height: 400px;"></div>
+    <div id="location_map" style="width: 500px; height: 400px;"></div>
 
 
     <div id="reviews">
@@ -120,7 +120,7 @@ $logged_in = true;
     <div class="add_review">
         <?php
         if ($logged_in) {
-            $user_email = "mitchellharvey97@gmail.com";
+            $user_email = $_SESSION['username'];
 
             ?>
             <form id="add_review" method="post" action="../<?php echo $add_review; ?>"
@@ -147,7 +147,7 @@ $logged_in = true;
 
             <?php
         } else {
-            echo "	You must be logged in to write a review. <a href='$login'>Login</a> or <a href = '$signup'> Create an account now</a>";
+            echo "You must be logged in to write a review. <a href='$login'>Login</a> or <a href = '$sign_up'> Create an account now</a>";
         }
         ?>
     </div>
@@ -157,7 +157,7 @@ $logged_in = true;
     <script>
         var hotspot_locations = []
         <?php  echo "hotspot_locations.push(['<h4>$wifiName</h4><br>',$wifiLat, $wifiLng]);";?>
-        display_map(hotspot_locations, "googleMap");
+        display_map(hotspot_locations, "location_map");
     </script>
     <?php include 'common_files/footer.php'; ?>
 </div>

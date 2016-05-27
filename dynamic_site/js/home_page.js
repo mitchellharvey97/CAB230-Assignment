@@ -13,7 +13,7 @@ window.onload = function () {
     console.log("Script Loaded")
     add_page_events();
     //parent = document.getElementById("main_search");
-  	initialize_suggestions("../common_files/database_api.php?q=all_names", "main_search")
+  	initialize_suggestions("../common_files/database_api.php?q=all_names", "sugg_parent")
 }
 
 function add_page_events() {
@@ -25,8 +25,6 @@ function add_page_events() {
 	suburb_list = document.getElementById("suburb_list");
 
     search_bar = document.getElementById("search_value");
-  //  radio_buttons.push(document.getElementById("search_by_name"));
-  //  radio_buttons.push(document.getElementById("search_by_suburb"));
 
 //Add the events
     search_bar.onkeyup = function () {

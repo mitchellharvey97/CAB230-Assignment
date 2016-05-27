@@ -14,6 +14,7 @@ $sign_up = 'signup.php';
 $results = 'results.php';
 $item = 'item_page.php';
 $login = 'login.php';
+$logout = 'logout.php';
 $add_review = 'process_review.php';
 $verify_user = "user_verification.php";
 $api = $web_root . 'common_files/database_api.php';

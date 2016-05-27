@@ -4,7 +4,9 @@
     <title>MyWiFind - Search Results</title>
 
     <?php
-    $logged_in = false;
+    require("common_files/check_session.php");
+	
+	
     require("common_files/pages.php");
     require("common_files/database_connect.php");
     require("common_files/distance_calculate.php");
@@ -107,8 +109,6 @@
             </tr>
 
             <?php
-
-
             function calculate_distance($place_lat, $place_lon)
             {
                 global $user_lat;
@@ -157,7 +157,7 @@
     </div>
 
 
-    <div id="results_map" style="width: 500px; height: 400px;"></div>
+    <div id="results_map"></div>
 
 
     <!--Some Inline Scripting to allow php to add to the array - PHP gets rendered before Javascript, therefore it is possible to write javascript arrays with it-->

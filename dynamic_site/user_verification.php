@@ -8,8 +8,10 @@ $form_source = $_POST['form_type'];
 
 //Collect email and password as it is required for both
 
+
 $user['email'] = $_POST['email'];
 $user['password'] = $_POST['password'];
+
 
 
 $register = false;
@@ -61,10 +63,10 @@ if ($register) {
 
             make_sql_request($request_data);
             //if all is good, go to the home page
-            echo "<script> window.location.assign('$home?q=signup'); </script>";
-            // echo "Success";
+			login_success("signup");
+             echo "Success";
         } else {
-            //	echo "Fail";
+           	echo "Fail";
             echo "<script> window.location.assign('$sign_up?q=error'); </script>";
 //            echo "That email address is already in use";
         }
@@ -81,10 +83,10 @@ if ($register) {
 
     if (make_sql_request($request_data)) {
         //echo "Success";
-        echo "<script> window.location.assign('$home?q=login'); </script>";
+		login_success("login");
     } else {
         //echo "fail";
-        echo "<script> window.location.assign('$login?q=fail'); </script>";
+      //  echo "<script> window.location.assign('$login?q=fail'); </script>";
     };
 
 
@@ -106,6 +108,26 @@ function out_of_bounds($val, $min, $max)
     } else {
         return false;
     }
+}
+
+
+function login_success($msg){
+	global $user;
+	global $home;
+	   ob_start();
+   session_start();
+                  $_SESSION['valid'] = true;
+                  $_SESSION['timeout'] = time();
+                  $_SESSION['username'] = $user['email'];   
+   
+   echo "<br>Session<br>";
+	print_r($_SESSION);
+	
+	
+    echo "<script> window.location.assign('$home?q=$msg'); </script>";
+	
+	
+	
 }
 
 

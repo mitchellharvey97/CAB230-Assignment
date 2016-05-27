@@ -5,7 +5,6 @@ require("common_files/pages.php");
 
 echo "Processing review";
 
-
 //print_r($_POST);
 
 $review['request'] = "add_review";
@@ -16,3 +15,7 @@ $review['userid'] = $_POST['userid'];
 $review['place'] = $_POST['place'];
 
 make_sql_request($review);
+
+$loc = $item . "?q=". $_POST['place'];
+
+header("Refresh: 1; URL = $loc");

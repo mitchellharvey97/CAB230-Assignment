@@ -1,9 +1,14 @@
 html, body {
-  background-color: whitesmoke;
   height: 100%;
   margin: 5px;
   padding: 0px;
-}
+  background-image: url("../img/background.jpg");
+background-size:cover;
+background-attachment:fixed;
+font-family: "Arial", Helvetica, sans-serif;
+  }
+  
+  $fore_color: rgba(0, 0, 0, 0.5);
 
 a {
   text-decoration: none;
@@ -13,30 +18,34 @@ a {
 #wrapper {
   margin: auto;
   width: 98%;
-  height: 100%;
+  min-height: 100%;
   min-width: 650px;
   border-radius: 5px 5px 0px 0px;
-  background-color: #000066;
+  bsackground-color: #000066;
   color: white;
 }
+
+
+.content{
+	margin-top:30px;
+	padding-top:20px;
+	background-color:$fore_color;	
+	border-radius:10px 10px 0 0 ;
+}
+
+
 
 #header {
   border-radius: 20px 20px 5px 5px;
   margin-bottom: 5px;
-  background-color: #000033;
+  background-color: $fore_color;
   height: 150px;
+  padding:10px;
+  padding:10px 10%;
 
-  .logo {
-    margin-top: 30px;
-    margin-left: 30px;
-    float: left;
-    width: 100px;
-    height: 100px;
-  }
-}
-
-#titleblock {
-  font-family: "Arial", Helvetica, sans-serif;
+  
+  
+ #titleblock {
   color: white;
   font-size: 15pt;
   height: 100%;
@@ -44,53 +53,155 @@ a {
   text-align: center;
   line-height: 500%;
 }
+  
+  .logo {
+    margin-top: 30px;
+    margin-left: 30px;
+    float: left;
+    width: 100px;
+    height: 100px;
+	#border{
+		    fill: rgba(0, 0, 0, 0);
+	}
+  }
+  
+  #right {
+    width: 25%;
+    float: right;
 
-#menu {
-  height: 100%;
-  width: 50%;
-  float: right;
+.profile{
+	width:25%;
+	margin:auto;
 }
 
-#menu a {
-  font-weight: 500;
+    svg {
+      width: 100%;
+      clear: both;
+      padding-right: 10px;
+    }
+  }
+
+  #menu {
+    width: 100%;
+	text-align:left;
+	
+	.left{
+		text-align:right;
+		float:left;
+		padding-right:5%;
+	}
+	
+	.right{
+	float:right;
+	padding-left:5%;	
+	}
+
+    ul li {		
+		a{
+		width:45%;
+		font-weight: 500;
+		}
+		
+      display: block;
+      vertical-align: bottom;
+      list-style-type: none;
+    }
+  }
 }
 
-#menu ul li {
-  font-family: "Arial", Helvetica, sans-serif;
-  float: right;
-  display: block;
-  vertical-align: bottom;
-  padding: 3pt;
-  margin-right: 2%;
-  margin-top: 100px;
-  list-style-type: none;
+
+
+#error_message {
+  color: red;
+  font-style: italic;
+  margin-bottom: 10px;
 }
 
-#location_name {
-  margin-top: 15px;
+
+$search_bar_width:50%;
+$button_height: 30px;
+
+
+/*Home Page Specific*/
+.suggestion_holder {
+  z-index: 1;
+  left: 0;
+  top: -20px;
+  position: relative;
+  width: 100%;
+  background-color: rgba(0,0,0,0.8);
+  border-radius: 0 0 10px 10px;
+	padding-left:3px;
+	padding-top:3px;
+	display: block;
+  margin: auto;
+  text-align: left;
+  color:#0cc;
+
+  li {
+    list-style-type: none;
+	padding:2px;
+  }
+  
+    li:hover {
+    list-style-type: none;
+	padding:2px;
+	color:#fff
+  }
+}
+
+#home_page_forms{
+	
   text-align: center;
-  font-size: 40px;
-  font-family: "Arial", Helvetica, sans-serif;
+  width: 30%;
+  margin:auto;
+  padding-bottom: 20px;
+  
+  form{
+  background-color:$fore_color;
+  padding:10px;
+  border-radius:10px;
+  }
+
+  input[type='text'] {
+	  color:#FFF;
+	text-align:center;
+    background-color: $fore_color;
+	border:none;
+	border-radius:20px;
+    height: $button_height;
+    width: 100%;
+  }
+  
+  input[type='button']{
+	  width:50%;
+	  background-color:green;
+	  border-style:solid;
+	  border-color:#000;
+	  border-radius:10px;
+	  height:$button_height;
+	  margin-left:10px;
+	  
+  }
+  
+  .left{
+	  width:80%;
+	  text-align:left;
+	  height:$button_height;
+	  float:left;
+  }
+  .right{
+	  height:$button_height;
+	  float:left;
+	  width:19%;
+  }
+  
 }
 
-#street_address {
-  margin-bottom: 5px;
-  text-align: center;
-  font-size: 35px;
-  font-family: "Arial", Helvetica, sans-serif;
-}
-
-#searchContent {
-  padding-top: 125px;
-  margin-left: 37.5%;
-  font-family: "Arial", Helvetica, sans-serif;
-  color: white;
-  font-size: 2em;
-}
-
+/*
 button {
-  background-color: #000033;
   width: 350px;
+  height:$button_height;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -98,18 +209,41 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 24px;
-}
+}*/
 
-#googleMap {
-
+#location_map {
   width: 80%;
   margin: auto;
   text-align: center;
   display: block;
 }
 
-table {
 
+
+/*Results page */
+
+
+
+#location_name {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 40px;
+}
+
+#street_address {
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 35px;
+}
+
+
+#results_map {
+  padding-top: 10px;
+  margin: auto;
+  width: 100%;
+  height: 400px;
+}
+table {
   width: 100%;
   border-collapse: collapse;
 }
@@ -117,7 +251,6 @@ table {
 th {
   height: 40px;
   background-color: #000033;
-
 }
 
 td {
@@ -132,11 +265,57 @@ th, td {
 }
 
 tr:hover {
-  background-color: black
+  background-color: black;
 }
 
+
+/*Reiew Specific Page */
+#reviews {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  background-color: green;
+
+  .review {
+    background-color: grey;
+  }
+
+  #profile_pict {
+    width: 40%;
+    float: left;
+    margin-bottom: 10px;
+
+    svg {
+      border-radius: 50%;
+      width: 100%;
+    }
+  }
+
+  .person_info {
+    padding-top: 30px;
+    padding-left: 10%;
+    width: 50%;
+    float: right;
+    text-align: left;
+  }
+
+  .left {
+    width: 30%;
+    float: left;
+  }
+
+  .right {
+    width: 70%;
+    float: right;
+  }
+}
+
+
+
+
+
+
 #footer {
-  font-family: "Arial", Helvetica, sans-serif;
   color: white;
   font-size: 17.5pt;
   font-style: oblique;
@@ -144,41 +323,6 @@ tr:hover {
   background-color: #000033;
   text-align: center;
   padding: 10px;
-}
-
-#main_search, #rating_search_form {
-
-  text-align: center;
-  width: 100%;
-  background-color: red;
-  padding-bottom: 20px;
-  input[type='text'] {
-    margin: 20px 0;
-    background-color: green;
-    height: 30px;
-    width: 50%;
-
-  }
-
-}
-
-.suggestion_holder {
-
-  z-index: 1;
-  left: 0;
-  top: -38px;
-  position: relative;
-  width: 50%;
-  background-color: gray;
-  display: block;
-  margin: auto;
-  text-align: left;
-
-  li {
-    list-style-type: none;
-
-  }
-
 }
 
 //Base Logo Colors
@@ -202,58 +346,9 @@ tr:hover {
   fill: #FFF;
 }
 
-
-#reviews{
-	width:80%;
-	margin:auto;
-	text-align:center;
-	background-color:green;
-	.review{
-		background-color:grey;
-	}
-	
-	#profile_pict{
-		width:40%;
-		float:left;
-		margin-bottom:10px;
-		
-		svg{			
-		border-radius:50%;
-			width:100%;			
-		}
-	}
-	.person_info{
-		padding-top:30px;
-		padding-left:10%;
-		width:50%;
-		float:right;
-		text-align:left;
-	}
-	
-	
-	
-.left{
-	width:30%;
-	float:left;
-	}	
-.right{
-	width:70%;
-	float:right;
+.clearfix {
+  clear: both;
 }
-}
-
-.clearfix{
-	clear:both;
-}
-
-
-#error_message{
-	color:red;
-	font-style:italic;
-	margin-bottom:10px;	
-}
-
-
 
 @media only screen and (min-width: 650px) {
   #menu a {

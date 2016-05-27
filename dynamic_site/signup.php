@@ -5,7 +5,10 @@
 
 
     <?php
-    $logged_in = false;
+
+	require("common_files/check_session.php");
+
+	
     $error = false;
     if (isset($_GET['q'])) {
 
