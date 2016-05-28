@@ -6,10 +6,8 @@
     <?php
     require("common_files/check_session.php");
 	
-	
     require("common_files/pages.php");
     require("common_files/database_connect.php");
-    require("common_files/distance_calculate.php");
     require("common_files/helper_functions.php");
 
     $search_type = $_GET['searchtype'];
@@ -19,19 +17,14 @@
         $request['search_value'] = $search_value;
     }
 
-
     $request['request'] = "search";
-
     $request['search_type'] = $search_type;
-
-
     $recieved_data = make_sql_request($request);
 
     //Clean the data
     foreach ($recieved_data as $place) {
         $place->{'Suburb'} = strip_postcode($place->{'Suburb'});
     }
-
 
     #Links for Style Sheets and scripts to include
     $scripts = array("http://maps.google.com/maps/api/js", "js/maps.js");
@@ -96,7 +89,7 @@
     <?php include 'common_files/header.php'; ?>
 
     <div id="results">
-        <table>
+        <table id = "result_table">
             <tr>
                 <th>Hotspot Name</th>
                 <th>Address</th>
@@ -106,6 +99,8 @@
                 <?php if ($geo_location) { //If it is a geolocation search then add the distance field to the array
                     echo "<th>Distance From User</th>";
                 } ?>
+                <th></th>
+				
             </tr>
 
             <?php
@@ -140,10 +135,11 @@
                     }
 
                     echo "<tr>";
-                    echo "<td><a href='$item?q=$wifi_name'>$wifi_name</a></td>";
+                    echo "<td>$wifi_name</td>";
                     echo "<td>$wifi_address</td>";
                     echo "<td>$wifi_suburb</td>";
                     echo "<td>$wifi_rating</td>";
+                    echo "<td><div class ='view_place'><a href='$item?q=$wifi_name'>View Details</a></div></td>";
                 }
 
                 if ($geo_location) {

@@ -202,6 +202,20 @@ function make_sql_request($data, $passed_source = "direct")
 		$prepared->bindParam(':email', $data['user']);		
 		$results = sql_query_prepared($prepared);
 		return $results[0];
+	}	
+	
+	else if ($requested == "user_already_posted"){
+		$prepared = $database_connection->prepare("SELECT * FROM `$database`.`$review_table` WHERE user_email = :email AND hotspot_name = :place");
+		$prepared->bindParam(':email', $data['user']);		
+		$prepared->bindParam(':place', $data['place']);		
+		$results = sql_query_prepared($prepared);
+		
+		if (sizeof($results) > 0){
+			return true;
+		}else{
+		return false;
+		}
+		
 	}
 
 

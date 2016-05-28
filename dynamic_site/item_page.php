@@ -1,13 +1,9 @@
 <?php
     require("common_files/check_session.php");
-	
-
-$place_name = $_GET["q"];
-
 require("common_files/pages.php");
 require("common_files/database_connect.php");
 
-$prefix = "../";
+	$place_name = $_GET["q"];
 //Get the data from the database connector and decode it to an object
 $request['request'] = "wifi";
 $request['place_name'] = $place_name;
@@ -42,9 +38,11 @@ $wifiLng = $received_data->{'Longitude'};
 <body>
 <div id="wrapper">
     <?php include 'common_files/header.php';
+		echo'<div class = "content">';
+	
     echo "<div class = 'location_details'>";
-    echo "<div id = 'location_name'>" . $wifiName . "</div>";
-    echo "<div id = 'street_address'>" . $wifiAddress . " , " . $wifiSuburb . "</div>";
+    echo "<h1>" . $wifiName . "</h1>";
+    echo "<h2>" . $wifiAddress . " , " . $wifiSuburb . "</h2>";
     echo "</div>";
     ?>
 
@@ -66,6 +64,11 @@ $wifiLng = $received_data->{'Longitude'};
             return floor($datediff / (60 * 60 * 24));
         }
 
+	if( sizeof($rating_data) < 1){
+		echo "No reviews have been posted yet";
+		
+	}
+	else{
 
         foreach ($rating_data as $rating){
         $request['request'] = 'user_rating_info';
@@ -113,6 +116,7 @@ $wifiLng = $received_data->{'Longitude'};
 <?php
 
 }
+	}
 
 ?>
 
@@ -121,16 +125,28 @@ $wifiLng = $received_data->{'Longitude'};
         <?php
         if ($logged_in) {
             $user_email = $_SESSION['username'];
-
+			
+			$review_status['request'] = 'user_already_posted';
+			$review_status['user'] = $user_email;
+			$review_status['place'] = $wifiName;
+			
+			$user_already_posted = make_sql_request($review_status);
+			
+		//	$user_already_reviewed = true;
+			
+			if ($user_already_posted){
+				echo "You can only post one review per location";
+			}
+			else {
             ?>
             <form id="add_review" method="post" action="../<?php echo $add_review; ?>"
                   oninput="x.value=parseInt(rating.value)">
                 <h2> Add Review</h2>
                 Title:<br>
-                <input type="text" required name="title"><br>
+                <input type="text" required name="title" placeholder="Review Title"><br>
 
                 Review<br>
-                <textarea required name="body"> </textarea><br>
+                <textarea required name="body"  placeholder="Review"> </textarea><br>
                 <br>
                 Rating:
                 <output name="x" for="rating"></output>
@@ -141,12 +157,13 @@ $wifiLng = $received_data->{'Longitude'};
 
 
                 <input type="hidden" name="userid" value="<?php echo $user_email; ?>">
-                <button value="<?php echo $wifiName; ?>" name="place" style="background-color:red;">Submit Review
+                <button value="<?php echo $wifiName; ?>" name="place">Submit Review
                 </button>
             </form>
 
             <?php
-        } else {
+			}
+		} else {
             echo "You must be logged in to write a review. <a href='$login'>Login</a> or <a href = '$sign_up'> Create an account now</a>";
         }
         ?>
@@ -159,6 +176,7 @@ $wifiLng = $received_data->{'Longitude'};
         <?php  echo "hotspot_locations.push(['<h4>$wifiName</h4><br>',$wifiLat, $wifiLng]);";?>
         display_map(hotspot_locations, "location_map");
     </script>
+</div>
     <?php include 'common_files/footer.php'; ?>
 </div>
 </body>

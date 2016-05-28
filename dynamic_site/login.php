@@ -38,21 +38,25 @@
 
 
 <div id="wrapper">
+
     <?php include 'common_files/header.php';
 
     if ($error) {
         echo "<div id='error_message'>There where errors in your username or password<br>Please try again</div>";
     }
-    ?>
 
-    <form method="post" action="<?php echo $verify_user; ?>">
-        Email Address:<input type="text" name="email"><br>
-        Password:<input type="password" name="password"><br>
-        <button value="Login" name="form_type" style="background-color:red;">Login</button>
+    ?>
+<div class = "content">
+
+    <form class = "login_form" method="post" action="<?php echo $verify_user; ?>">
+        <span class = "tag">Email Address:</span><input type="text" name="email"><br>
+        <span class = "tag">Password:</span><input type="password" name="password"><br>
+        <button value="Login" name="form_type">Login</button>
         <br>
         Don't Have an account?
         <a href="<?php echo $sign_up ?>">Sign up now</a>
 
+</div>
         <?php include 'common_files/footer.php'; ?>
 </div>
 </body>
