@@ -46,7 +46,7 @@ $wifiLng = $received_data->{'Longitude'};
     echo "</div>";
     ?>
 
-    <div id="location_map" style="width: 500px; height: 400px;"></div>
+    <div id="location_map"  class = "map"></div>
 
 
     <div id="reviews">

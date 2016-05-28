@@ -1,3 +1,7 @@
+<?php 
+	
+	$results = false;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,12 +33,12 @@
     #Links for Style Sheets and scripts to include
     $scripts = array("http://maps.google.com/maps/api/js", "js/maps.js");
     $css = array("css/style.css");
-    //"js/suggestion.js",
 
-    foreach ($scripts as $script) {              #Link all Script Files
+	
+    foreach ($scripts as $script) {#Link all Script Files
         echo "<script src='" . $script . "'></script>\n";
     }
-    foreach ($css as $script) {                  #Link All CSS Files
+    foreach ($css as $script) {#Link All CSS Files
         echo "<link href='" . $script . "' rel='stylesheet'>\n";
     }
 
@@ -60,26 +64,7 @@
         $rating_min = $_GET['value'];
     }
 
-
-    function find_index_in_order($input_array, $item)
-    {
-        if (sizeof($input_array) == 0) {
-            return 0;
-        }
-
-        $index = 0;
-        for ($x = 0; $x < sizeof($input_array); $x++) {
-            $index_distance = $input_array[$x]->{'distance'};
-            if ($index_distance < $item) {
-                $index++;
-            } else {
-                break;
-            }
-        }
-        return $index;
-    }
-
-
+	
     ?>
 </head>
 <body>
@@ -88,7 +73,13 @@
 <div id="wrapper">
     <?php include 'common_files/header.php'; ?>
 
+    <div id="content">
     <div id="results">
+	<?php 
+	$results = false;
+	if ($results){
+		
+	?>
         <table id = "result_table">
             <tr>
                 <th>Hotspot Name</th>
@@ -150,16 +141,27 @@
             }
             ?>
         </table>
+	<?php }
+	else {
+		echo"Ya Stuffed it";
+	}
+	?>
     </div>
 
-
-    <div id="results_map"></div>
+<?php
+$results = true;
+ if ($results){
+	echo "WE got em";
+}
+?>
+    <div id="results_map" class = "map"></div>
 
 
     <!--Some Inline Scripting to allow php to add to the array - PHP gets rendered before Javascript, therefore it is possible to write javascript arrays with it-->
     <script>
         var hotspot_locations = []
         <?php
+
         foreach ($recieved_data as $each_loc) {
             $lon = ($each_loc->Longitude);
             $lat = ($each_loc->Latitude);
@@ -177,11 +179,14 @@
 	  ";
             }
         }
-        ?>
+
+		?>
         display_map(hotspot_locations, "results_map"); //Call the Display map command with the item locations, and the map ID
     </script>
 
-    <?php include 'common_files/footer.php'; ?>
+    <?php 
+echo "WHYYY</div>";
+	include 'common_files/footer.php'; ?>
 </div>
 </body>
 </html>

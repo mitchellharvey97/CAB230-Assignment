@@ -83,3 +83,23 @@ function find_distance($lat1, $lon1, $lat2, $lon2)
     $km = $dist * 60 * 1.1515 * 1.609344;
     return round($km, 2, PHP_ROUND_HALF_UP);;
 }
+
+
+
+    function find_index_in_order($input_array, $item)
+    {
+        if (sizeof($input_array) == 0) {
+            return 0;
+        }
+
+        $index = 0;
+        for ($x = 0; $x < sizeof($input_array); $x++) {
+            $index_distance = $input_array[$x]->{'distance'};
+            if ($index_distance < $item) {
+                $index++;
+            } else {
+                break;
+            }
+        }
+        return $index;
+    }

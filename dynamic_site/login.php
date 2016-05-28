@@ -53,9 +53,8 @@
         <span class = "tag">Password:</span><input type="password" name="password"><br>
         <button value="Login" name="form_type">Login</button>
         <br>
-        Don't Have an account?
-        <a href="<?php echo $sign_up ?>">Sign up now</a>
-
+       <p> Don't Have an account? <a href="<?php echo $sign_up ?>">Sign up now</a></p>
+</form>
 </div>
         <?php include 'common_files/footer.php'; ?>
 </div>

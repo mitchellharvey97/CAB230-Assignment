@@ -107,7 +107,7 @@ a {
 
 #home_page_forms {
   text-align: center;
-  width: 30%;
+  width: 50%;
   margin: auto;
   padding-bottom: 20px; }
   #home_page_forms form {
@@ -123,7 +123,7 @@ a {
     height: 30px;
     width: 100%; }
   #home_page_forms input[type='button'] {
-    width: 50%;
+    width: 60%;
     background-color: rgba(0, 170, 0, 0.7);
     border-style: solid;
     border-color: #000;
@@ -144,7 +144,11 @@ a {
   width: 80%;
   margin: auto;
   text-align: center;
-  display: block; }
+  display: block;
+  height: 400px; }
+
+.map, .map a {
+  color: black; }
 
 /*Results page */
 #results_map {
@@ -249,8 +253,7 @@ tr:hover {
 
 /*Login page */
 .login_form {
-  background-color: green;
-  width: 30%;
+  width: 60%;
   margin: auto; }
   .login_form .tag {
     width: 30%;
@@ -261,6 +264,53 @@ tr:hover {
   .login_form input[type='text'], .login_form input[type='password'] {
     width: 69%;
     float: right; }
+  .login_form button {
+    background-color: red;
+    width: 80%;
+    margin-left: 10%;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    background-color: #00aa00; }
+  .login_form p {
+    text-align: center;
+    display: block; }
+    .login_form p a {
+      text-decoration: underline; }
+
+#user_register {
+  width: 75%;
+  margin: auto; }
+  #user_register h1 {
+    text-align: center; }
+  #user_register p, #user_register input, #user_register select {
+    height: 40px;
+    margin-top: 0px;
+    margin-bottom: 10px; }
+  #user_register p {
+    display: block;
+    bsackground-color: green;
+    width: 50%;
+    float: left; }
+  #user_register input, #user_register select {
+    bacskground-color: yellow;
+    float: left;
+    width: 45%; }
+  #user_register input[type='submit'] {
+    background-color: red;
+    width: 80%;
+    margin-left: 10%;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    background-color: #00aa00; }
+  #user_register input ::after, #user_register select ::after {
+    clear: both; }
+
+#user_register ::after {
+  clear: both; }
 
 #footer {
   color: white;
@@ -290,6 +340,12 @@ tr:hover {
 .clearfix {
   clear: both; }
 
+/*
+@media only screen and (max-width: 650px) {
+
+
+
+}*/
 @media only screen and (min-width: 650px) {
   #menu a {
     font-size: 1em; } }

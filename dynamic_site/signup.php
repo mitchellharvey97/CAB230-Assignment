@@ -46,33 +46,37 @@
 	</ul></div>";
     }
     ?>
+	<div class = "content">
 
-    Register for My WiFind<br>
 
-    <form method="post" action="<?php echo $verify_user; ?>">
-        First Name:
-        <input type="text" id="f_name" name="f_name" required value="PersonFirst"><br>
-        Last Name:
-        <input type="text" name="l_name" required value="PersonLast"><br>
-        Age:
-        <input type="number" min="1" max="99" name="age" require value="21"><br>
-        Gender:
-        <select id='gender' require name="gender">
+    <form id = "user_register" method="post" action="<?php echo $verify_user; ?>">
+    <h1>Register for My WiFind</h1>
+        <p>First Name:</p><input type="text" pattern="[A-Za-z]*" title = "Please only use a-z and A-Z" id="f_name" name="f_name" required placeholder="First Name"><br>
+       
+	   <p>Last Name:</p><input type="text" pattern="[A-Za-z]*" title = "Please only use a-z and A-Z" name="l_name" required placeholder="Last Name"><br>
+       
+	   <p>Age:</p><input type="number" min="1" max="99" name="age" required placeholder="Age"><br>
+      
+	  <p>Gender:</p><select id='gender' required name="gender">
             <option value="m">Male</option>
             <option value="f">Female</option>
             <option value="o">Prefer not to say</option>
         </select><br>
-        How excited for free wifi are you?
-        Not very :(<input type="range" size="2" require name="excitment" min="1" max="10" value="5">Very :)!!! <br>
-        Email Address:
-        <input type="email" name="email" require value="mitch@me.com"><br>
-        Profile Color:
-        <input type="color" name="profile_color" require value="#ff0000"><br>
-        Password:
-        <input type="password" name="password" require><br>
-        Repeat Password:
-        <input type="submit" name="form_type" value="Register">
-
+     
+	   <p>How excited for free wifi are you?</p>
+	   <input type="range" size="2" required name="excitment" min="1" max="10" value="5"><br>
+       
+       
+	   <p>Profile Color:</p><input type="color" name="profile_color" pattern = "[A-Fa-f0-9]{6}*" required value="#00aa00"><br>
+        
+	   <p>Email Address:</p><input type="email" name="email" required placeholder="someone@example.com"><br>
+	
+	<p>Password:</p><input type="password" name="password" required><br>
+        
+		<input type="submit" name="form_type" value="Register">
+		<div class = "clearfix"></div>
+</form>
+</div>
         <?php include 'common_files/footer.php'; ?>
 </div>
 </body>
