@@ -73,23 +73,6 @@ if ($register) {
     }
 
 
-} else {
-    //	global $user;
-    $request_data['request'] = "user_verify";
-    $request_data['email'] = $user['email'];
-    $request_data['password'] = $user['password'];
-
-    print_r($request_data);
-
-    if (make_sql_request($request_data)) {
-        //echo "Success";
-		login_success("login");
-    } else {
-        //echo "fail";
-      //  echo "<script> window.location.assign('$login?q=fail'); </script>";
-    };
-
-
 }
 
 

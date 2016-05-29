@@ -38,20 +38,23 @@ $wifiLng = $received_data->{'Longitude'};
 <body>
 <div id="wrapper">
     <?php include 'common_files/header.php';
-		echo'<div class = "content">';
+		echo'<div class = "content" itemscope itemtype="http://schema.org/Place">';
 	
     echo "<div class = 'location_details'>";
-    echo "<h1>" . $wifiName . "</h1>";
+    echo "<h1 itemprop='name'>" . $wifiName . "</h1>";
     echo "<h2>" . $wifiAddress . " , " . $wifiSuburb . "</h2>";
+	 echo "<div itemprop='geo' itemscope itemtype=http://schema.org/GeoCoordinates>";
+	echo "<meta itemprop='latitude' content='$wifiLat' />
+			<meta itemprop='longitude' content='$wifiLng' /></div>";			
     echo "</div>";
-    ?>
 
+
+    ?>
     <div id="location_map"  class = "map"></div>
 
 
     <div id="reviews">
         <h1>Reviews</h1>
-
         <?php
         $request['request'] = "rating_all";
         $request['place_name'] = $place_name;
@@ -69,12 +72,23 @@ $wifiLng = $received_data->{'Longitude'};
 		
 	}
 	else{
+		$request['request'] = "rating_average";
+		$request['place_name'] = $wifiName;
+		$avg_rating = make_sql_request($request);
+		?>
+		<div itemprop="aggregateRating"
+    itemscope itemtype="http://schema.org/AggregateRating">
+   Rated <span itemprop="ratingValue"><?php echo $avg_rating?></span>/5
+   based on <span itemprop="reviewCount"><?php echo sizeof($rating_data)?></span> customer reviews
+  </div>
+  
+  <?php
 
         foreach ($rating_data as $rating){
         $request['request'] = 'user_rating_info';
         $request['email'] = $rating->{'user_email'};
         $user_info = make_sql_request($request);
-        echo "<br><div class ='review'>";
+        echo "<br><div class ='review'  itemprop='review' itemscope itemtype='http://schema.org/Review'>";
 
         $person_name = $user_info->{'f_name'} . " " . $user_info->{'l_name'};
         $person_email = $rating->{'user_email'};
@@ -89,7 +103,7 @@ $wifiLng = $received_data->{'Longitude'};
         ?>
 
         <div class='left'>
-            <div id='profile_pict'>
+            <div class='profile_pict'>
 
                 <?php
                 user_profile($person_color, $person_gender); ?>
@@ -97,23 +111,23 @@ $wifiLng = $received_data->{'Longitude'};
 
 
             <div class="person_info">
-
-                <?php
-                echo "$person_name <br>
+<?php  echo "<span itemprop='author' itemscope itemtype='http://schema.org/Person'><span itemprop='name'>$person_name </span></span><br>
 		Member for $member_for days<br>
-		Number of reviews: $number_reviews";
-                ?>
+		Number of reviews: $number_reviews
             </div>
         </div>
 
-        <div class="right">
-            <?php echo "<h2>$review_title</h2>
-	Rating: $review_rating, Posted $review_age days ago
-	<p>$review_body</p>"; ?>
-        </div>
-        <div class="clearfix"></div>
-    </div> <!--End of review repeat-->
-<?php
+        <div class='right'>
+            <h2 itemprop='name'>$review_title</h2>
+			<span itemprop='reviewRating' itemscope itemtype='http://schema.org/Rating'>
+						Rating: <span itemprop='ratingValue'>$review_rating</span>
+						 <meta itemprop='worstRating' content = '1'>
+						 <meta itemprop='bestRating' content = '5'>
+				</span>, Posted $review_age days ago
+	<p itemprop='reviewBody'>$review_body</p>
+        </div>";
+echo "        <div class='clearfix'> </div>";
+echo"    </div> <!--End of review repeat-->";
 
 }
 	}
@@ -176,6 +190,7 @@ $wifiLng = $received_data->{'Longitude'};
         <?php  echo "hotspot_locations.push(['<h4>$wifiName</h4><br>',$wifiLat, $wifiLng]);";?>
         display_map(hotspot_locations, "location_map");
     </script>
+</div>
 </div>
     <?php include 'common_files/footer.php'; ?>
 </div>

@@ -1,21 +1,13 @@
-<?php 
-	
-	$results = false;
-?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>MyWiFind - Search Results</title>
-
     <?php
     require("common_files/check_session.php");
-	
-    require("common_files/pages.php");
+	require("common_files/pages.php");
     require("common_files/database_connect.php");
     require("common_files/helper_functions.php");
-
     $search_type = $_GET['searchtype'];
-
     if ($search_type != "geo_location") {
         $search_value = $_GET['value'];
         $request['search_value'] = $search_value;
@@ -25,6 +17,13 @@
     $request['search_type'] = $search_type;
     $recieved_data = make_sql_request($request);
 
+	if (sizeof($recieved_data) <1){
+		$search_results = false;
+	}
+	else{
+		$search_results = true;
+	}
+	
     //Clean the data
     foreach ($recieved_data as $place) {
         $place->{'Suburb'} = strip_postcode($place->{'Suburb'});
@@ -51,6 +50,15 @@
 
         $user_lat = $_GET['lat'];
         $user_lon = $_GET['lon'];
+		
+		            function calculate_distance($place_lat, $place_lon)
+            {
+                global $user_lat;
+                global $user_lon;
+                return (find_distance($user_lat, $user_lon, $place_lat, $place_lon));
+            }
+		
+		
         foreach ($recieved_data as $hotspot_loc) {
             $distance_from_user = calculate_distance($hotspot_loc->{'Latitude'}, $hotspot_loc->{'Longitude'});
             $hotspot_loc->{'distance'} = $distance_from_user;
@@ -76,8 +84,8 @@
     <div id="content">
     <div id="results">
 	<?php 
-	$results = false;
-	if ($results){
+
+	if ($search_results){
 		
 	?>
         <table id = "result_table">
@@ -86,23 +94,12 @@
                 <th>Address</th>
                 <th>Suburb</th>
                 <th>Average Rating</th>
-
                 <?php if ($geo_location) { //If it is a geolocation search then add the distance field to the array
                     echo "<th>Distance From User</th>";
-                } ?>
-                <th></th>
-				
+                } ?><th></th>
             </tr>
 
             <?php
-            function calculate_distance($place_lat, $place_lon)
-            {
-                global $user_lat;
-                global $user_lon;
-                return (find_distance($user_lat, $user_lon, $place_lat, $place_lon));
-            }
-
-
             $totalSearch = count($recieved_data);
             for ($i = 0; $i < $totalSearch; $i++) {
 
@@ -125,12 +122,14 @@
                         $wifi_rating = "No Ratings yet";
                     }
 
-                    echo "<tr>";
-                    echo "<td>$wifi_name</td>";
-                    echo "<td>$wifi_address</td>";
-                    echo "<td>$wifi_suburb</td>";
-                    echo "<td>$wifi_rating</td>";
-                    echo "<td><div class ='view_place'><a href='$item?q=$wifi_name'>View Details</a></div></td>";
+				echo "<tr>
+                <td>$wifi_name</td>
+                <td>$wifi_address</td>
+                <td>$wifi_suburb</td>
+                <td>$wifi_rating</td>
+                <td><div class ='view_place'><a href='$item?q=" . urlencode ($wifi_name) . "'>View Details</a></div></td>
+					
+				";
                 }
 
                 if ($geo_location) {
@@ -143,23 +142,21 @@
         </table>
 	<?php }
 	else {
-		echo"Ya Stuffed it";
+		echo"<div id = 'no_results'>Sorry but your search provided no results.<br>
+		<a href = '$home'>Go Back</a> and Search for something else?</div>";
 	}
 	?>
     </div>
 
 <?php
-$results = true;
- if ($results){
-	echo "WE got em";
-}
+ if ($search_results){
 ?>
     <div id="results_map" class = "map"></div>
 
 
     <!--Some Inline Scripting to allow php to add to the array - PHP gets rendered before Javascript, therefore it is possible to write javascript arrays with it-->
     <script>
-        var hotspot_locations = []
+	var hotspot_locations = []
         <?php
 
         foreach ($recieved_data as $each_loc) {
@@ -175,17 +172,18 @@ $results = true;
 
             if (!$rating || ($rating && $wifi_rating >= $rating_min)) {
 
-                echo "hotspot_locations.push([\"<h4>$name</h4><br><a href =\\\"$result_page\\\"> View Hotspot</a>\",$lat, $lon])
+echo "hotspot_locations.push([\"<h4>$name</h4><br><a href =\\\"$result_page\\\"> View Hotspot</a>\",$lat, $lon])
 	  ";
             }
         }
 
 		?>
-        display_map(hotspot_locations, "results_map"); //Call the Display map command with the item locations, and the map ID
+display_map(hotspot_locations, "results_map"); //Call the Display map command with the item locations, and the map ID
     </script>
 
+</div>
     <?php 
-echo "WHYYY</div>";
+	}
 	include 'common_files/footer.php'; ?>
 </div>
 </body>

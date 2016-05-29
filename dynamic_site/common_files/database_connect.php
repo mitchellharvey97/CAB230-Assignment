@@ -46,7 +46,6 @@ function make_sql_request($data, $passed_source = "direct")
 		return $results;	
     }
 
-
 	else if ($requested == "all_suburb") {
 		$prepared = $database_connection->prepare("SELECT DISTINCT `Suburb` FROM $wifi_table ORDER BY `Suburb`");
 		$results = sql_query_prepared($prepared);	
@@ -106,14 +105,14 @@ function make_sql_request($data, $passed_source = "direct")
 
     } 
 	else if ($requested == "add_user") {
-  		$prepared = $database_connection->prepare("INSERT INTO `$database`.`$user_table` (`email`, `f_name`, `l_name`, `Age`, `Gender`, `Excitment`, `profile_color`, `date_added`,`password`) VALUES (:email, :f_name, :l_name, :age, :gender, :excitment, :profile_color, :date_added, :password)");
+  		$prepared = $database_connection->prepare("INSERT INTO `$database`.`$user_table` (`email`, `f_name`, `l_name`, `Age`, `Gender`, `Excitement`, `profile_color`, `date_added`,`password`) VALUES (:email, :f_name, :l_name, :age, :gender, :excitement, :profile_color, :date_added, :password)");
 		
 		$prepared->bindParam(':email', $data['user']['email']);
 		$prepared->bindParam(':f_name', $data['user']['f_name']);
 		$prepared->bindParam(':l_name', $data['user']['l_name']);
 		$prepared->bindParam(':age', $data['user']['age']);
 		$prepared->bindParam(':gender', $data['user']['gender']);
-		$prepared->bindParam(':excitment', $data['user']['excitment']);
+		$prepared->bindParam(':excitement', $data['user']['excitement']);
 		$prepared->bindParam(':profile_color', $data['user']['profile_color']);
 		$prepared->bindParam(':password', $data['user']['password']);		
 		$prepared->bindParam(':date_added', time());		
@@ -190,7 +189,7 @@ function make_sql_request($data, $passed_source = "direct")
 	
 	
 	else if ($requested == "user_rating_info"){
-		$prepared = $database_connection->prepare("SELECT f_name, l_name, profile_color, gender, date_added, age, excitment, COUNT(rating)AS review_count FROM `$database`.`$review_table`, `$database`.`$user_table` WHERE user_email = :email AND Members.email = Reviews.user_email");
+		$prepared = $database_connection->prepare("SELECT f_name, l_name, profile_color, gender, date_added, age, excitement, COUNT(rating)AS review_count FROM `$database`.`$review_table`, `$database`.`$user_table` WHERE user_email = :email AND Members.email = Reviews.user_email");
 		$prepared->bindParam(':email', $data['email']);		
 		$results = sql_query_prepared($prepared);
 		return $results[0];
@@ -248,7 +247,7 @@ else {
 } 
 }
 catch(Exception $e){
-//	print_r($e);
+	//print_r($e);
 	
 }
 }

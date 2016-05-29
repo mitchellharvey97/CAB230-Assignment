@@ -18,7 +18,6 @@ a {
   min-height: 100%;
   min-width: 650px;
   border-radius: 5px 5px 0px 0px;
-  bsackground-color: #000066;
   color: white; }
 
 .content {
@@ -78,7 +77,7 @@ a {
         font-weight: 500; }
 
 #error_message {
-  color: red;
+  color: black;
   font-style: italic;
   margin-bottom: 10px; }
 
@@ -162,6 +161,13 @@ a {
   text-align: center;
   border-radius: 10px; }
 
+#no_results {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px 10px 0 0;
+  padding: 10px; }
+  #no_results a {
+    text-decoration: underline; }
+
 #result_table {
   width: 100%;
   border-collapse: collapse;
@@ -211,11 +217,11 @@ tr:hover {
       background-color: #00aa00; }
   #reviews .review {
     background-color: grey; }
-  #reviews #profile_pict {
+  #reviews .profile_pict {
     width: 40%;
     float: left;
     margin-bottom: 10px; }
-    #reviews #profile_pict svg {
+    #reviews .profile_pict svg {
       border-radius: 50%;
       width: 100%; }
   #reviews .person_info {
@@ -230,6 +236,12 @@ tr:hover {
   #reviews .right {
     width: 70%;
     float: right; }
+  #reviews .reviews ::after {
+    content: "TEST";
+    background-color: red;
+    width: 100%;
+    display: block;
+    clear: both; }
 
 .location_details {
   width: 100%;
@@ -259,9 +271,9 @@ tr:hover {
     width: 30%;
     display: block;
     float: left; }
-  .login_form .tag, .login_form input[type='text'], .login_form input[type='password'] {
+  .login_form .tag, .login_form input[type='email'], .login_form input[type='password'] {
     margin-bottom: 10px; }
-  .login_form input[type='text'], .login_form input[type='password'] {
+  .login_form input[type='email'], .login_form input[type='password'] {
     width: 69%;
     float: right; }
   .login_form button {
@@ -290,11 +302,9 @@ tr:hover {
     margin-bottom: 10px; }
   #user_register p {
     display: block;
-    bsackground-color: green;
     width: 50%;
     float: left; }
   #user_register input, #user_register select {
-    bacskground-color: yellow;
     float: left;
     width: 45%; }
   #user_register input[type='submit'] {

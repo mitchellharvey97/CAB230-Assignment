@@ -17,8 +17,7 @@ require("pages.php");
 	$person = make_sql_request($request_data);
 	echo "<div class = 'profile'>";
 	user_profile($person->{'profile_color'}, $person->{'gender'});
-	 echo "<div class = 'clearfix'></div>
-	 </div>";
+	echo " </div>";
 	 }
 	?>
     <div id="menu">
@@ -35,9 +34,8 @@ require("pages.php");
                 ?></li>
             <li><a class ='left' href="<?php echo $home ?>">Home</a></li>
        
-	<div class = "clearfix"></div>
+	
 	   </ul>
     </div>
-	<div class = "clearfix"></div>
-    </div>
+	</div>
 </div>

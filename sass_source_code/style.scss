@@ -22,7 +22,6 @@ a {
   min-height: 100%;
   min-width: 650px;
   border-radius: 5px 5px 0px 0px;
-  bsackground-color: #000066;
   color: white;
 }
 
@@ -44,7 +43,6 @@ a {
   padding:10px;
   padding:10px 10%;
 
-  
   
  #titleblock {
   color: white;
@@ -74,6 +72,8 @@ a {
 	width:25%;
 	margin:auto;
 }
+
+
 
     svg {
       width: 100%;
@@ -113,7 +113,7 @@ a {
 
 
 #error_message {
-  color: red;
+  color: black;
   font-style: italic;
   margin-bottom: 10px;
 }
@@ -226,6 +226,14 @@ $dark_color:rgba(0,0,51,0.7);
 
 
 
+#no_results{
+	background-color:$fore_color;
+	border-radius:10px 10px 0 0;
+	padding:10px;
+	a{
+		text-decoration:underline;
+	}
+}
 
 #result_table {
   width: 100%;
@@ -293,7 +301,7 @@ tr:hover {
     background-color: grey;
   }
 
-  #profile_pict {
+  .profile_pict {
     width: 40%;
     float: left;
     margin-bottom: 10px;
@@ -321,6 +329,14 @@ tr:hover {
     width: 70%;
     float: right;
   }
+  
+.reviews ::after{
+	content:"TEST";
+	background-color:red;
+	width:100%;
+	display:block;
+	clear:both;
+}
 }
 
 
@@ -364,12 +380,12 @@ tr:hover {
 		display:block;
 		float:left;
 	}
-	.tag, input[type='text'], input[type='password']{
+	.tag, input[type='email'], input[type='password']{
 	margin-bottom:10px;	
 		
 	}
 	
-	 input[type='text'], input[type='password'] {
+	 input[type='email'], input[type='password'] {
 		   width:69%;
 		   float:right;
 	   }
@@ -409,15 +425,12 @@ p, input, select{
 
 	p{
 		display:block;
-		bsackground-color:green;
 		width:50%;
 		float:left;
 	}
 	input, select{
-		bacskground-color:yellow;
 		float:left;
-		width:45%;
-		
+		width:45%;		
 	}
 	
 	input[type='submit']{
