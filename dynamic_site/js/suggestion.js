@@ -1,14 +1,10 @@
 var place_names;
 var parent;
 
-
-
-function initialize_suggestions(place_source, parent_id){
-	parent = document.getElementById(parent_id);
-	get_place_names(place_source)
+function initialize_suggestions(place_source, parent_id) {
+    parent = document.getElementById(parent_id);
+    get_place_names(place_source)
 }
-
-
 
 function get_place_names(place_source) {
     //The Function to retrieve place names from the specified file location
@@ -55,7 +51,6 @@ function user_input(search_bar) {
         matches = matches.splice(0, 4);
         return matches;
     }
-
 
     function cleanup_suggestions() {
         var curr_suggestions = document.getElementsByClassName('suggestion_holder')

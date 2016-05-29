@@ -47,7 +47,6 @@ function duplicate_entry($input, $key, $item, $index)
     return false;
 }
 
-
 //Sort an array with a specified max value (Used for locations within x km of person)
 function sort_array($unsorted, $max_value = null)
 {
@@ -59,7 +58,6 @@ function sort_array($unsorted, $max_value = null)
             $returned_value = insertArrayIndex($returned_value, $item, ($pos));
         }
     }
-
     return $returned_value;
 }
 
@@ -85,21 +83,19 @@ function find_distance($lat1, $lon1, $lat2, $lon2)
 }
 
 
-
-    function find_index_in_order($input_array, $item)
-    {
-        if (sizeof($input_array) == 0) {
-            return 0;
-        }
-
-        $index = 0;
-        for ($x = 0; $x < sizeof($input_array); $x++) {
-            $index_distance = $input_array[$x]->{'distance'};
-            if ($index_distance < $item) {
-                $index++;
-            } else {
-                break;
-            }
-        }
-        return $index;
+function find_index_in_order($input_array, $item)
+{
+    if (sizeof($input_array) == 0) {
+        return 0;
     }
+    $index = 0;
+    for ($x = 0; $x < sizeof($input_array); $x++) {
+        $index_distance = $input_array[$x]->{'distance'};
+        if ($index_distance < $item) {
+            $index++;
+        } else {
+            break;
+        }
+    }
+    return $index;
+}

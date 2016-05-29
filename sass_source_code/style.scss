@@ -1,15 +1,15 @@
 html, body {
   height: 100%;
-  min-width:1024px;
+  min-width: 1024px;
   margin: 5px;
   padding: 0px;
   background-image: url("../img/background.jpg");
-background-size:cover;
-background-attachment:fixed;
-font-family: "Arial", Helvetica, sans-serif;
-  }
-  
-  $fore_color: rgba(0, 0, 0, 0.5);
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Arial", Helvetica, sans-serif;
+}
+
+$fore_color: rgba(0, 0, 0, 0.5);
 
 a {
   text-decoration: none;
@@ -25,55 +25,49 @@ a {
   color: white;
 }
 
-
-.content{
-	margin-top:30px;
-	padding-top:20px;
-	background-color:$fore_color;	
-	border-radius:10px 10px 0 0 ;
+.content {
+  margin-top: 30px;
+  padding-top: 20px;
+  background-color: $fore_color;
+  border-radius: 10px 10px 0 0;
 }
-
-
 
 #header {
   border-radius: 20px 20px 5px 5px;
   margin-bottom: 5px;
   background-color: $fore_color;
   height: 150px;
-  padding:10px;
-  padding:10px 10%;
+  padding: 10px;
+  padding: 10px 10%;
 
-  
- #titleblock {
-  color: white;
-  font-size: 15pt;
-  height: 100%;
-  float: left;
-  text-align: center;
-  line-height: 500%;
-}
-  
+  #titleblock {
+    color: white;
+    font-size: 15pt;
+    height: 100%;
+    float: left;
+    text-align: center;
+    line-height: 500%;
+  }
+
   .logo {
     margin-top: 30px;
     margin-left: 30px;
     float: left;
     width: 100px;
     height: 100px;
-	#border{
-		    fill: rgba(0, 0, 0, 0);
-	}
+    #border {
+      fill: rgba(0, 0, 0, 0);
+    }
   }
-  
+
   #right {
     width: 25%;
     float: right;
 
-.profile{
-	width:25%;
-	margin:auto;
-}
-
-
+    .profile {
+      width: 25%;
+      margin: auto;
+    }
 
     svg {
       width: 100%;
@@ -84,25 +78,25 @@ a {
 
   #menu {
     width: 100%;
-	text-align:left;
-	
-	.left{
-		text-align:right;
-		float:left;
-		padding-right:5%;
-	}
-	
-	.right{
-	float:right;
-	padding-left:5%;	
-	}
+    text-align: left;
 
-    ul li {		
-		a{
-		width:45%;
-		font-weight: 500;
-		}
-		
+    .left {
+      text-align: right;
+      float: left;
+      padding-right: 5%;
+    }
+
+    .right {
+      float: right;
+      padding-left: 5%;
+    }
+
+    ul li {
+      a {
+        width: 45%;
+        font-weight: 500;
+      }
+
       display: block;
       vertical-align: bottom;
       list-style-type: none;
@@ -110,19 +104,16 @@ a {
   }
 }
 
-
-
 #error_message {
   color: black;
   font-style: italic;
   margin-bottom: 10px;
 }
 
-
-$search_bar_width:50%;
+$search_bar_width: 50%;
 $button_height: 30px;
-$button_color:rgba(0,170,0,0.7);
-$dark_color:rgba(0,0,51,0.7);
+$button_color: rgba(0, 170, 0, 0.7);
+$dark_color: rgba(0, 0, 51, 0.7);
 
 /*Home Page Specific*/
 .suggestion_holder {
@@ -131,71 +122,69 @@ $dark_color:rgba(0,0,51,0.7);
   top: -20px;
   position: relative;
   width: 100%;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 0 0 10px 10px;
-	padding-left:3px;
-	padding-top:3px;
-	display: block;
+  padding-left: 3px;
+  padding-top: 3px;
+  display: block;
   margin: auto;
   text-align: left;
-  color:#0cc;
+  color: #0cc;
 
   li {
     list-style-type: none;
-	padding:2px;
+    padding: 2px;
   }
-  
-    li:hover {
+
+  li:hover {
     list-style-type: none;
-	padding:2px;
-	color:#fff
+    padding: 2px;
+    color: #fff
   }
 }
 
-#home_page_forms{
+#home_page_forms {
   text-align: center;
   width: 50%;
-  margin:auto;
+  margin: auto;
   padding-bottom: 20px;
-  
-  form{
-  background-color:$fore_color;
-  padding:10px;
-  border-radius:10px;
+
+  form {
+    background-color: $fore_color;
+    padding: 10px;
+    border-radius: 10px;
   }
 
   input[type='text'] {
-	  color:#FFF;
-	text-align:center;
+    color: #FFF;
+    text-align: center;
     background-color: $fore_color;
-	border:none;
-	border-radius:20px;
+    border: none;
+    border-radius: 20px;
     height: $button_height;
     width: 100%;
   }
-  
-  input[type='button']{
-	  width:60%;
-	  background-color:$button_color;
-	  border-style:solid;
-	  border-color:#000;
-	  border-radius:10px;
-	  height:$button_height;
-	  margin-left:10px;
+
+  input[type='button'] {
+    width: 60%;
+    background-color: $button_color;
+    border: solid #000;
+    border-radius: 10px;
+    height: $button_height;
+    margin-left: 10px;
   }
-  
-  .left{
-	  width:80%;
-	  text-align:left;
-	  height:$button_height;
-	  float:left;
+
+  .left {
+    width: 80%;
+    text-align: left;
+    height: $button_height;
+    float: left;
   }
-  .right{
-	  height:$button_height;
-	  float:left;
-	  width:19%;
+  .right {
+    height: $button_height;
+    float: left;
+    width: 19%;
   }
-  
 }
 
 #location_map {
@@ -206,8 +195,8 @@ $dark_color:rgba(0,0,51,0.7);
   height: 400px;
 }
 
-.map, .map a{
-	color:black;
+.map, .map a {
+  color: black;
 }
 
 /*Results page */
@@ -218,29 +207,26 @@ $dark_color:rgba(0,0,51,0.7);
   height: 400px;
 }
 
-.view_place{
-	background-color:$button_color;
-	text-align:center;
-	border-radius:10px;
+.view_place {
+  background-color: $button_color;
+  text-align: center;
+  border-radius: 10px;
 }
 
-
-
-#no_results{
-	background-color:$fore_color;
-	border-radius:10px 10px 0 0;
-	padding:10px;
-	a{
-		text-decoration:underline;
-	}
+#no_results {
+  background-color: $fore_color;
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
+  a {
+    text-decoration: underline;
+  }
 }
 
 #result_table {
   width: 100%;
   border-collapse: collapse;
-  background-color:$fore_color;
+  background-color: $fore_color;
 }
-
 
 th {
   height: 40px;
@@ -259,44 +245,43 @@ th, td {
 }
 
 tr:hover {
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
-
 
 /*Item Specific Page */
 #reviews {
   width: 80%;
   margin: auto;
   text-align: center;
-  background-color: rgba(0,170,0,0.7);
-  border-radius:10px 10px 0 0;
+  background-color: rgba(0, 170, 0, 0.7);
+  border-radius: 10px 10px 0 0;
 
-  #add_review{
-  padding-bottom:20px;
-  border-radius:10px 10px 0 0;
-	  background-color:rgba(0,0,0,0.5);
-	  width:30%;
-	  margin:auto;
-	   input[type='text'], textarea {
-		   background-color:rgba(0,0,0,0.5);
-		   color:white;
-		   width:80%;
-	   }
-	   input[type='range'] {
-		   width:80%;
-	   }
-	   
-	   button{
-		   background-color:red;
-		   width:80%;
-		   padding-top:10px;
-		   padding-bottom:10px;
-		   border-radius:10px;
-		   background-color:rgba(0,170,0,1);
-		   
-	   }
+  #add_review {
+    padding-bottom: 20px;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 30%;
+    margin: auto;
+    input[type='text'], textarea {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      width: 80%;
+    }
+    input[type='range'] {
+      width: 80%;
+    }
+
+    button {
+      background-color: red;
+      width: 80%;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-radius: 10px;
+      background-color: rgba(0, 170, 0, 1);
+
+    }
   }
-   
+
   .review {
     background-color: grey;
   }
@@ -329,23 +314,20 @@ tr:hover {
     width: 70%;
     float: right;
   }
-  
-.reviews ::after{
-	content:"TEST";
-	background-color:red;
-	width:100%;
-	display:block;
-	clear:both;
-}
-}
 
-
-.location_details{
-	width:100%;
-	text-align:center;
+  .reviews ::after {
+    content: "TEST";
+    background-color: red;
+    width: 100%;
+    display: block;
+    clear: both;
+  }
 }
 
-
+.location_details {
+  width: 100%;
+  text-align: center;
+}
 
 #location_name {
   margin-top: 15px;
@@ -366,107 +348,95 @@ tr:hover {
   font-size: 2em;
 }
 
-
-
-
 /*Login page */
 
-.login_form{
-	width:60%;
-	margin:auto;
-	
-	.tag{
-		width:30%;
-		display:block;
-		float:left;
-	}
-	.tag, input[type='email'], input[type='password']{
-	margin-bottom:10px;	
-		
-	}
-	
-	 input[type='email'], input[type='password'] {
-		   width:69%;
-		   float:right;
-	   }
-	button{
-		   background-color:red;
-		   width:80%;
-		   margin-left:10%;
-		   font-weight:bold;
-		   padding-top:10px;
-		   padding-bottom:10px;
-		   border-radius:10px;
-		   background-color:rgba(0,170,0,1);
-	   }
-	   p{
-		   text-align:center;
-		   display:block;
-		   a{
-			   text-decoration:underline;
-		   }
-		   }
-	
-	
+.login_form {
+  width: 60%;
+  margin: auto;
+
+  .tag {
+    width: 30%;
+    display: block;
+    float: left;
+  }
+  .tag, input[type='email'], input[type='password'] {
+    margin-bottom: 10px;
+
+  }
+
+  input[type='email'], input[type='password'] {
+    width: 69%;
+    float: right;
+  }
+  button {
+    background-color: red;
+    width: 80%;
+    margin-left: 10%;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 170, 0, 1);
+  }
+  p {
+    text-align: center;
+    display: block;
+    a {
+      text-decoration: underline;
+    }
+  }
+
 }
 
+#user_register {
+  h1 {
+    text-align: center;
+  }
+  width: 75%;
+  margin: auto;
+  p, input, select {
+    height: 40px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
 
-#user_register{
-	h1{
-		text-align:center;
-	}
-width:75%;
-margin:auto;
-p, input, select{
-	height:40px;
-	margin-top:0px;
-	margin-bottom:10px;
+  p {
+    display: block;
+    width: 50%;
+    float: left;
+  }
+  input, select {
+    float: left;
+    width: 45%;
+  }
+
+  input[type='submit'] {
+    background-color: red;
+    width: 80%;
+    margin-left: 10%;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 170, 0, 1);
+  }
+
+  input ::after, select ::after {
+    clear: both;
+  }
+
 }
 
-	p{
-		display:block;
-		width:50%;
-		float:left;
-	}
-	input, select{
-		float:left;
-		width:45%;		
-	}
-	
-	input[type='submit']{
-		   background-color:red;
-		   width:80%;
-		   margin-left:10%;
-		   font-weight:bold;
-		   padding-top:10px;
-		   padding-bottom:10px;
-		   border-radius:10px;
-		   background-color:rgba(0,170,0,1);
-	}
-	
-	input ::after, select ::after{
-		clear:both;
-	}
-	
+#user_register ::after {
+  clear: both;
 }
-
-
-#user_register ::after{
-	clear:both;
-}
-
-
-
-
-
-
 
 #footer {
   color: white;
   font-size: 17.5pt;
   font-style: oblique;
   height: 45px;
-  border-radius:(0 0 10px 10px);
+  border-radius: (0 0 10px 10px);
   background-color: $dark_color;
   text-align: center;
   padding: 10px;
@@ -496,6 +466,7 @@ p, input, select{
 .clearfix {
   clear: both;
 }
+
 /*
 @media only screen and (max-width: 650px) {
 
