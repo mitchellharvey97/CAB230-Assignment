@@ -56,6 +56,23 @@ $wifiLng = $received_data->{'Longitude'};
     <div id="reviews">
         <h1>Reviews</h1>
         <?php
+							//Methods to process the reviews
+					
+					if (isset($_POST['form_type'])){ //Check if it is set first - avoids the painfull error messages when first loading
+						if ($_POST['form_type'] == "review_submit"){
+					$review['request'] = "add_review";
+					$review['title'] = $_POST['title'];
+					$review['body'] = $_POST['body'];
+					$review['rating'] = $_POST['rating'];
+					$review['userid'] = $_POST['userid'];
+					$review['place'] = $_POST['place'];
+						make_sql_request($review);
+						}
+					}
+		
+		
+		
+		
         $request['request'] = "rating_all";
         $request['place_name'] = $place_name;
         $rating_data = make_sql_request($request);
@@ -152,7 +169,7 @@ $wifiLng = $received_data->{'Longitude'};
                             echo "You can only post one review per location";
                         } else {
                             ?>
-                            <form id="add_review" method="post" action="../<?php echo $add_review; ?>"
+                            <form id="add_review" method="post"
                                   oninput="x.value=parseInt(rating.value)">
                                 <h2> Add Review</h2>
                                 Title:<br>
@@ -170,6 +187,7 @@ $wifiLng = $received_data->{'Longitude'};
 
 
                                 <input type="hidden" name="userid" value="<?php echo $user_email; ?>">
+                                <input type="hidden" name="form_type" value="review_submit">
                                 <button value="<?php echo $wifiName; ?>" name="place">Submit Review
                                 </button>
                             </form>

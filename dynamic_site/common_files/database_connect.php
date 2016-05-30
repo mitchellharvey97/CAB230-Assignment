@@ -97,7 +97,7 @@ function make_sql_request($data, $passed_source = "direct")
         }
 
     } else if ($requested == "add_user") {
-        $prepared = $database_connection->prepare("INSERT INTO `$database`.`$user_table` (`email`, `f_name`, `l_name`, `Age`, `Gender`, `Excitement`, `profile_color`, `date_added`,`password`) VALUES (:email, :f_name, :l_name, :age, :gender, :excitement, :profile_color, :date_added, :password)");
+        $prepared = $database_connection->prepare("INSERT INTO `$database`.`$user_table` (`email`, `f_name`, `l_name`, `Age`, `Gender`, `Excitement`, `profile_color`, `date_added`,`password`, `some_date`) VALUES (:email, :f_name, :l_name, :age, :gender, :excitement, :profile_color, :date_added, :password, :some_date)");
 
         $prepared->bindParam(':email', $data['user']['email']);
         $prepared->bindParam(':f_name', $data['user']['f_name']);
@@ -107,6 +107,7 @@ function make_sql_request($data, $passed_source = "direct")
         $prepared->bindParam(':excitement', $data['user']['excitement']);
         $prepared->bindParam(':profile_color', $data['user']['profile_color']);
         $prepared->bindParam(':password', $data['user']['password']);
+        $prepared->bindParam(':some_date', $data['user']['some_date']);
         $prepared->bindParam(':date_added', time());
 
         $results = sql_query_prepared($prepared);
@@ -119,8 +120,8 @@ function make_sql_request($data, $passed_source = "direct")
 
         if (isset($data['password'])) { //We are logging in
             if (sizeof($result) > 0) { //Don't bother checking if there is no result
-                if (password_verify($data['password'], $result[0]->{'password'})) {
-                    return true;
+                if (hash_equals($result[0]->{'password'}, crypt($data['password'], $result[0]->{'password'}))){ 
+			return true;
                 } else {
                     return false;
                 }

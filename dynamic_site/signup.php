@@ -17,6 +17,7 @@
         $user['age'] = $_POST['age'];
         $user['gender'] = $_POST['gender'];
         $user['excitement'] = $_POST['excitement'];
+        $user['some_date'] = $_POST['some_date'];
         $user['profile_color'] = substr($_POST['profile_color'], 1); //Stripping # From front
 
         $error_fields = array();
@@ -34,7 +35,7 @@
             $request_data['user'] = $user;
             $request_data['request'] = "add_user";
             if (user_unique()) {
-                $request_data['user']['password'] = password_hash($request_data['user']['password'], PASSWORD_DEFAULT);
+                $request_data['user']['password'] = crypt($request_data['user']['password']);
                 make_sql_request($request_data);
                 //if all is good, go to the home page
                 login_success("signup");
@@ -99,6 +100,40 @@
                 return "Please provide a valid email";
             }
         }
+
+        if ($key == "some_date") {
+			$date_regex = "/^[0-9]{1,2}\/[0-9][012]{0,1}\/[12][0-9]{3}/i";
+            $matches = null;
+            preg_match($date_regex, $value, $matches);
+		
+
+		$return_string = "Please provide a valid date";
+		
+		$date = explode("/", $value);
+		$date_error = false;
+		$dd = $date[0];
+		$mm = $date[1];
+		$yyyy = $date[2];
+		
+		if ($dd <= 0 || $mm <=0  || $mm > 12 ||$yyyy <=0){
+			return $return_string;
+		}
+		else{
+			$max_days = cal_days_in_month(CAL_GREGORIAN, $mm, $yyyy);
+			if ($dd > $max_days){
+			return $return_string;				
+			}
+		}
+		
+            if (empty($matches) || $matches[0] != $value || $date_error) {
+				echo "Last?";
+                return $return_string;
+            }
+        }
+        
+		
+		
+		
 
         if ($key == "profile_color") {
             $re = "/[^a-f0-9]+/";
@@ -191,6 +226,9 @@
 
             <p>Age:</p><input type="number" min="1" max="99" name="age" required
                               placeholder="Age" <?php if ($error) echo "value ='" . $_POST['age'] . "'"; ?>><br>
+
+		  <p>Meaningful Date:</p><input type="date" name="some_date" required
+                              placeholder="dd/mm/yyyy" pattern="[0-9]{1,2}\/[0-9][012]{0,1}\/[12][0-9]{3}" <?php if ($error) echo "value ='" . $_POST['some_date'] . "'"; ?>><br>
 
             <p>Gender:</p><select id='gender' required name="gender">
                 <option <?php if ($error && $_POST['gender'] == "m") echo "selected='selected'" ?>value="m">Male

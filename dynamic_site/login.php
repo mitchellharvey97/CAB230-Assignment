@@ -25,7 +25,13 @@
             $request_data['email'] = $user['email'];
             $request_data['password'] = $user['password'];
             if (make_sql_request($request_data)) {
-                login_success("login");
+				ob_start();
+				session_start();
+				$_SESSION['valid'] = true;
+				$_SESSION['timeout'] = time();
+				$_SESSION['username'] = $user['email'];
+				header("Refresh: 0; URL = $home?q=login");
+		
             } else {
                 $error = true;
             };
@@ -46,21 +52,6 @@
         } else {
             return false;
         }
-    }
-
-
-    function login_success($msg)
-    {
-        global $user;
-        global $home;
-        ob_start();
-        session_start();
-        $_SESSION['valid'] = true;
-        $_SESSION['timeout'] = time();
-        $_SESSION['username'] = $user['email'];
-
-        header("Refresh: 0; URL = $home?q=$msg");
-        //    echo "<script> window.location.assign('$home?q=$msg'); </script>";
     }
 
     #Links for Style Sheets and scripts to include
