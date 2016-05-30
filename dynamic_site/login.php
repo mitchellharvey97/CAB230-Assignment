@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MyWiFind - Search Results</title>
+    <title>MyWiFind - Login</title>
 
 
     <?php

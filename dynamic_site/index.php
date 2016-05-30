@@ -8,7 +8,7 @@
 
     #Links for Style Sheets and scripts to include
     $script_folder = "js";
-    $scripts = array("$script_folder/suggestion.js", "$script_folder/form_validate.js", "$script_folder/home_page.js");
+    $scripts = array("$script_folder/suggestion.js", "$script_folder/home_page.js");
     $css = array("css/style.css");
     require("common_files/database_connect.php");
     require("common_files/helper_functions.php");
@@ -35,6 +35,8 @@
             echo "<div id ='login_success'>Log in successful</div>";
         } else if ($_GET['q'] == "signup") {
             echo "<div id ='login_success'>Registration successful</div>";
+        } else if ($_GET['q'] == "logout") {
+            echo "<div id ='login_success'>Log Out successful</div>";
         }
     }
 

@@ -11,7 +11,6 @@ var suburb_list;
 window.onload = function () {
     console.log("Script Loaded")
     add_page_events();
-    //parent = document.getElementById("main_search");
     initialize_suggestions("../common_files/database_api.php?q=all_names", "sugg_parent")
 }
 
@@ -22,18 +21,15 @@ function add_page_events() {
     location_search = document.getElementById("geo_location_search");
     suburb_search = document.getElementById("suburb_search");
     suburb_list = document.getElementById("suburb_list");
-
     search_bar = document.getElementById("search_value");
 
 //Add the events
     search_bar.onkeyup = function () {
         user_input(search_bar);
     };
-
     text_box_search.onclick = function () {
         search_button_clicked("text_search")
     };
-
     suburb_search.onclick = function () {
         search_button_clicked("suburb_search")
     };
@@ -47,7 +43,6 @@ function add_page_events() {
 
 function search_button_clicked(source) {
     //If the user clicks on a place name then they can skip the results page and go straight to the item page
-
     var search_page_prefix = "results.php?"
     var result_query = "";
     var search_type;
@@ -58,7 +53,6 @@ function search_button_clicked(source) {
         var search_value = search_bar.value;
         //if (radio_buttons[0].checked) {
         if (source == "suggestion") {
-
             //GO straight to results
             result_page = "item_page.php/?q=" + search_value
         }
@@ -66,59 +60,47 @@ function search_button_clicked(source) {
             //Searching By Name
             search_type = "name";
             result_query = search_value;
-            //  search_value = "Name - " + search_value;
         }
-        // }
-        //  else {
-        //			search_type = "suburb";
         result_query = search_value;
-        //      search_value = "Suburb - " + search_value;
-        //  }
-    }
-
+		}
     else if (source == "suburb_search") {
         search_type = "suburb";
         result_query = suburb_list.options[suburb_list.selectedIndex].value;
-
-
     }
-
-
     else if (source == "rating_search") {
         //Searching By Rating
         var search_value = document.querySelector('input[name = "enterRating"]:checked').value;
         search_type = "rating";
         result_query = search_value;
         search_value = "Rating Search: " + search_value;
-    }
+    }	
     else if (source == "geo_location_search") {
         search_type = null;
         search_value = "Geo Location Search";
+		//Run the function to retreve the user location and act upon it
         geo_loc();
     }
-
     if (result_page != null) {
         //if the user hasn't selected a drop down option
         document.location = result_page
     }
     else if (search_type != null) {
+		//If the user is searching via geo location this is null as we don't want to redirect
         document.location = "results.php?" + "searchtype=" + search_type + "&value=" + result_query;
     }
-//    alert(result_query);
-
 }
 
 function suggestion_clicked(suggestion) {
+	//if a suggestion was clicked, Load the page for it
     search_bar.value = suggestion.innerHTML;
     search_button_clicked("suggestion");
 }
 
-
 function geo_loc() {
     getLocation()
-
     function getLocation() {
         if (navigator.geolocation) {
+			//Check if the browser supports Geolocation and pass it onto the ShowPosition function if so
             navigator.geolocation.getCurrentPosition(showPosition);
 
         } else {
@@ -127,9 +109,8 @@ function geo_loc() {
     }
 
     function showPosition(position) {
-        console.log(position);
-        alert("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
-        document.location = "results.php?searchtype=geo_location&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&radius=30";
+    //Once the coordernates have been found, redirect
+		document.location = "results.php?searchtype=geo_location&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&radius=30";
     }
 }
 

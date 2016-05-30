@@ -55,9 +55,6 @@ a {
     float: left;
     width: 100px;
     height: 100px;
-    #border {
-      fill: rgba(0, 0, 0, 0);
-    }
   }
 
   #right {
@@ -119,7 +116,6 @@ $dark_color: rgba(0, 0, 51, 0.7);
 .suggestion_holder {
   z-index: 1;
   left: 0;
-  top: -20px;
   position: relative;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
@@ -447,21 +443,6 @@ tr:hover {
   width: 100%;
 }
 
-.logo #background {
-  fill: #FFF;
-}
-
-.logo #border {
-  fill: #000033;
-}
-
-.logo #circle {
-  fill: #000066;
-}
-
-.logo .line {
-  fill: #FFF;
-}
 
 .clearfix {
   clear: both;

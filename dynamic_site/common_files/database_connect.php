@@ -120,7 +120,21 @@ function make_sql_request($data, $passed_source = "direct")
 
         if (isset($data['password'])) { //We are logging in
             if (sizeof($result) > 0) { //Don't bother checking if there is no result
-                if (hash_equals($result[0]->{'password'}, crypt($data['password'], $result[0]->{'password'}))){ 
+
+			//Dodgy hack to make the site actually work with an outdated version of php
+			//Source from http://php.net/manual/en/function.hash-equals.php - a comment posted by user "Cedric Van Bockhaven"
+			//The function checks if the 'hash_equals' function exists (It does in local host) and if it does not (On FastApps Server) it defines it
+			//This is not an idential replica of the function provided by default on modern servers, but it will serve for the needs of the assignment
+			//A Hashed Password in this form stores the randomly generated salt in the first couple of places in the hash, so the function extracts it, and hashes the new password and compares it 
+			if(!function_exists('hash_equals')) {
+				function hash_equals($a, $b) {
+				$ret = strlen($a) ^ strlen($b);
+				$ret |= array_sum(unpack("C*", $a^$b));
+				return !$ret;
+					}
+				}				
+				
+				if (hash_equals($result[0]->{'password'}, crypt($data['password'], $result[0]->{'password'}))){ 
 			return true;
                 } else {
                     return false;

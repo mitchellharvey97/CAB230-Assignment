@@ -23,8 +23,8 @@ $wifiLng = $received_data->{'Longitude'};
 
     <?php
     #Links for Style Sheets and scripts to include
-    $scripts = array("../js/maps.js", "http://maps.google.com/maps/api/js?sensor=false");
-    $css = array("../css/style.css");
+    $scripts = array("js/maps.js", "http://maps.google.com/maps/api/js?sensor=false");
+    $css = array("css/style.css");
     foreach ($scripts as $script) {#Link all Script Files
         echo "<script src='" . $script . "'></script>\n";
     }

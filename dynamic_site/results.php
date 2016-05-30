@@ -100,6 +100,7 @@
                         $wifi_suburb = $received_data[$i]->{'Suburb'};
                         $wifi_lat = $received_data[$i]->{'Latitude'};
                         $wifi_lon = $received_data[$i]->{'Longitude'};
+						
                         $rating_request['request'] = "rating_average";
                         $rating_request['place_name'] = $wifi_name;
                         $wifi_rating = make_sql_request($rating_request);

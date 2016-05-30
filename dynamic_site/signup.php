@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MyWiFind - Search Results</title>
+    <title>MyWiFind - Sign Up</title>
     <?php
 
     require("common_files/check_session.php");
     require("common_files/database_connect.php");
     require("common_files/pages.php");
+    $submit_error = false;
+		
     if (isset($_POST['form_type'])) { //There is data getting posted to it
 
 //Collect all the data into an object
@@ -20,18 +22,29 @@
         $user['some_date'] = $_POST['some_date'];
         $user['profile_color'] = substr($_POST['profile_color'], 1); //Stripping # From front
 
+		//Destroying the inputs for the php checker - commented out to put site functionality back to normal
+		/*
+		$user['email'] = "Nope";
+        $user['password'] = $_POST['password'];
+        $user['f_name'] = "Destroyer101";
+        $user['l_name'] = "Alright";
+        $user['age'] = "666";
+        $user['gender'] = "d";
+        $user['excitement'] = $_POST['excitement'];
+        $user['some_date'] = "30/2/2016";
+        $user['profile_color'] = "FFFFFFF"; //Stripping # From front
+*/		
         $error_fields = array();
-        $error = false;
 
         foreach ($user as $key => $value) {
             if ($msg = error($key, $value)) {
                 $error_info['field'] = $key;
                 array_push($error_fields, $msg);
-                $error = true;
+                $submit_error = true;
             }
         }
 
-        if (!$error) {
+        if (!$submit_error) {
             $request_data['user'] = $user;
             $request_data['request'] = "add_user";
             if (user_unique()) {
@@ -40,7 +53,7 @@
                 //if all is good, go to the home page
                 login_success("signup");
             } else {
-                $error = true;
+                $submit_error = true;
                 array_push($error_fields, "Email address has already been used, please use a unique email");
             }
         }
@@ -205,7 +218,7 @@
 <body>
 <div id="wrapper">
     <?php include 'common_files/header.php';
-    if ($error) {
+    if ($submit_error) {
         echo "<div id='error_message'>There where errors in the form<ul>";
         foreach ($error_fields as $error_text) {
             echo "<li>$error_text</li>";
@@ -218,44 +231,44 @@
             <h1>Register for My WiFind</h1>
             <p>First Name:</p><input type="text" pattern="[A-Za-z]*" title="Please only use a-z and A-Z" id="f_name"
                                      name="f_name" required
-                                     placeholder="First Name" <?php if ($error) echo "value ='" . $_POST['f_name'] . "'"; ?>><br>
+                                     placeholder="First Name" <?php if ($submit_error) echo "value ='" . $_POST['f_name'] . "'"; ?>><br>
 
             <p>Last Name:</p><input type="text" pattern="[A-Za-z]*" title="Please only use a-z and A-Z" name="l_name"
                                     required
-                                    placeholder="Last Name"<?php if ($error) echo "value ='" . $_POST['l_name'] . "'"; ?>><br>
+                                    placeholder="Last Name"<?php if ($submit_error) echo "value ='" . $_POST['l_name'] . "'"; ?>><br>
 
             <p>Age:</p><input type="number" min="1" max="99" name="age" required
-                              placeholder="Age" <?php if ($error) echo "value ='" . $_POST['age'] . "'"; ?>><br>
+                              placeholder="Age" <?php if ($submit_error) echo "value ='" . $_POST['age'] . "'"; ?>><br>
 
 		  <p>Meaningful Date:</p><input type="date" name="some_date" required
-                              placeholder="dd/mm/yyyy" pattern="[0-9]{1,2}\/[0-9][012]{0,1}\/[12][0-9]{3}" <?php if ($error) echo "value ='" . $_POST['some_date'] . "'"; ?>><br>
+                              placeholder="dd/mm/yyyy" pattern="[0-9]{1,2}\/[0-9][012]{0,1}\/[12][0-9]{3}" <?php if ($submit_error) echo "value ='" . $_POST['some_date'] . "'"; ?>><br>
 
             <p>Gender:</p><select id='gender' required name="gender">
-                <option <?php if ($error && $_POST['gender'] == "m") echo "selected='selected'" ?>value="m">Male
+                <option <?php if ($submit_error && $_POST['gender'] == "m") echo "selected='selected'" ?>value="m">Male
                 </option>
-                <option <?php if ($error && $_POST['gender'] == "f") echo "selected='selected'" ?>value="f">Female
+                <option <?php if ($submit_error && $_POST['gender'] == "f") echo "selected='selected'" ?>value="f">Female
                 </option>
-                <option <?php if ($error && $_POST['gender'] == "o") echo "selected='selected'" ?>value="o">Prefer not
+                <option <?php if ($submit_error && $_POST['gender'] == "o") echo "selected='selected'" ?>value="o">Prefer not
                     to say
                 </option>
             </select><br>
 
             <p>How excited for free wifi are you?</p>
-            <input type="range" size="2" required name="excitement" min="1" max="10" value="<?php if ($error) {
+            <input type="range" size="2" required name="excitement" min="1" max="10" value="<?php if ($submit_error) {
                 echo $_POST['excitement'];
             } else {
                 echo "5";
             } ?>"><br>
 
             <p>Profile Color:</p><input type="color" name="profile_color" pattern="[A-Fa-f0-9]{6}*" required
-                                        value="<?php if ($error) {
+                                        value="<?php if ($submit_error) {
                                             echo $_POST['profile_color'];
                                         } else {
                                             echo "#00aa00";
                                         } ?>"><br>
 
             <p>Email Address:</p><input type="email" name="email" required
-                                        placeholder="someone@example.com"<?php if ($error) echo "value ='" . $_POST['email'] . "'"; ?>><br>
+                                        placeholder="someone@example.com"<?php if ($submit_error) echo "value ='" . $_POST['email'] . "'"; ?>><br>
 
             <p>Password:</p><input type="password" name="password" required><br>
 
