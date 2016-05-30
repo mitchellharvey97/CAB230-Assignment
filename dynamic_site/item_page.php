@@ -55,16 +55,44 @@ $wifiLng = $received_data->{'Longitude'};
     <div id="reviews">
         <h1>Reviews</h1>
         <?php
+		  $error_fields = array();
+		  $submit_error = false;
         //Methods to process the reviews
         if (isset($_POST['form_type'])) { //Check if it is set first - avoids the painful error messages when first loading
             if ($_POST['form_type'] == "review_submit") {
-                $review['request'] = "add_review";
+				
+		
+		function error($key, $value){
+			if ($key == "title" || $key || "body" || $key == "request" || $key == "userid" || $key == "place"){
+				        $re = "/[^a-zA-Z0-9 _@!,\.]/i";
+				if (illegal_characters($re, $value)) {
+					return true;
+					}
+			}
+			
+			return false;
+		}
+		
+				$review['request'] = "add_review";
                 $review['title'] = $_POST['title'];
                 $review['body'] = $_POST['body'];
                 $review['rating'] = $_POST['rating'];
                 $review['userid'] = $_POST['userid'];
                 $review['place'] = $_POST['place'];
-                make_sql_request($review);
+		
+		$review['title'] = "<script> Blah";
+		
+		    foreach ($review as $key => $value) {
+				if (error($key, $value)) {
+					$submit_error = true;
+					}
+				}
+				if (!$submit_error){
+					make_sql_request($review);
+				}
+				else{
+					echo "There is an error in your input <br>";
+				}
             }
         }
 
@@ -157,7 +185,7 @@ $wifiLng = $received_data->{'Longitude'};
                                   oninput="x.value=parseInt(rating.value)">
                                 <h2> Add Review</h2>
                                 Title:<br>
-                                <input type="text" required name="title" placeholder="Review Title"><br>
+                                <input type="text" title="Please use only alphanumeric characters" pattern="[A-Za-z0-9!, ]*" required name="title" placeholder="Review Title"><br>
 
                                 Review<br>
                                 <textarea required name="body" placeholder="Review"> </textarea><br>
