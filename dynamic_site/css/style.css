@@ -8,6 +8,7 @@ html, body {
   background-attachment: fixed;
   font-family: "Arial", Helvetica, sans-serif; }
 
+/*Default all links to white and no underline - toggle differently as required*/
 a {
   text-decoration: none;
   color: white; }
@@ -16,7 +17,6 @@ a {
   margin: auto;
   width: 98%;
   min-height: 100%;
-  min-width: 650px;
   border-radius: 5px 5px 0px 0px;
   color: white; }
 
@@ -121,6 +121,7 @@ a {
   #home_page_forms input[type='button'] {
     width: 60%;
     background-color: rgba(0, 170, 0, 0.7);
+    color: white;
     border: solid #000;
     border-radius: 10px;
     height: 30px;
@@ -287,6 +288,7 @@ tr:hover {
     .login_form p a {
       text-decoration: underline; }
 
+/*User Registration Page Specifics*/
 #user_register {
   width: 75%;
   margin: auto; }
@@ -328,23 +330,13 @@ tr:hover {
   text-align: center;
   padding: 10px; }
 
+/*Make the logo 100% of the container */
 .logo {
   width: 100%; }
 
+/*A cool hack to make fluid layouts have the correct height*/
 .clearfix {
-  clear: both; }
-
-/*
-@media only screen and (max-width: 650px) {
-
-
-
-}*/
-@media only screen and (min-width: 650px) {
-  #menu a {
-    font-size: 1em; } }
-@media only screen and (min-width: 950px) {
-  #menu a {
-    font-size: 1.5em; } }
+  clear: both;
+  display: block; }
 
 /*# sourceMappingURL=style.css.map */

@@ -19,17 +19,19 @@ if (isset($_POST['form_type'])) { //There is data getting posted to it
     $user['profile_color'] = substr($_POST['profile_color'], 1); //Stripping # From front
 
     //Destroying the inputs for the php checker - commented out to put site functionality back to normal
-    /*
-    $user['email'] = "Nope";
+    
+  /*  $user['email'] = "Nope";
     $user['password'] = $_POST['password'];
     $user['f_name'] = "Destroyer101";
     $user['l_name'] = "Alright";
     $user['age'] = "666";
-    $user['gender'] = "d";
+	echo $_POST['gender'];
+    $user['gender'] = "";
     $user['excitement'] = $_POST['excitement'];
     $user['some_date'] = "30/2/2016";
     $user['profile_color'] = "FFFFFFF"; //Stripping # From front
 */
+
     $error_fields = array();
 //For each object run it through the error checker
     foreach ($user as $key => $value) {
@@ -206,12 +208,13 @@ function error($key, $value)
             <p>Age:</p><input type="number" min="1" max="99" name="age" required
                               placeholder="Age" <?php if ($submit_error) echo "value ='" . $_POST['age'] . "'"; ?>><br>
 
-            <p>Meaningful Date:</p><input type="date" name="some_date" required
+            <p>Meaningful Date:</p><input type="text" name="some_date" required
                                           placeholder="dd/mm/yyyy"
                                           pattern="[0-9]{1,2}\/[0-9][012]{0,1}\/[12][0-9]{3}" <?php if ($submit_error) echo "value ='" . $_POST['some_date'] . "'"; ?>><br>
 
             <p>Gender:</p><select id='gender' required name="gender">
-                <option <?php if ($submit_error && $_POST['gender'] == "m") echo "selected='selected'" ?>value="m">Male
+                <option value="">Select your gender</option>
+				<option <?php if ($submit_error && $_POST['gender'] == "m") echo "selected='selected'" ?>value="m">Male
                 </option>
                 <option <?php if ($submit_error && $_POST['gender'] == "f") echo "selected='selected'" ?>value="f">
                     Female
@@ -223,14 +226,13 @@ function error($key, $value)
             </select><br>
 
             <p>How excited for free wifi are you?</p>
-            <input type="range" size="2" required name="excitement" min="1" max="10" value="<?php if ($submit_error) {
+            <input type="range" size="2" name="excitement" min="1" max="10" value="<?php if ($submit_error) {
                 echo $_POST['excitement'];
             } else {
                 echo "5";
             } ?>"><br>
 
-            <p>Profile Color:</p><input type="color" name="profile_color" pattern="[A-Fa-f0-9]{6}*" required
-                                        value="<?php if ($submit_error) {
+            <p>Profile Color:</p><input type="color" name="profile_color" value="<?php if ($submit_error) {
                                             echo $_POST['profile_color'];
                                         } else {
                                             echo "#00aa00";
@@ -249,5 +251,3 @@ function error($key, $value)
 </div>
 </body>
 </html>
-	
-	
