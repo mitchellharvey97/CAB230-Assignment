@@ -16,10 +16,10 @@
     $request['request'] = "all_suburb";
     $suburb_data = make_sql_request($request);
 
-    foreach ($scripts as $script) {              #Link all Script Files
+    foreach ($scripts as $script) { #Link all Script Files
         echo "<script src='" . $script . "'></script>\n";
     }
-    foreach ($css as $script) {                  #Link All CSS Files
+    foreach ($css as $script) { #Link All CSS Files
         echo "<link href='" . $script . "' rel='stylesheet'>\n";
     }
 
@@ -30,6 +30,7 @@
 <div id="wrapper">
     <?php include 'common_files/header.php';
 
+    //If the page has been displayed after login etc, there will be a value outlining what to display
     if (isset($_GET['q'])) {
         if ($_GET['q'] == "login") {
             echo "<div id ='login_success'>Log in successful</div>";
@@ -40,11 +41,11 @@
         }
     }
 
+    //Lazy way of saving the duplication of code
     function display_button($id)
     {
         echo "<input type='button' value='Search' id='$id'>";
     }
-
     ?>
     <div class="content">
         <div id="home_page_forms">
@@ -66,15 +67,14 @@
                     Or, Select a suburb from the list
                     <select id="suburb_list">
                         <?php
-
+                        //Clean Postcode Data (and also some other items) out of the Suburbs to make them look consistent
                         foreach ($suburb_data as $suburb) {
                             $suburb->{'Suburb'} = strip_postcode($suburb->{'Suburb'});
                         }
-
+                        //Remove the duplicates out of the data
                         $suburb_data = remove_duplicates($suburb_data, "Suburb");
 
                         foreach ($suburb_data as $suburb) {
-
                             $suburb_name = $suburb['Suburb'];
                             echo "<option value=\"$suburb_name\">$suburb_name</option>";
                         }

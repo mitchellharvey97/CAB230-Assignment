@@ -11,6 +11,7 @@ html, body {
 
 $fore_color: rgba(0, 0, 0, 0.5);
 
+/*Default all links to white and no underline - toggle differently as required*/
 a {
   text-decoration: none;
   color: white;
@@ -20,7 +21,6 @@ a {
   margin: auto;
   width: 98%;
   min-height: 100%;
-  min-width: 650px;
   border-radius: 5px 5px 0px 0px;
   color: white;
 }
@@ -345,7 +345,6 @@ tr:hover {
 }
 
 /*Login page */
-
 .login_form {
   width: 60%;
   margin: auto;
@@ -357,13 +356,13 @@ tr:hover {
   }
   .tag, input[type='email'], input[type='password'] {
     margin-bottom: 10px;
-
   }
 
   input[type='email'], input[type='password'] {
     width: 69%;
     float: right;
   }
+
   button {
     background-color: red;
     width: 80%;
@@ -384,6 +383,7 @@ tr:hover {
 
 }
 
+/*User Registration Page Specifics*/
 #user_register {
   h1 {
     text-align: center;
@@ -438,31 +438,13 @@ tr:hover {
   padding: 10px;
 }
 
-//Base Logo Colors
+/*Make the logo 100% of the container */
 .logo {
   width: 100%;
 }
 
-
+/*A cool hack to make fluid layouts have the correct height*/
 .clearfix {
   clear: both;
-}
-
-/*
-@media only screen and (max-width: 650px) {
-
-
-
-}*/
-
-@media only screen and (min-width: 650px) {
-  #menu a {
-    font-size: 1em;
-  }
-}
-
-@media only screen and (min-width: 950px) {
-  #menu a {
-    font-size: 1.5em;
-  }
+  display: block;
 }

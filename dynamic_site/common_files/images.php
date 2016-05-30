@@ -1,4 +1,7 @@
 <?php
+//A File containing the LOGO and Profile image
+//The Logo image is just a variable as it is always the same
+//Whereas the profile is a function that accepts gender and color parameters to modify the image - it also prints the value rather than returning it
 $logo = '<svg class="logo" viewBox="0 0 612 612">
 							<g>
 								<path id="border" fill="transparent" d="M0,612C0,407.997,0,204.001,0,0c204.002,0,407.997,0,612,0
@@ -33,11 +36,8 @@ $logo = '<svg class="logo" viewBox="0 0 612 612">
 							</g>
 						</svg>';
 
-
 function user_profile($profile_color = "D3D3D3", $gender = 'u')
 {
-    $line_color = "E81010";
-
     echo '<svg viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
 <g class="background_lines">
 		<path  d="M0.811,49.832c-0.438-0.019-0.46-0.273-0.338-0.482c0.163-0.279,0.395-0.525,0.626-0.756

@@ -2,11 +2,10 @@ function display_map(locations, map_id) {
     //console.log(locations);
 
     //Script adapted from http://chrisltd.com/blog/2013/08/google-map-random-color-pins/
-    //The script has been tweeked to enable the map locations to become clickable objects
+    //The script has been tweaked to enable the map locations to become clickable objects
 
     // Setup the different icons and shadows
     var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
-
     //Sourcing the icons from google's server
     var icons = [
         iconURLPrefix + 'red-dot.png',
@@ -27,10 +26,10 @@ function display_map(locations, map_id) {
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         streetViewControl: false,
-        panControl: false,
+        panControl: false
     });
 
-    var infowindow = new google.maps.InfoWindow({
+    var info_window = new google.maps.InfoWindow({
         maxWidth: 200
     });
 
@@ -38,7 +37,7 @@ function display_map(locations, map_id) {
 
     var iconCounter = 0;
 
-    // Add the markers and infowindows to the map
+    // Add the markers and info windows to the map
     for (var i = 0; i < locations.length; i++) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
@@ -51,20 +50,20 @@ function display_map(locations, map_id) {
 
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
             return function () {
-                infowindow.setContent(locations[i][0]);
-                infowindow.open(map, marker);
+                info_window.setContent(locations[i][0]);
+                info_window.open(map, marker);
             }
         })(marker, i));
 
         iconCounter++;
-        // We only have a limited number of possible icon colors, so we may have to restart the counter
+        // We only have a limited number of possible icon colors, so we may have to restart the counter if we have too many
+        //Could have used a mod function instead
         if (iconCounter >= iconsLength) {
             iconCounter = 0;
         }
     }
 
     function autoCenter() {
-
         //  Create a new viewpoint bound
         var bounds = new google.maps.LatLngBounds();
         //  Go through each...
@@ -72,7 +71,7 @@ function display_map(locations, map_id) {
             bounds.extend(markers[i].position);
         }
         //  Fit these bounds to the map
-        //If there is only one location, the auto center code bugs out and zooms too much so hardcode values
+        //If there is only one location, the auto center code bugs out and zooms too much so hard code zoom values
         if (locations.length == 1) {
             map.setCenter(bounds.getCenter());
             map.setZoom(14);
@@ -80,9 +79,6 @@ function display_map(locations, map_id) {
         else {
             map.fitBounds(bounds);
         }
-
     }
-
     autoCenter();
-
 }

@@ -9,9 +9,9 @@ require("pages.php");
         <h1>MyWiFind</h1>
     </div>
     <div id="right">
-
         <?php
         if ($logged_in) {
+            //If the user is logged in, add their account picture
             $request_data['request'] = "user_color_gender";
             $request_data['user'] = $_SESSION['username'];
             $person = make_sql_request($request_data);
@@ -29,12 +29,8 @@ require("pages.php");
                     } else {
                         echo "<a class ='right' href='$login'>Sign Up/ Login</a>";
                     }
-
-
                     ?></li>
                 <li><a class='left' href="<?php echo $home ?>">Home</a></li>
-
-
             </ul>
         </div>
     </div>

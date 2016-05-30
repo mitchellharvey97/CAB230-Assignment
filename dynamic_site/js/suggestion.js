@@ -1,6 +1,7 @@
 var place_names;
 var parent;
 
+//Download Initialize the function by retrieving all relevant data and setting variables
 function initialize_suggestions(place_source, parent_id) {
     parent = document.getElementById(parent_id);
     get_place_names(place_source)
@@ -8,6 +9,7 @@ function initialize_suggestions(place_source, parent_id) {
 
 function get_place_names(place_source) {
     //The Function to retrieve place names from the specified file location
+    //Using a xhttp request to talk to a configured api
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {

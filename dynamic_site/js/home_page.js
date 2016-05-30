@@ -1,5 +1,5 @@
 //Define Global Variables for easy access
-var place_names = [];
+//var place_names = [];
 var search_bar;
 var text_box_search;
 var suburb_search;

@@ -1,6 +1,7 @@
 <?php
 require("common_files/check_session.php");
 require("common_files/pages.php");
+require("common_files/helper_functions.php");
 require("common_files/database_connect.php");
 
 $place_name = $_GET["q"];
@@ -47,8 +48,6 @@ $wifiLng = $received_data->{'Longitude'};
     echo "<meta itemprop='latitude' content='$wifiLat' />
 			<meta itemprop='longitude' content='$wifiLng' /></div>";
     echo "</div>";
-
-
     ?>
     <div id="location_map" class="map"></div>
 
@@ -56,37 +55,26 @@ $wifiLng = $received_data->{'Longitude'};
     <div id="reviews">
         <h1>Reviews</h1>
         <?php
-							//Methods to process the reviews
-					
-					if (isset($_POST['form_type'])){ //Check if it is set first - avoids the painfull error messages when first loading
-						if ($_POST['form_type'] == "review_submit"){
-					$review['request'] = "add_review";
-					$review['title'] = $_POST['title'];
-					$review['body'] = $_POST['body'];
-					$review['rating'] = $_POST['rating'];
-					$review['userid'] = $_POST['userid'];
-					$review['place'] = $_POST['place'];
-						make_sql_request($review);
-						}
-					}
-		
-		
-		
-		
+        //Methods to process the reviews
+        if (isset($_POST['form_type'])) { //Check if it is set first - avoids the painful error messages when first loading
+            if ($_POST['form_type'] == "review_submit") {
+                $review['request'] = "add_review";
+                $review['title'] = $_POST['title'];
+                $review['body'] = $_POST['body'];
+                $review['rating'] = $_POST['rating'];
+                $review['userid'] = $_POST['userid'];
+                $review['place'] = $_POST['place'];
+                make_sql_request($review);
+            }
+        }
+
+
         $request['request'] = "rating_all";
         $request['place_name'] = $place_name;
         $rating_data = make_sql_request($request);
 
-
-        function days_between($first, $second)
-        {
-            $datediff = $second - $first;
-            return floor($datediff / (60 * 60 * 24));
-        }
-
         if (sizeof($rating_data) < 1){
             echo "No reviews have been posted yet";
-
         }
         else{
         $request['request'] = "rating_average";
@@ -145,10 +133,8 @@ $wifiLng = $received_data->{'Longitude'};
         </div>";
                 echo "        <div class='clearfix'> </div>";
                 echo "    </div> <!--End of review repeat-->";
-
                 }
                 }
-
                 ?>
 
 
@@ -157,14 +143,12 @@ $wifiLng = $received_data->{'Longitude'};
                     if ($logged_in) {
                         $user_email = $_SESSION['username'];
 
+                        //Check if the user has already posted a review on this page
                         $review_status['request'] = 'user_already_posted';
                         $review_status['user'] = $user_email;
                         $review_status['place'] = $wifiName;
 
                         $user_already_posted = make_sql_request($review_status);
-
-                        //	$user_already_reviewed = true;
-
                         if ($user_already_posted) {
                             echo "You can only post one review per location";
                         } else {
@@ -201,9 +185,11 @@ $wifiLng = $received_data->{'Longitude'};
                 </div>
 
 
-                <!--Some Inline Scripting to allow php to add to the array - PHP gets rendered before Javascript, therefore it is possible to write javascript arrays with it-->
+                <?php //Some Inline Scripting to allow php to add to the array - PHP gets rendered before Javascript, therefore it is possible to write javascript arrays with it
+                //Wrapped this comment in php tags as the end user doesn't need to know that comment?>
                 <script>
-                    var hotspot_locations = []
+                    <!--Add Locations to the map-->
+                    var hotspot_locations = [];
                     <?php  echo "hotspot_locations.push(['<h4>$wifiName</h4><br>',$wifiLat, $wifiLng]);";?>
                     display_map(hotspot_locations, "location_map");
                 </script>
